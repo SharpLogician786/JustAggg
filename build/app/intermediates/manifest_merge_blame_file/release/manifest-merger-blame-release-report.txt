@@ -1,0 +1,201 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.testtting"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="26"
+8-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="33" />
+9-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+11-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:3:5-80
+11-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:3:22-77
+12    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+12-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:4:5-81
+12-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:4:22-78
+13    <uses-permission android:name="android.permission.CAMERA" />
+13-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:5:5-65
+13-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:5:22-62
+14
+15    <uses-feature android:name="android.hardware.camera" />
+15-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:6:5-60
+15-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:6:19-57
+16    <uses-feature android:name="android.hardware.camera.autofocus" />
+16-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:7:5-70
+16-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:7:19-67
+17
+18    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+18-->[:camera_android] /Users/macbook/Desktop/Testtting/build/camera_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:5-71
+18-->[:camera_android] /Users/macbook/Desktop/Testtting/build/camera_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:22-68
+19
+20    <permission
+20-->[androidx.core:core:1.10.1] /Users/macbook/.gradle/caches/transforms-3/f396f1c0e7b4efbe1bdb9e3537f88914/transformed/core-1.10.1/AndroidManifest.xml:22:5-24:47
+21        android:name="com.example.testtting.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+21-->[androidx.core:core:1.10.1] /Users/macbook/.gradle/caches/transforms-3/f396f1c0e7b4efbe1bdb9e3537f88914/transformed/core-1.10.1/AndroidManifest.xml:23:9-81
+22        android:protectionLevel="signature" />
+22-->[androidx.core:core:1.10.1] /Users/macbook/.gradle/caches/transforms-3/f396f1c0e7b4efbe1bdb9e3537f88914/transformed/core-1.10.1/AndroidManifest.xml:24:9-44
+23
+24    <uses-permission android:name="com.example.testtting.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+24-->[androidx.core:core:1.10.1] /Users/macbook/.gradle/caches/transforms-3/f396f1c0e7b4efbe1bdb9e3537f88914/transformed/core-1.10.1/AndroidManifest.xml:26:5-97
+24-->[androidx.core:core:1.10.1] /Users/macbook/.gradle/caches/transforms-3/f396f1c0e7b4efbe1bdb9e3537f88914/transformed/core-1.10.1/AndroidManifest.xml:26:22-94
+25
+26    <application
+26-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:9:5-18:19
+27        android:name="com.example.testtting.JustAgg"
+27-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:11:9-33
+28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+28-->[androidx.core:core:1.10.1] /Users/macbook/.gradle/caches/transforms-3/f396f1c0e7b4efbe1bdb9e3537f88914/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
+29        android:extractNativeLibs="false"
+30        android:icon="@mipmap/ic_launcher"
+30-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:12:9-43
+31        android:label="JustAgg" >
+31-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:10:9-32
+32
+33        <!--
+34             Don't delete the meta-data below.
+35             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+36        -->
+37        <meta-data
+37-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:15:9-17:33
+38            android:name="flutterEmbedding"
+38-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:16:13-44
+39            android:value="2" />
+39-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:17:13-30
+40
+41        <provider
+41-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-18:20
+42            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+42-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-82
+43            android:authorities="com.example.testtting.flutter.image_provider"
+43-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-74
+44            android:exported="false"
+44-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-37
+45            android:grantUriPermissions="true" >
+45-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-47
+46            <meta-data
+46-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
+47                android:name="android.support.FILE_PROVIDER_PATHS"
+47-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
+48                android:resource="@xml/flutter_image_picker_file_paths" />
+48-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
+49        </provider>
+50        <!--
+51           Declares a provider which allows us to store files to share in
+52           '.../caches/share_plus' and grant the receiving action access
+53        -->
+54        <provider
+54-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:15:9-23:20
+55            android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
+55-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:16:13-77
+56            android:authorities="com.example.testtting.flutter.share_provider"
+56-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:17:13-74
+57            android:exported="false"
+57-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:18:13-37
+58            android:grantUriPermissions="true" >
+58-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:19:13-47
+59            <meta-data
+59-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
+60                android:name="android.support.FILE_PROVIDER_PATHS"
+60-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
+61                android:resource="@xml/flutter_share_file_paths" />
+61-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
+62        </provider>
+63        <!--
+64           This manifest declared broadcast receiver allows us to use an explicit
+65           Intent when creating a PendingItent to be informed of the user's choice
+66        -->
+67        <receiver
+67-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:28:9-34:20
+68            android:name="dev.fluttercommunity.plus.share.SharePlusPendingIntent"
+68-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:29:13-82
+69            android:exported="false" >
+69-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:30:13-37
+70            <intent-filter>
+70-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:31:13-33:29
+71                <action android:name="EXTRA_CHOSEN_COMPONENT" />
+71-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:32:17-65
+71-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:32:25-62
+72            </intent-filter>
+73        </receiver>
+74
+75        <activity
+75-->[:url_launcher_android] /Users/macbook/Desktop/Testtting/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-13:74
+76            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+76-->[:url_launcher_android] /Users/macbook/Desktop/Testtting/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-74
+77            android:exported="false"
+77-->[:url_launcher_android] /Users/macbook/Desktop/Testtting/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-37
+78            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+78-->[:url_launcher_android] /Users/macbook/Desktop/Testtting/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-71
+79
+80        <uses-library
+80-->[androidx.window:window:1.0.0-beta04] /Users/macbook/.gradle/caches/transforms-3/710d8bb5eafb400ef0b189b82cdde18f/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+81            android:name="androidx.window.extensions"
+81-->[androidx.window:window:1.0.0-beta04] /Users/macbook/.gradle/caches/transforms-3/710d8bb5eafb400ef0b189b82cdde18f/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+82            android:required="false" />
+82-->[androidx.window:window:1.0.0-beta04] /Users/macbook/.gradle/caches/transforms-3/710d8bb5eafb400ef0b189b82cdde18f/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+83        <uses-library
+83-->[androidx.window:window:1.0.0-beta04] /Users/macbook/.gradle/caches/transforms-3/710d8bb5eafb400ef0b189b82cdde18f/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+84            android:name="androidx.window.sidecar"
+84-->[androidx.window:window:1.0.0-beta04] /Users/macbook/.gradle/caches/transforms-3/710d8bb5eafb400ef0b189b82cdde18f/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+85            android:required="false" />
+85-->[androidx.window:window:1.0.0-beta04] /Users/macbook/.gradle/caches/transforms-3/710d8bb5eafb400ef0b189b82cdde18f/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+86
+87        <provider
+87-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:24:9-32:20
+88            android:name="androidx.startup.InitializationProvider"
+88-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:25:13-67
+89            android:authorities="com.example.testtting.androidx-startup"
+89-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:26:13-68
+90            android:exported="false" >
+90-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:27:13-37
+91            <meta-data
+91-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
+92                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+92-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
+93                android:value="androidx.startup" />
+93-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
+94        </provider>
+95
+96        <receiver
+96-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
+97            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+97-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
+98            android:directBootAware="false"
+98-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
+99            android:enabled="true"
+99-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
+100            android:exported="true"
+100-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
+101            android:permission="android.permission.DUMP" >
+101-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
+102            <intent-filter>
+102-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
+103                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+103-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
+103-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
+104            </intent-filter>
+105            <intent-filter>
+105-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
+106                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+106-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
+106-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
+107            </intent-filter>
+108            <intent-filter>
+108-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
+109                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+109-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
+109-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
+110            </intent-filter>
+111            <intent-filter>
+111-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
+112                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+112-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
+112-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
+113            </intent-filter>
+114        </receiver>
+115    </application>
+116
+117</manifest>
