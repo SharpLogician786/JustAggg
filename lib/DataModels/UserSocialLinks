@@ -1,0 +1,81 @@
+// To parse this JSON data, do
+//
+//     final userSocialLinkModel = userSocialLinkModelFromJson(jsonString);
+
+import 'dart:convert';
+
+UserSocialLinkModel userSocialLinkModelFromJson(String str) => UserSocialLinkModel.fromJson(json.decode(str));
+
+String userSocialLinkModelToJson(UserSocialLinkModel data) => json.encode(data.toJson());
+
+class UserSocialLinkModel {
+    bool? status;
+    String? message;
+    List<Datum>? data;
+
+    UserSocialLinkModel({
+        this.status,
+        this.message,
+        this.data,
+    });
+
+    factory UserSocialLinkModel.fromJson(Map<String, dynamic> json) => UserSocialLinkModel(
+        status: json["status"],
+        message: json["message"],
+        data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "status": status,
+        "message": message,
+        "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
+    };
+}
+
+class Datum {
+    int? id;
+    int? linkId;
+    String? name;
+    String? image;
+    String? qrImage;
+    String? value;
+    String? placeholder;
+    int? clicks;
+    int? status;
+
+    Datum({
+        this.id,
+        this.linkId,
+        this.name,
+        this.image,
+        this.qrImage,
+        this.value,
+        this.placeholder,
+        this.clicks,
+        this.status,
+    });
+
+    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+        id: json["id"],
+        linkId: json["linkId"],
+        name: json["name"],
+        image: json["image"],
+        qrImage: json["qrImage"],
+        value: json["value"],
+        placeholder: json["placeholder"],
+        clicks: json["clicks"],
+        status: json["status"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "linkId": linkId,
+        "name": name,
+        "image": image,
+        "qrImage": qrImage,
+        "value": value,
+        "placeholder": placeholder,
+        "clicks": clicks,
+        "status": status,
+    };
+}
