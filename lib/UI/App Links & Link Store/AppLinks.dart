@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -303,12 +304,12 @@ class ApplinkState extends State<Applink> {
     _headerData = {
       'Authorization': 'Bearer $bearerToken',
     };
-
+    EasyLoading.show(status: 'Loading Data');
     final response = await http.get(
       _url,
       headers: _headerData,
     );
-
+    EasyLoading.dismiss();
     if (response.body.isEmpty != true) {
       AppLinksModel notifyObj =
           AppLinksModel.fromJson(json.decode(response.body));
@@ -382,6 +383,10 @@ class CustomDialogBox extends StatefulWidget {
 class CustomDialogBoxState extends State<CustomDialogBox> {
   @override
   var _headerData;
+  File? galleryImaage;
+  File? dpImage;
+  TextEditingController fileValue = TextEditingController();
+
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -421,6 +426,7 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
                 child: SizedBox(
                   height: 44,
                   child: TextField(
+                    controller: fileValue,
                     style: const TextStyle(
                         fontFamily: Constants.fontFamily,
                         fontSize: 15,
@@ -449,11 +455,15 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
                     widthFactor: 1,
                     child: Row(
                       children: [
-                        const Expanded(
+                         Expanded(
                           flex: 1,
                           child: FractionallySizedBox(
                             widthFactor: 0.9,
-                            child: SizedBox(height: 50.0, child: Text('')),
+                            child: SizedBox(height: 50.0, child: galleryImaage != null
+                                ? Image.file(
+                              galleryImaage!,
+                              fit: BoxFit.fill) : FlutterLogo()
+                            ),
                           ),
                         ),
                         Expanded(
@@ -473,7 +483,9 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
                               color: Colors.black,
                               size: 24.0,
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              imageSelectionDialogue(context, false);
+                            },
                           ),
                         )
                       ],
@@ -535,15 +547,25 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
                             backgroundColor: Colors.black,
 
                             onPressed: () {
-                              addUpdateAppsLinksData(
-                                  widget.appLinks.data?[widget.headerIndex]
-                                          .links?[widget.index].id
-                                          .toString() ??
-                                      "",
-                                  widget.appLinks.data?[widget.headerIndex]
-                                          .links?[widget.index].value
-                                          .toString() ??
-                                      "");
+                              String linkid = widget
+                                  .appLinks
+                                  .data?[widget.headerIndex]
+                                  .links?[widget.index]
+                                  .linkId
+                                  .toString() ??
+                                  "";
+                              String linkName = widget
+                                  .appLinks
+                                  .data?[widget.headerIndex]
+                                  .links?[widget.index]
+                                  .name
+                                  .toString() ??
+                                  "";
+                              String value = fileValue.text;
+                              var result = uploadImage(linkid, linkName, value,
+                                  galleryImaage?.path.toString() ?? "");
+                              print(result);
+                              Navigator.pop(context);
                             },
                           ),
                         ),
@@ -680,6 +702,234 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
       _url,
       headers: _headerData,
       body: bodyData,
+    );
+  }
+
+
+  Future pickBannerImage(ImageSource source, bool isBannerImage) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    try {
+      if (source == ImageSource.gallery) {
+        final imagePick =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+        if (imagePick != null) {
+          setState(() {
+            final tempImage = File(imagePick.path);
+            galleryImaage = tempImage;
+          });
+        } else {
+          return;
+        }
+      } else {
+        final imagePick =
+        await ImagePicker().pickImage(source: ImageSource.camera);
+        if (imagePick != null) {
+          setState(() {
+            if (isBannerImage == true) {
+              final tempImage = File(imagePick.path);
+              galleryImaage = tempImage;
+            } else {
+              final tempImage = File(imagePick.path);
+              dpImage = tempImage;
+            }
+          });
+        } else {
+          return;
+        }
+      }
+    } on Exception catch (e) {
+      print('Failed to pickImage,$e');
+    }
+  }
+
+  Future<String> uploadImage(
+      String linkId, String name, String value, filename) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var userData = (prefs.getString('user') ?? '');
+
+    Map<String, dynamic> userMap = jsonDecode(userData);
+
+    SignUpModel user = SignUpModel.fromJson(userMap);
+
+    var bearerToken = user.data?.token.toString();
+
+    var userID = user.data?.id.toString() ?? "";
+    // ignore: no_leading_underscores_for_local_identifiers
+    Uri url = Uri.parse(
+        Constants.baseUrl.toString() + Constants.ADD_USER_LINK.toString());
+
+    Map<String, String> headers = {
+      "Accept": "application/json",
+      'Authorization': 'Bearer $bearerToken',
+    };
+    var request = http.MultipartRequest('POST', url);
+    request.fields['userId'] = userID;
+    request.fields['linkId'] = linkId;
+    request.fields['value'] = value;
+    request.fields['name'] = name;
+
+    request.headers.addAll(headers);
+    request.files.add(await http.MultipartFile.fromPath('image', filename));
+    var res = await request.send();
+    return res.reasonPhrase.toString();
+  }
+
+  Future imageSelectionDialogue(BuildContext context, bool isBannerImage) {
+    // show the dialog
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.transparent,
+          contentPadding: EdgeInsets.zero,
+          content: dialogueBox(isBannerImage),
+          actions: const <Widget>[],
+        );
+      },
+    );
+  }
+
+  Widget dialogueBox(bool isBannerImage) {
+    return Container(
+      height: 230,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20.0),
+        color: Colors.white,
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.grey,
+            offset: Offset(0.0, 1.0), //(x,y)
+            blurRadius: 6.0,
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          const Text(
+            'Select Image',
+            style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w700,
+              fontFamily: Constants.fontFamily,
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 2,
+              color: const Color.fromARGB(255, 219, 216, 216),
+            ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                flex: 1,
+                child: InkWell(
+                  onTap: () {
+                    pickBannerImage(ImageSource.gallery, isBannerImage);
+                    Navigator.of(context, rootNavigator: true).pop();
+                  },
+                  child: SizedBox(
+                    height: 105,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset(
+                            'assets/gallery.png',
+                            height: 44,
+                            width: 44,
+                          ),
+                        ),
+                        const Text(
+                          'Gallery',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: Constants.fontFamily,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              Expanded(
+                flex: 1,
+                child: InkWell(
+                  onTap: () {
+                    pickBannerImage(ImageSource.camera, isBannerImage);
+                  },
+                  child: SizedBox(
+                    height: 105,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Image.asset(
+                            'assets/camera.png',
+                            height: 44,
+                            width: 44,
+                          ),
+                        ),
+                        const Text(
+                          'Camera',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontFamily: Constants.fontFamily,
+                              fontWeight: FontWeight.w600),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.only(top: 10.0, left: 10.0, right: 20.0),
+            child: FractionallySizedBox(
+              widthFactor: 1,
+              child: Row(
+                children: [
+                  const Expanded(
+                    flex: 1,
+                    child: FractionallySizedBox(
+                      widthFactor: 0.9,
+                      child: SizedBox(height: 50.0, child: Text('')),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: FloatingActionButton.extended(
+                      elevation: 2,
+                      label: const Text(
+                        'Cancel',
+                        style: TextStyle(
+                            fontFamily: Constants.fontFamily,
+                            color: Colors.white),
+                      ), // <-- Text
+                      backgroundColor: Colors.black,
+
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

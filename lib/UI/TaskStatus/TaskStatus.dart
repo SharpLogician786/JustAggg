@@ -160,7 +160,7 @@ class TaskStatusState extends State<TaskStatus> {
                   const EdgeInsets.only(top: 15.0, left: 15.0, right: 15.0),
               child: Container(
                 width: double.infinity,
-                height: 130,
+                height: 150,
                 child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -256,7 +256,9 @@ class TaskStatusState extends State<TaskStatus> {
                                               color: Colors.black)),
                                       Spacer(),
                                       Text('By clicking on + icon on home page',
+                                          textAlign: TextAlign.center,
                                           style: TextStyle(
+
                                               fontFamily: Constants.fontFamily,
                                               fontWeight: FontWeight.normal,
                                               fontSize: 15.0,

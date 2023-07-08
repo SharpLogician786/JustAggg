@@ -76,9 +76,9 @@ class CustomDialogBoxForContentState extends State<CustomDialogBoxForContent> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               Padding(
-                padding: const EdgeInsets.only(top: 15.0),
+                padding: const EdgeInsets.only(top: 0.0),
                 child: SizedBox(
-                  height: 44,
+                  height: 54,
                   child: TextField(
                     controller: fileValue,
                     style: const TextStyle(
@@ -88,6 +88,7 @@ class CustomDialogBoxForContentState extends State<CustomDialogBoxForContent> {
                     textAlignVertical: TextAlignVertical.bottom,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(
+                          borderSide: const BorderSide(color: Colors.white, width: 2.0),
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                         filled: true,
@@ -117,7 +118,7 @@ class CustomDialogBoxForContentState extends State<CustomDialogBoxForContent> {
                           ),
                         ),
                         Expanded(
-                          flex: 1,
+                          flex: 2,
                           child: FloatingActionButton.extended(
                             elevation: 2,
                             label: const Text(
@@ -266,18 +267,21 @@ class CustomDialogBoxForContentState extends State<CustomDialogBoxForContent> {
                             // Place textfield
                             child: SizedBox(
                               height: 20,
-                              child: TextField(
+                              child: TextFormField(
                                 controller: filename,
-
+                                textAlign: TextAlign.justify,
                                 style: const TextStyle(
                                     fontFamily: Constants.fontFamily,
                                     fontSize: 15,
                                     fontWeight: FontWeight.normal),
                                 // controller: emailController,
-                                decoration: InputDecoration(
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
+                                  decoration: InputDecoration(
+                                    fillColor: Colors.white,
+                                    focusedBorder:OutlineInputBorder(
+                                      borderSide: const BorderSide(color: Colors.white, width: 2.0),
+                                      borderRadius: BorderRadius.circular(25.0),
                                     ),
+
                                     filled: true,
                                     hintText: widget
                                         .appLinks
@@ -287,9 +291,8 @@ class CustomDialogBoxForContentState extends State<CustomDialogBoxForContent> {
                                     hintStyle: const TextStyle(
                                       color: Colors.white,
                                       fontFamily: Constants.fontFamily,
-                                    ),
-                                    fillColor: Colors.white70),
-                                textAlignVertical: TextAlignVertical.bottom,
+                                    ),),
+
                               ),
                             ),
                           ),

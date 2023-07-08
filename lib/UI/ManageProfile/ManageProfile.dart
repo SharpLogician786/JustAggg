@@ -154,7 +154,7 @@ class ManageProfileState extends State<ManageProfile> {
                                         child: Row(
                                           children: [
                                             const SizedBox(
-                                              width: 30,
+                                              width: 10,
                                             ),
                                             const Text(
                                               'Lead',

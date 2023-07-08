@@ -157,7 +157,8 @@ class AnalyticsState extends State<Analytics> {
                                   ),
                                   SizedBox(
                                     width: MediaQuery.of(context).size.width *
-                                        0.25,
+                                        0.3,
+
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
@@ -230,7 +231,7 @@ class AnalyticsState extends State<Analytics> {
                     padding: const EdgeInsets.only(
                         left: 15.0, right: 15.0, top: 15.0),
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.33,
+                      height: MediaQuery.of(context).size.height * 0.35,
                       child: Column(
                         children: [
                           Padding(
