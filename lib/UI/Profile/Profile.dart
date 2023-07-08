@@ -989,8 +989,6 @@ class ProfileState extends State<Profile> {
   Future<GetUserModel> fetchDataFromUserApi(String userRole) async {
     //EasyLoading.show(status: 'loading...');
 
-    print(userRole);
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var userData = (prefs.getString('user') ?? '');

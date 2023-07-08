@@ -1,14 +1,19 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+
 import '../../Constants/Constants.dart';
 import '../../DataModels/AppLinks.dart';
 import '../../DataModels/SignUpModel.dart';
 import 'package:testtting/DataModels/UserSocialLinks';
 
 import 'package:sticky_headers/sticky_headers.dart';
+
+import 'ApplinkAlertDialogue.dart';
 
 class Applink extends StatefulWidget {
   const Applink({Key? key}) : super(key: key);
@@ -182,21 +187,42 @@ class ApplinkState extends State<Applink> {
         onTap: () {
           // ignore: unused_local_variable
           bool headerSelection = false;
+          bool contentSelection = false;
           if (appLinkDataModelOBJ.data?[headerIndex].category == 'payment') {
             headerSelection = true;
           } else {
             headerSelection = false;
           }
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return CustomDialogBox(
-                  appLinks: appLinkDataModelOBJ,
-                  headerIndex: headerIndex,
-                  index: index,
-                  headerSelection: headerSelection,
-                );
-              });
+
+          if (appLinkDataModelOBJ.data?[headerIndex].category == 'content') {
+            if (appLinkDataModelOBJ.data?[headerIndex].links?[index].name ==
+                'Link') {
+              contentSelection = true;
+            } else {
+              contentSelection = false;
+            }
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CustomDialogBoxForContent(
+                    appLinks: appLinkDataModelOBJ,
+                    headerIndex: headerIndex,
+                    index: index,
+                    headerSelection: contentSelection,
+                  );
+                });
+          } else {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return CustomDialogBox(
+                    appLinks: appLinkDataModelOBJ,
+                    headerIndex: headerIndex,
+                    index: index,
+                    headerSelection: headerSelection,
+                  );
+                });
+          }
         },
         child: Card(
           elevation: 0,
