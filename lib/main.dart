@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testtting/Constants/Constants.dart';
 import 'package:testtting/UI/Analytics/Analytics.dart';
 import 'package:testtting/UI/Contacts/Contacts.dart';
@@ -8,15 +9,17 @@ import 'package:testtting/UI/StartingScreen/startup.dart';
 import 'UI/Menu/Menu.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    home: Scaffold(
-        backgroundColor: Colors.white,
-        body: //ContactDetails()),
-            IntialView()),
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool isLoggedIn = prefs.getBool('isLogin') ?? false;
+  runApp(MaterialApp(
     debugShowCheckedModeBanner: false,
+    home: isLoggedIn == true ? BottomNavigationBarExample()  : IntialView(),
   ));
 }
+
 
 class BottomNavigationBarExample extends StatefulWidget {
   @override

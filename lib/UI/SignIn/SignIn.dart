@@ -34,7 +34,6 @@ class SignInWidget extends State<SignIn> {
   Utltity utilityOBJ = new Utltity();
   var _data;
   var data;
-  SharedPreferences? newUserDefault;
   TextEditingController emailController = new TextEditingController();
   TextEditingController passwordController = new TextEditingController();
 
@@ -99,6 +98,8 @@ class SignInWidget extends State<SignIn> {
 
         await prefs.setString(
             'userRole', userToken.data?.role.toString() ?? "");
+
+        await prefs.setBool('isLogin', true);
 
         // ignore: use_build_context_synchronously
         Navigator.pushAndRemoveUntil(

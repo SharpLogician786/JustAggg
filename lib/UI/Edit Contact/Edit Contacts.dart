@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:country_picker/country_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -8,6 +9,8 @@ import 'package:testtting/DataModels/GetUserModel.dart';
 import '../../Constants/Constants.dart';
 import '../../Constants/Utilities.dart';
 import '../../DataModels/SignUpModel.dart';
+
+
 
 class EditContacts extends StatefulWidget {
   const EditContacts(
@@ -30,6 +33,9 @@ class EditContactState extends State<EditContacts> {
   var headerData;
 
   Utltity utilityOBJ = new Utltity();
+
+   String countryCode = '+1';
+   String countryFlag = '';
 
   late SignUpModel profileUserData;
 
@@ -65,6 +71,7 @@ class EditContactState extends State<EditContacts> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     if(widget.socialMode == false)
       {
         print('');
@@ -263,9 +270,68 @@ class EditContactState extends State<EditContacts> {
                                             fontSize: 15,
                                             fontWeight: FontWeight.normal),
                                         controller: mobileField,
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
+                                          prefixIcon: InkWell(
+                                            onTap: (){
+                                              showCountryPicker(
+                                                context: context,
+                                                //Optional.  Can be used to exclude(remove) one ore more country from the countries list (optional).
+                                                exclude: <String>['KN', 'MF'],
+                                                favorite: <String>['SE'],
+                                                //Optional. Shows phone code before the country name.
+                                                showPhoneCode: true,
+                                                onSelect: (Country country) {
+                                                  setState(() {
+                                                    countryFlag = country.flagEmoji;
+                                                    countryCode = country.phoneCode;
+                                                  });
+                                                  print('Select country: ${country.displayName}');
+                                                },
+                                                // Optional. Sets the theme for the country list picker.
+                                                countryListTheme: CountryListThemeData(
+                                                  // Optional. Sets the border radius for the bottomsheet.
+                                                  borderRadius: BorderRadius.only(
+                                                    topLeft: Radius.circular(40.0),
+                                                    topRight: Radius.circular(40.0),
+                                                  ),
+                                                  // Optional. Styles the search field.
+                                                  inputDecoration: InputDecoration(
+                                                    labelText: 'Search',
+                                                    hintText: 'Start typing to search',
+                                                    prefixIcon: const Icon(Icons.search),
+                                                    border: OutlineInputBorder(
+                                                      borderSide: BorderSide(
+                                                        color: const Color(0xFF8C98A8).withOpacity(0.2),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  // Optional. Styles the text in the search field
+                                                  searchTextStyle: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 18,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: Container(
+                                              width: 50,
+                                              height: 20,
+                                              decoration: ShapeDecoration(
+                                                  shape: CircleBorder(), //here we set the circular figure
+                                                  color: Colors.white
+                                              ),
+                                              child: Center(
+                                                  child: Row(
+                                                    children: [
+                                                      Text(countryCode),
+                                                      Text(countryFlag),
+                                                    ],
+                                                  )
+                                              ),
+                                            ),
+                                          ),
                                           border: InputBorder.none,
-                                          hintText: 'Mobile',
+                                          hintText: 'Mobile Number',
                                           // labelText: 'Frist Name',
                                         ),
                                       ),
@@ -1236,7 +1302,7 @@ class EditContactState extends State<EditContacts> {
       'name': nameField.text,
       'phone': mobileField.text,
       'address': locationField.text,
-      'secondaryPhone': mobilePopField.text,
+      'secondaryPhone': '${countryCode}${mobilePopField.text}',
       'gender': 'male',
       'secondaryEmail': emailPopField.text,
       'bio': widget.userDataModel.data?.bio.toString() ?? "",

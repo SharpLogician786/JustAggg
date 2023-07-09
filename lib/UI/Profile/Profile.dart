@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
-import 'package:loading_indicator/loading_indicator.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:testtting/Constants/Constants.dart';
 
 import 'package:testtting/UI/App%20Links%20&%20Link%20Store/AppLinks.dart';
@@ -22,6 +22,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'package:image_picker/image_picker.dart';
 
+
+
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
 
@@ -33,14 +35,16 @@ class ProfileState extends State<Profile> {
   File? galleryImage;
   File? dpImage;
 
-  var userRole = 'personal';
-  bool socialOrNot = true;
+
+  late bool socialOrNot;
 
   late GetUserModel userDataModelOBJ = GetUserModel();
   // ignore: prefer_typing_uninitialized_variables
   var data;
   // ignore: prefer_typing_uninitialized_variables
   var _headerData;
+
+  var userRole = '';
 
   Utltity utilityOBJ = new Utltity();
 
@@ -156,12 +160,23 @@ class ProfileState extends State<Profile> {
     }
   }
 
+  void saveStatusdata(bool value) async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setBool('isSocialOrNot', value);
+  }
+
   //------------------------------------Fetch Data-------------------------------------
 
   Future<SignUpModel> fetchUserData() async {
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var userData = (prefs.getString('user') ?? '');
+
+    userRole = prefs.getString('userRole') ?? '';
+
+    socialOrNot = prefs.getBool('isSocialOrNot') ?? true;
 
     Map<String, dynamic> userMap = jsonDecode(userData);
 
@@ -174,6 +189,7 @@ class ProfileState extends State<Profile> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    fetchUserData();
   }
 
   void _yourFunction() {
@@ -195,6 +211,7 @@ class ProfileState extends State<Profile> {
                   } else {
                     userRole = 'business';
                   }
+                  saveStatusdata(socialOrNot);
                 });
               },
               child: Container(
@@ -248,6 +265,7 @@ class ProfileState extends State<Profile> {
                   } else {
                     userRole = 'business';
                   }
+                  saveStatusdata(socialOrNot);
                 });
               },
               child: Container(
@@ -321,7 +339,7 @@ class ProfileState extends State<Profile> {
         physics: const ClampingScrollPhysics(),
         // physics: const AlwaysScrollableScrollPhysics(),
         child: FutureBuilder(
-          future: fetchDataFromUserApi(userRole),
+          future: fetchDataFromUserApi(),
           builder: (context, snapshot) {
             if (snapshot.hasData == true) {
               return Column(
@@ -994,8 +1012,11 @@ class ProfileState extends State<Profile> {
 
   //------------------------------------Get User Data Api Data-------------------------------------
 
-  Future<GetUserModel> fetchDataFromUserApi(String userRole) async {
+  Future<GetUserModel> fetchDataFromUserApi() async {
     //EasyLoading.show(status: 'loading...');
+    print(userRole);
+
+    print('user Data from api');
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -1017,11 +1038,6 @@ class ProfileState extends State<Profile> {
     _headerData = {
       'Authorization': 'Bearer $bearerToken',
     };
-
-    SharedPreferences sharedPref = await SharedPreferences.getInstance();
-
-    prefs.setString("userRole", userRole);
-
     var body = {'role': userRole};
     final response = await http.post(
       url,
