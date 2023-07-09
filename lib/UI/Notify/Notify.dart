@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
+import 'package:testtting/Constants/Utilities.dart';
 import '../../Constants/Constants.dart';
 import '../../DataModels/NotificationModel.dart';
 import '../../DataModels/SignUpModel.dart';
@@ -16,6 +17,8 @@ class NotifyState extends State<Notify> {
   // ignore: prefer_typing_uninitialized_variables
   var _headerData;
 
+
+  Utltity utilityOBJ = new Utltity();
   late NotificationModel notificationDataModelOBJ = NotificationModel();
 
   @override
@@ -135,24 +138,7 @@ class NotifyState extends State<Notify> {
                           });
                     } else {
                       return Container(
-                        height: MediaQuery
-                            .of(context)
-                            .size
-                            .height * 0.8,
-                        width: MediaQuery
-                            .of(context)
-                            .size
-                            .width,
-                        child: Center(
-                          child: Container(
-                            width: 100,
-                            height: 100,
-                            child: const LoadingIndicator(
-                              indicatorType: Indicator.ballPulseSync,
-                              strokeWidth: 10.0,
-                            ),
-                          ),
-                        ),
+
                       );
                     }
                   },
@@ -188,12 +174,13 @@ class NotifyState extends State<Notify> {
     _headerData = {
       'Authorization': 'Bearer $bearerToken',
     };
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       url,
       body: {'userId': userID},
       headers: _headerData,
     );
+    utilityOBJ.onLoadingDismiss(context);
     if (response.body.isEmpty != true) {
       NotificationModel notifyObj =
           NotificationModel.fromJson(json.decode(response.body));
@@ -224,12 +211,13 @@ class NotifyState extends State<Notify> {
     _headerData = {
       'Authorization': 'Bearer $bearerToken',
     };
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       _url,
       body: {'id': id},
       headers: _headerData,
     );
+    utilityOBJ.onLoadingDismiss(context);
     if (response.body.isEmpty != true) {
       NotificationModel notifyObj =
           NotificationModel.fromJson(json.decode(response.body));

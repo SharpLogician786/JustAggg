@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:testtting/UI/SignIn/SignIn.dart';
 import 'package:testtting/UI/SignUp/SignUp.dart';
 
@@ -76,7 +78,7 @@ class IntialViewState extends State<IntialView> {
                   child: SizedBox(
                       height: 50.0,
                       child: OutlinedButton(
-                        onPressed: () async {
+                        onPressed: ()  {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => SignIn()));
                         },
@@ -99,4 +101,5 @@ class IntialViewState extends State<IntialView> {
       ),
     ));
   }
+
 }

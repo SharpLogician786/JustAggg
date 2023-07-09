@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'package:loading_indicator/loading_indicator.dart';
+import 'package:testtting/Constants/Utilities.dart';
 import '../../Constants/Constants.dart';
 import '../../DataModels/AppLinks.dart';
 import '../../DataModels/SignUpModel.dart';
@@ -25,6 +26,8 @@ class Applink extends StatefulWidget {
 class ApplinkState extends State<Applink> {
   // ignore: prefer_typing_uninitialized_variables
   var _headerData;
+
+  Utltity utilityOBJ = new Utltity();
 
   final TextEditingController _searchController = TextEditingController();
 
@@ -161,18 +164,7 @@ class ApplinkState extends State<Applink> {
                     );
                   } else {
                    return Container(
-                     height: MediaQuery.of(context).size.height * 0.8,
-                     width: MediaQuery.of(context).size.width,
-                     child: Center(
-                       child: Container(
-                         width: 100,
-                         height: 100,
-                         child: const LoadingIndicator(
-                           indicatorType: Indicator.ballPulseSync,
-                           strokeWidth: 10.0,
-                         ),
-                       ),
-                     ),
+
                    );
                   }
                 },
@@ -316,11 +308,13 @@ class ApplinkState extends State<Applink> {
     };
 
 
+    utilityOBJ.onLoading(context);
+
     final response = await http.get(
       _url,
       headers: _headerData,
     );
-
+    utilityOBJ.onLoadingDismiss(context);
     if (response.body.isEmpty != true) {
       AppLinksModel notifyObj =
           AppLinksModel.fromJson(json.decode(response.body));
@@ -351,13 +345,13 @@ class ApplinkState extends State<Applink> {
     _headerData = {
       'Authorization': 'Bearer $bearerToken',
     };
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       _url,
       headers: _headerData,
       body: {'userId': userID},
     );
-
+    utilityOBJ.onLoadingDismiss(context);
     if (response.body.isEmpty != true) {
       UserSocialLinkModel userLinkObj =
           UserSocialLinkModel.fromJson(json.decode(response.body));
@@ -654,6 +648,9 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
   //------------------------------------Get User Social Links-------------------------------------
 
   void addUpdateAppsLinksData(String linkId, String value) async {
+
+    Utltity utilityOBJ = new Utltity();
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var userData = (prefs.getString('user') ?? '');
@@ -675,17 +672,24 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
     var bodyData = {'userId': userID, 'linkId': linkId, 'value': value};
 
     print(bodyData);
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       _url,
       headers: _headerData,
       body: bodyData,
     );
-  }
+    utilityOBJ.onLoadingDismiss(context);
+    if (response.body.isEmpty == true)
+      {
 
+      }
+  }
   //------------------------------------Get User Social Links-------------------------------------
 
   void deleteAppsLinksData(String linkId, String value) async {
+
+    Utltity utilityOBJ = new Utltity();
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var userData = (prefs.getString('user') ?? '');
@@ -708,12 +712,13 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
     var bodyData = {'userId': userID, 'linkId': linkId, 'value': value};
 
     print(bodyData);
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       _url,
       headers: _headerData,
       body: bodyData,
     );
+    utilityOBJ.onLoadingDismiss(context);
   }
 
 
@@ -755,6 +760,8 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
 
   Future<String> uploadImage(
       String linkId, String name, String value, filename) async {
+    Utltity utilityOBJ = new Utltity();
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var userData = (prefs.getString('user') ?? '');
@@ -774,6 +781,7 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
       "Accept": "application/json",
       'Authorization': 'Bearer $bearerToken',
     };
+    utilityOBJ.onLoading(context);
     var request = http.MultipartRequest('POST', url);
     request.fields['userId'] = userID;
     request.fields['linkId'] = linkId;
@@ -783,6 +791,7 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
     request.headers.addAll(headers);
     request.files.add(await http.MultipartFile.fromPath('image', filename));
     var res = await request.send();
+    utilityOBJ.onLoadingDismiss(context);
     return res.reasonPhrase.toString();
   }
 

@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:testtting/Constants/Utilities.dart';
+import 'package:testtting/DataModels/ContactModel.dart';
 
 import '../../Constants/Constants.dart';
 
 class ContactDetails extends StatefulWidget {
+
+  const ContactDetails({Key? key, required this.contactDataModelOBJ, required this.index}) : super(key: key);
+
+  final ContactsModel contactDataModelOBJ;
+
+   final int index;
+
+  @override
   ContactDetailsState createState() => ContactDetailsState();
 }
 
 class ContactDetailsState extends State<ContactDetails> {
   @override
+  Utltity utilityOBJ = new Utltity();
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
@@ -37,7 +48,7 @@ class ContactDetailsState extends State<ContactDetails> {
             Padding(
               padding: const EdgeInsets.only(right: 15.0, left: 15.0),
               child: Container(
-                  height: MediaQuery.of(context).size.height * 0.3,
+                  height: MediaQuery.of(context).size.height * 0.33,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       color: Colors.grey[300],
@@ -53,7 +64,7 @@ class ContactDetailsState extends State<ContactDetails> {
                               CircleAvatar(
                                 radius: 50.0,
                                 backgroundImage: NetworkImage(
-                                    'https://via.placeholder.com/150'),
+                                    widget.contactDataModelOBJ.data?[widget.index].image.toString() ?? ""),
                                 backgroundColor: Colors.transparent,
                               ),
                               Container(
@@ -77,7 +88,8 @@ class ContactDetailsState extends State<ContactDetails> {
                                             SizedBox(
                                               width: 15,
                                             ),
-                                            Text('Friday, 06/02'),
+                                            Text( utilityOBJ.parseDate(widget.contactDataModelOBJ.data?[widget.index].createdAt.toString() ?? "")
+                                              ,style: TextStyle(fontFamily: Constants.fontFamily,fontSize: 12),),
                                             Spacer(),
                                             Padding(
                                               padding: const EdgeInsets.only(
@@ -106,11 +118,11 @@ class ContactDetailsState extends State<ContactDetails> {
                         child: Row(
                           children: [
                             Text(
-                              'Amar Abbas',
+                              widget.contactDataModelOBJ.data?[widget.index].name.toString() ?? "",
                               style: TextStyle(
                                   fontFamily: Constants.fontFamily,
                                   fontWeight: FontWeight.w700,
-                                  fontSize: 18),
+                                  fontSize: 15),
                             ),
                             SizedBox(
                               width: 10,
@@ -133,7 +145,12 @@ class ContactDetailsState extends State<ContactDetails> {
                             SizedBox(
                               width: 10,
                             ),
-                            Text('amarjafri1472@gmail.com'),
+                            Text( widget.contactDataModelOBJ.data?[widget.index].email.toString() ?? "",
+                              style: TextStyle(
+                                  fontFamily: Constants.fontFamily,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 12),
+                            ),
                             SizedBox(
                               width: 10,
                             ),
@@ -155,7 +172,11 @@ class ContactDetailsState extends State<ContactDetails> {
                             SizedBox(
                               width: 10,
                             ),
-                            Text('03146167055'),
+                            Text(widget.contactDataModelOBJ.data?[widget.index].phone.toString() ?? ""
+                            ,style: TextStyle(
+                                  fontFamily: Constants.fontFamily,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 12),),
                             SizedBox(
                               width: 10,
                             ),

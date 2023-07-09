@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testtting/Constants/Utilities.dart';
 import 'package:testtting/UI/Share/ProfileSignature.dart';
 
 import '../../Constants/Constants.dart';
@@ -48,6 +49,8 @@ class ShareState extends State<ShareTab> {
   var data;
   // ignore: prefer_typing_uninitialized_variables
   var headerData;
+
+  Utltity utilityOBJ = new Utltity();
 
   String title = 'Color Picker';
 
@@ -302,24 +305,7 @@ class ShareState extends State<ShareTab> {
               }
               else {
                 return Container(
-                  height: MediaQuery
-                      .of(context)
-                      .size
-                      .height * 0.8,
-                  width: MediaQuery
-                      .of(context)
-                      .size
-                      .width,
-                  child: Center(
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      child: const LoadingIndicator(
-                        indicatorType: Indicator.ballPulseSync,
-                        strokeWidth: 10.0,
-                      ),
-                    ),
-                  ),
+
                 );
               }
             }
@@ -356,7 +342,7 @@ class ShareState extends State<ShareTab> {
     print(body);
 
     print(url);
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       url,
       body: body,
@@ -368,7 +354,7 @@ class ShareState extends State<ShareTab> {
           GetUserModel.fromJson(json.decode(response.body));
       userDataModelOBJ = contactObj;
     }
-
+    utilityOBJ.onLoadingDismiss(context);
     return userDataModelOBJ;
   }
 

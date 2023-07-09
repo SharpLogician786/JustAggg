@@ -24,6 +24,8 @@ class AnalyticsState extends State<Analytics> {
   // ignore: prefer_typing_uninitialized_variables
   var _headerData;
 
+  Utltity utilityOBJ = new Utltity();
+
   late AnalyticModel analyticDataModelOBJ = AnalyticModel();
 
   Monthly? timeData;
@@ -518,20 +520,7 @@ class AnalyticsState extends State<Analytics> {
               );
             } else {
               return Container(
-                height: MediaQuery.of(context).size.height * 0.8,
-                width: MediaQuery.of(context).size.width,
-                child: Center(
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    child: const LoadingIndicator(
-                        indicatorType: Indicator.ballPulse, /// Required, The loading type of the widget
-                        colors: const [Colors.black],       /// Optional, The color collections
-                        strokeWidth: 2,            /// Optional, Background of the widget
-                        pathBackgroundColor: Colors.black
-                    ),
-                  ),
-                ),
+
               );
             }
           },
@@ -564,13 +553,13 @@ class AnalyticsState extends State<Analytics> {
     _headerData = {
       'Authorization': 'Bearer $bearerToken',
     };
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       _url,
       body: data,
       headers: _headerData,
     );
-
+    utilityOBJ.onLoadingDismiss(context);
     print("before data");
 
     if (response.body.isEmpty != true) {

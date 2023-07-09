@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testtting/Constants/Utilities.dart';
 import 'package:testtting/DataModels/ContactModel.dart';
 import 'package:testtting/DataModels/SignUpModel.dart';
 import 'package:testtting/UI/Contacts/ContactDetails.dart';
@@ -33,6 +34,7 @@ class ContactsState extends State<Contacts> {
   var updateGroupId = "";
   bool groupSelection = false;
 
+
   // ignore: prefer_typing_uninitialized_variables
   var headerData;
 
@@ -46,7 +48,11 @@ class ContactsState extends State<Contacts> {
 
   int groupIndexSelected = 1;
 
+  Utltity utilityOBJ = new Utltity();
+
   late ContactsModel contactDataModelOBJ = ContactsModel();
+
+  late ContactsModel copyContactDataModelOBJ = ContactsModel();
 
   late ContactsModel groupContacts = ContactsModel();
 
@@ -163,26 +169,32 @@ class ContactsState extends State<Contacts> {
                             ),
                             onPressed: () {
                               if (index > 0) {
-                                groupIndexSelected = index;
+
                               } else {
                                 print('');
                               }
                               buttonTitle = "";
                               if (index == 0) {
                                 setState(() {
+                                  buttonTitle = '';
+                                  selectedContactIDS.clear();
                                   isGroupSelection = false;
                                   groupSelection = false;
                                   addGroup(context);
                                 });
                               } else if (index == 1) {
                                 setState(() {
+                                  buttonTitle = '';
+                                  groupIndexSelected = index;
+                                  selectedContactIDS.clear();
                                   isGroupSelection = false;
                                   groupSelection = false;
                                 });
                               } else {
                                 setState(() {
-                                  groupSelection = true;
                                   buttonTitle = 'Select';
+                                  groupSelection = true;
+                                  groupIndexSelected = index;
                                   deleteGroupId =
                                       groupNames[index].id?.toString() ?? "";
                                   updateGroupId =
@@ -193,8 +205,9 @@ class ContactsState extends State<Contacts> {
                               }
                             },
                             shape: RoundedRectangleBorder(
-                                side: const BorderSide(
-                                    width: 1, color: Colors.black),
+                                side:  BorderSide(
+                                    width: 1,
+                                    color: Colors.black),
                                 borderRadius: BorderRadius.circular(100)),
                             label: Text(
                               groupNames[index].groupName.toString(),
@@ -305,24 +318,42 @@ class ContactsState extends State<Contacts> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (_) => ContactDetails(),
+                                          builder: (_) => ContactDetails(contactDataModelOBJ: contactDataModelOBJ,index: index,),
                                         ),
                                       );
                                     } else {
-                                      selectedContactIDS.add(contactDataModelOBJ
+                                      setState(() {
+                                        if (selectedContactIDS.contains(contactDataModelOBJ
+                                            .data?[index].id
+                                            .toString() ??
+                                            ""))
+                                        {
+                                          selectedContactIDS.remove(contactDataModelOBJ
                                               .data?[index].id
                                               .toString() ??
-                                          "");
+                                              "");
+                                        }
+                                        else {
+                                          selectedContactIDS.add(contactDataModelOBJ
+                                              .data?[index].id
+                                              .toString() ??
+                                              "");
+                                        }
+
+                                      });
+
                                     }
                                   },
                                   child: SizedBox(
                                     height: 84,
                                     child: Card(
+                                      color: Colors.white,
                                       elevation: 0,
                                       child: Column(
                                         mainAxisSize: MainAxisSize.min,
                                         children: <Widget>[
                                           ListTile(
+                                            tileColor: getColor(index),
                                             leading: Container(
                                                 decoration: BoxDecoration(
                                                     shape: BoxShape.circle,
@@ -330,33 +361,38 @@ class ContactsState extends State<Contacts> {
                                                         color: Colors.black)),
                                                 child: CircleAvatar(
                                                   backgroundColor:
-                                                      Colors.transparent,
+                                                  Colors.transparent,
                                                   radius: 20.0,
                                                   backgroundImage: NetworkImage(
                                                       contactDataModelOBJ
-                                                              .data?[index]
-                                                              .image
-                                                              .toString() ??
+                                                          .data?[index]
+                                                          .image
+                                                          .toString() ??
                                                           ""),
                                                 )),
                                             title: Text(
                                               contactDataModelOBJ
-                                                      .data?[index].name
-                                                      .toString() ??
+                                                  .data?[index].name
+                                                  .toString() ??
                                                   "",
-                                              style: const TextStyle(
+
+                                              style: TextStyle(
+                                                color:  Colors.black,
                                                   fontFamily:
-                                                      Constants.fontFamily,
-                                                  fontWeight: FontWeight.bold),
+                                                  Constants.fontFamily,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.w600),
                                             ),
                                             trailing: Text(
-                                              contactDataModelOBJ
-                                                      .data?[index].createdAt
-                                                      .toString() ??
-                                                  "",
-                                              style: const TextStyle(
+                                              utilityOBJ.parseDate(contactDataModelOBJ
+                                                  .data?[index].createdAt
+                                                  .toString() ??
+                                                  "")
+                                              ,
+                                              style:  TextStyle(
+                                                  color: Colors.black,
                                                   fontFamily:
-                                                      Constants.fontFamily,
+                                                  Constants.fontFamily,
                                                   fontSize: 10,
                                                   fontWeight: FontWeight.w300),
                                             ),
@@ -369,20 +405,7 @@ class ContactsState extends State<Contacts> {
                               });
                         } else {
                           return Container(
-                            height: MediaQuery.of(context).size.height * 0.8,
-                            width: MediaQuery.of(context).size.width,
-                            child: Center(
-                              child: Container(
-                                width: 100,
-                                height: 100,
-                                child: const LoadingIndicator(
-                                    indicatorType: Indicator.ballPulse, /// Required, The loading type of the widget
-                                    colors: const [Colors.black],       /// Optional, The color collections
-                                    strokeWidth: 2,            /// Optional, Background of the widget
-                                    pathBackgroundColor: Colors.black
-                                ),
-                              ),
-                            ),
+
                           );
                         }
                       })),
@@ -391,6 +414,25 @@ class ContactsState extends State<Contacts> {
         ),
       ),
     );
+  }
+
+  Color? getColor(int index)
+  {
+    if(selectedContactIDS.isEmpty == true)
+      {
+        return Colors.grey[50];
+      }else{
+        if (selectedContactIDS.contains(contactDataModelOBJ
+            .data?[index].id
+            .toString() ??
+            ""))
+          {
+            return Colors.blue;
+          }
+        else {
+          return Colors.grey[50];
+        }
+    }
   }
 
   //---------------------------------------------Custom Add Group Popup-----------------------------------------------------
@@ -469,7 +511,9 @@ class ContactsState extends State<Contacts> {
                       height: 50.0,
                       child: OutlinedButton(
                         onPressed: () {
-                          createGroupApi(groupName.text.toString());
+                          setState(() {
+                            createGroupApi(groupName.text.toString());
+                          });
                         },
                         child: Text(
                           'Create',
@@ -517,19 +561,20 @@ class ContactsState extends State<Contacts> {
     headerData = {
       'Authorization': 'Bearer $bearerToken',
     };
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       _url,
       body: data,
       headers: headerData,
     );
-
+    utilityOBJ.onLoadingDismiss(context);
     print(response.body);
     if (response.body.isEmpty != true) {
       ContactsModel contactObj =
           ContactsModel.fromJson(json.decode(response.body));
       contactDataModelOBJ = contactObj;
     }
+    copyContactDataModelOBJ = contactDataModelOBJ;
     return contactDataModelOBJ;
   }
   //---------------------------------------------Create Group Api Call-----------------------------------------------------
@@ -555,25 +600,26 @@ class ContactsState extends State<Contacts> {
       'Authorization': 'Bearer $bearerToken',
     };
     var body = {'userId': userId, 'name': groupName};
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       url,
       body: body,
       headers: headerData,
     );
-
+    utilityOBJ.onLoadingDismiss(context);
     if (response.body.isEmpty != true) {
       CreateGroupModel contactObj =
           CreateGroupModel.fromJson(json.decode(response.body));
       userDataModelOBJ = contactObj;
     }
-
+    Navigator.pop(context);
     return userDataModelOBJ;
   }
 
   //---------------------------------------------Group Group Api Call-----------------------------------------------------
 
   Future<CreateGroupModel> getUserGroupApi() async {
+
     //EasyLoading.show(status: 'loading...');
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -590,7 +636,7 @@ class ContactsState extends State<Contacts> {
 
     Uri url = Uri.parse(
         Constants.baseUrl.toString() + Constants.GET_USER_GROUP.toString());
-
+    groupNames.clear();
     Groups? group1 = Groups();
     group1.id = 1;
     group1.groupName = 'New';
@@ -607,13 +653,13 @@ class ContactsState extends State<Contacts> {
       'Authorization': 'Bearer $bearerToken',
     };
     var body = {'userId': userId};
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       url,
       body: body,
       headers: headerData,
     );
-
+    utilityOBJ.onLoadingDismiss(context);
     if (response.body.isEmpty != true) {
       CreateGroupModel contactObj =
           CreateGroupModel.fromJson(json.decode(response.body));
@@ -635,6 +681,7 @@ class ContactsState extends State<Contacts> {
   //-----------------------------------------Delete Group Api-------------------------------------
 
   Future<CreateGroupModel> deleteUserGroupApi(String groupId) async {
+
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var userData = (prefs.getString('user') ?? '');
@@ -653,20 +700,26 @@ class ContactsState extends State<Contacts> {
     headerData = {
       'Authorization': 'Bearer $bearerToken',
     };
+    groupNames.clear();
     var body = {'userId': userId, 'groupId': groupId};
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       url,
       body: body,
       headers: headerData,
     );
-
+    utilityOBJ.onLoadingDismiss(context);
     if (response.body.isEmpty != true) {
       CreateGroupModel contactObj =
           CreateGroupModel.fromJson(json.decode(response.body));
       userGroupDataModelOBJ = contactObj;
     }
-
+    setState(() {
+     groupIndexSelected = 1;
+      isGroupSelection = false;
+      groupSelection = false;
+     selectedContactIDS.clear();
+    });
     return userDataModelOBJ;
   }
 
@@ -693,13 +746,13 @@ class ContactsState extends State<Contacts> {
     };
 
     var body = jsonEncode({'groupId': groupId, 'contactIds': contactsID});
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       url,
       body: body,
       headers: headerData,
     );
-
+    utilityOBJ.onLoadingDismiss(context);
     if (response.body.isEmpty != true) {
       CreateGroupModel contactObj =
           CreateGroupModel.fromJson(json.decode(response.body));
@@ -732,21 +785,23 @@ class ContactsState extends State<Contacts> {
     };
 
     var body = {'groupId': groupId};
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       url,
       body: body,
       headers: headerData,
     );
-
+    utilityOBJ.onLoadingDismiss(context);
     // setState(() {
     if (response.body.isEmpty != true) {
       ContactsModel contactObj =
           ContactsModel.fromJson(json.decode(response.body));
       contactDataModelOBJ = contactObj;
     }
-    // });
-
+  if (contactDataModelOBJ.data?.isEmpty == true)
+    {
+      contactDataModelOBJ = copyContactDataModelOBJ;
+    }
     return contactDataModelOBJ;
   }
 }

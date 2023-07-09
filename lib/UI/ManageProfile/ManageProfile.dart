@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testtting/Constants/Utilities.dart';
 import 'package:testtting/DataModels/GetUserModel.dart';
 import 'package:http/http.dart' as http;
 import 'package:testtting/DataModels/SignUpModel.dart';
@@ -34,6 +35,8 @@ class ManageProfileState extends State<ManageProfile> {
   File? galleryImage;
 
   File? dpImage;
+
+  Utltity utilityOBJ = new Utltity();
 
   // ignore: prefer_typing_uninitialized_variables
   var _headerData;
@@ -366,24 +369,7 @@ class ManageProfileState extends State<ManageProfile> {
             );
           } else {
             return Container(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height * 0.8,
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
-              child: Center(
-                child: Container(
-                  width: 100,
-                  height: 100,
-                  child: const LoadingIndicator(
-                    indicatorType: Indicator.ballPulseSync,
-                    strokeWidth: 10.0,
-                  ),
-                ),
-              ),
+
             );
           }
         },
@@ -552,6 +538,7 @@ class ManageProfileState extends State<ManageProfile> {
 
   // -----------------fetchDataFromUserApi--------------------
   Future<GetUserModel> fetchDataFromUserApi() async {
+
     //EasyLoading.show(status: 'loading...');
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -575,13 +562,13 @@ class ManageProfileState extends State<ManageProfile> {
     var role = prefs.getString("userRole");
 
     var body = {'role': role};
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       url,
       body: body,
       headers: _headerData,
     );
-
+    utilityOBJ.onLoadingDismiss(context);
     if (response.body.isEmpty != true) {
       GetUserModel contactObj =
           GetUserModel.fromJson(json.decode(response.body));
@@ -686,6 +673,7 @@ class ManageProfileState extends State<ManageProfile> {
     request.fields['id'] = userId;
     request.headers.addAll(headers);
     print(fileUrl);
+    utilityOBJ.onLoading(context);
     if (fileUrl == 'coverUrl') {
       request.files
           .add(await http.MultipartFile.fromPath('coverUrl', filename));
@@ -694,6 +682,7 @@ class ManageProfileState extends State<ManageProfile> {
           .add(await http.MultipartFile.fromPath('profileUrl', filename));
     }
     var res = await request.send();
+    utilityOBJ.onLoadingDismiss(context);
     return res.reasonPhrase.toString();
   }
 
@@ -730,13 +719,13 @@ class ManageProfileState extends State<ManageProfile> {
       'username': widget.userDataModel.data?.username.toString() ?? "",
       'leadMode': widget.userDataModel.data?.leadMode.toString() ?? "",
     };
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       url,
       body: bodyData,
       headers: _headerData,
     );
-
+    utilityOBJ.onLoadingDismiss(context);
     print(response.body);
 
     if (response.body.isEmpty != true) {
@@ -775,12 +764,13 @@ class ManageProfileState extends State<ManageProfile> {
     var headerData = {
       'Authorization': 'Bearer $bearerToken',
     };
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       _url,
       body: {'userId': '42'},
       headers: headerData,
     );
+    utilityOBJ.onLoadingDismiss(context);
     print(response.body);
     if (response.body.isEmpty != true) {
       data = json.decode(response.body);
@@ -818,12 +808,13 @@ class ManageProfileState extends State<ManageProfile> {
     var headerData = {
       'Authorization': 'Bearer $bearerToken',
     };
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       _url,
       body: {'userId': '42'},
       headers: headerData,
     );
+    utilityOBJ.onLoadingDismiss(context);
     print(response.body);
     if (response.body.isEmpty != true) {
       data = json.decode(response.body);

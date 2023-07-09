@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:testtting/Constants/Utilities.dart';
 import 'package:testtting/UI/Notify/Notify.dart';
 import 'package:testtting/UI/TaskStatus/TaskStatus.dart';
 import 'package:http/http.dart' as http;
@@ -28,7 +29,7 @@ List<String> listData = [
 
 class MenuState extends State<MenuWidget> {
   late GetUserModel userDataModelOBJ = GetUserModel();
-
+  Utltity utilityOBJ = new Utltity();
   // ignore: prefer_typing_uninitialized_variables
   var data;
   // ignore: prefer_typing_uninitialized_variables
@@ -63,12 +64,14 @@ class MenuState extends State<MenuWidget> {
 
     var body = {'role': role};
 
+    utilityOBJ.onLoading(context);
+
     final response = await http.post(
       url,
       body: body,
       headers: _headerData,
     );
-
+    utilityOBJ.onLoadingDismiss(context);
     if (response.body.isEmpty != true) {
       GetUserModel contactObj =
           GetUserModel.fromJson(json.decode(response.body));
@@ -575,24 +578,7 @@ class MenuState extends State<MenuWidget> {
                 );
               }else{
               return Container(
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height * 0.8,
-                width: MediaQuery
-                    .of(context)
-                    .size
-                    .width,
-                child: Center(
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    child: const LoadingIndicator(
-                      indicatorType: Indicator.ballPulseSync,
-                      strokeWidth: 10.0,
-                    ),
-                  ),
-                ),
+
               );
             }
 

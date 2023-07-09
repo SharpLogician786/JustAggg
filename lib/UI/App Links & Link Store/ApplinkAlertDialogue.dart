@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
 import '../../Constants/Constants.dart';
+import '../../Constants/Utilities.dart';
 import '../../DataModels/AppLinks.dart';
 import '../../DataModels/SignUpModel.dart';
 import 'package:testtting/DataModels/UserSocialLinks';
@@ -35,6 +36,8 @@ class CustomDialogBoxForContentState extends State<CustomDialogBoxForContent> {
   @override
   var _headerData;
 
+  Utltity utilityOBJ = new Utltity();
+
   TextEditingController filename = TextEditingController();
   TextEditingController fileValue = TextEditingController();
 
@@ -52,110 +55,77 @@ class CustomDialogBoxForContentState extends State<CustomDialogBoxForContent> {
     );
   }
 
-  contentBox(
+contentBox(
     context,
-  ) {
-    return Stack(
-      children: <Widget>[
-        Container(
-          padding: const EdgeInsets.only(
-              left: Constants.padding,
-              top: Constants.avatarRadius + Constants.padding,
-              right: 20,
-              bottom: Constants.padding),
-          margin: const EdgeInsets.only(top: 30),
-          decoration: BoxDecoration(
-              shape: BoxShape.rectangle,
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(Constants.padding),
-              boxShadow: const [
-                BoxShadow(
-                    color: Colors.black, offset: Offset(0, 10), blurRadius: 10),
-              ]),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 0.0),
-                child: SizedBox(
-                  height: 54,
-                  child: TextField(
-                    controller: fileValue,
-                    style: const TextStyle(
+    ) {
+  return Stack(
+    children: <Widget>[
+      Container(
+        padding: const EdgeInsets.only(
+            left: Constants.padding,
+            top: Constants.avatarRadius + Constants.padding,
+            right: 20,
+            bottom: Constants.padding),
+        margin: const EdgeInsets.only(top: 30),
+        decoration: BoxDecoration(
+            shape: BoxShape.rectangle,
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(Constants.padding),
+            boxShadow: const [
+              BoxShadow(
+                  color: Colors.black, offset: Offset(0, 10), blurRadius: 10),
+            ]),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 0.0),
+              child: SizedBox(
+                height: 54,
+                child: TextField(
+                  controller: fileValue,
+                  style: const TextStyle(
+                      fontFamily: Constants.fontFamily,
+                      fontSize: 15,
+                      fontWeight: FontWeight.normal),
+                  textAlignVertical: TextAlignVertical.bottom,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white, width: 2.0),
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      filled: true,
+                      hintText: widget.appLinks.data?[widget.headerIndex]
+                          .links?[widget.index].placeholder,
+                      hintStyle: TextStyle(
+                        color: Colors.grey[300],
                         fontFamily: Constants.fontFamily,
-                        fontSize: 15,
-                        fontWeight: FontWeight.normal),
-                    textAlignVertical: TextAlignVertical.bottom,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderSide: const BorderSide(color: Colors.white, width: 2.0),
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        filled: true,
-                        hintText: widget.appLinks.data?[widget.headerIndex]
-                            .links?[widget.index].placeholder,
-                        hintStyle: TextStyle(
-                          color: Colors.grey[300],
-                          fontFamily: Constants.fontFamily,
-                        ),
-                        fillColor: Colors.white70),
-                  ),
+                      ),
+                      fillColor: Colors.white70),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                child: Visibility(
-                  visible: widget.headerSelection,
-                  child: FractionallySizedBox(
-                    widthFactor: 1,
-                    child: Row(
-                      children: [
-                        const Expanded(
-                          flex: 1,
-                          child: FractionallySizedBox(
-                            widthFactor: 0.9,
-                            child: SizedBox(height: 50.0, child: Text('')),
-                          ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+              child: Visibility(
+                visible: widget.headerSelection,
+                child: FractionallySizedBox(
+                  widthFactor: 1,
+                  child: Row(
+                    children: [
+                      const Expanded(
+                        flex: 1,
+                        child: FractionallySizedBox(
+                          widthFactor: 0.9,
+                          child: SizedBox(height: 50.0, child: Text('')),
                         ),
-                        Expanded(
-                          flex: 2,
-                          child: FloatingActionButton.extended(
-                            elevation: 2,
-                            label: const Text(
-                              'Upload Icon',
-                              style: TextStyle(
-                                  fontFamily: Constants.fontFamily,
-                                  color: Colors.black),
-                            ), // <-- Text
-                            backgroundColor: Colors.white,
-                            icon: const Icon(
-                              // <-- Icon
-                              Icons.edit,
-                              color: Colors.black,
-                              size: 24.0,
-                            ),
-                            onPressed: () {
-                              imageSelectionDialogue(context, false);
-                            },
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              FractionallySizedBox(
-                widthFactor: 1,
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: FractionallySizedBox(
-                        widthFactor: 0.9,
+                      ),
+                      Expanded(
+                        flex: 2,
                         child: FloatingActionButton.extended(
                           elevation: 2,
                           label: const Text(
-                            'Delete',
+                            'Upload Icon',
                             style: TextStyle(
                                 fontFamily: Constants.fontFamily,
                                 color: Colors.black),
@@ -168,151 +138,184 @@ class CustomDialogBoxForContentState extends State<CustomDialogBoxForContent> {
                             size: 24.0,
                           ),
                           onPressed: () {
-                            deleteAppsLinksData(
-                                widget.appLinks.data?[widget.headerIndex]
-                                        .links?[widget.index].id
-                                        .toString() ??
-                                    "",
-                                widget.appLinks.data?[widget.headerIndex]
-                                        .links?[widget.index].value
-                                        .toString() ??
-                                    "");
+                            imageSelectionDialogue(context, false);
                           },
                         ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: FractionallySizedBox(
-                        widthFactor: 0.9,
-                        child: SizedBox(
-                          height: 50.0,
-                          child: FloatingActionButton.extended(
-                            elevation: 2,
-                            label: const Text(
-                              'Save',
-                              style: TextStyle(
-                                  fontFamily: Constants.fontFamily,
-                                  color: Colors.white),
-                            ), // <-- Text
-                            backgroundColor: Colors.black,
-
-                            onPressed: () async {
-                              String linkid = widget
-                                      .appLinks
-                                      .data?[widget.headerIndex]
-                                      .links?[widget.index]
-                                      .linkId
-                                      .toString() ??
-                                  "";
-                              String linkName = filename.text;
-                              String value = fileValue.text;
-                              var result = uploadImage(linkid, linkName, value,
-                                  galleryImage?.path.toString() ?? "");
-                              print(result);
-                            },
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ],
-          ),
-        ),
-        Positioned(
-            left: -10,
-            child: Container(
-              height: 74,
-              width: MediaQuery.of(context).size.width,
-              color: Colors.transparent,
+            ),
+            FractionallySizedBox(
+              widthFactor: 1,
               child: Row(
                 children: [
                   Expanded(
                     flex: 1,
-                    child: CircleAvatar(
-                      radius: 50,
-                      backgroundColor: Colors.transparent,
-                      child: ClipRRect(
-                          borderRadius: const BorderRadius.all(
-                              Radius.circular(Constants.avatarRadius)),
-                          child: galleryImage != null
-                              ? Image.file(
-                                  galleryImage!,
-                                  fit: BoxFit.fill,
-                                )
-                              : FadeInImage.assetNetwork(
-                                  placeholder: 'assets/placeholder.jpeg',
-                                  image: widget
-                                          .appLinks
-                                          .data?[widget.headerIndex]
-                                          .links?[widget.index]
-                                          .image
-                                          .toString() ??
-                                      "",
-                                  fit: BoxFit.fill,
-                                  imageScale: 1.0)),
+                    child: FractionallySizedBox(
+                      widthFactor: 0.9,
+                      child: FloatingActionButton.extended(
+                        elevation: 2,
+                        label: const Text(
+                          'Delete',
+                          style: TextStyle(
+                              fontFamily: Constants.fontFamily,
+                              color: Colors.black),
+                        ), // <-- Text
+                        backgroundColor: Colors.white,
+                        icon: const Icon(
+                          // <-- Icon
+                          Icons.edit,
+                          color: Colors.black,
+                          size: 24.0,
+                        ),
+                        onPressed: () {
+                          deleteAppsLinksData(
+                              widget.appLinks.data?[widget.headerIndex]
+                                  .links?[widget.index].id
+                                  .toString() ??
+                                  "",
+                              widget.appLinks.data?[widget.headerIndex]
+                                  .links?[widget.index].value
+                                  .toString() ??
+                                  "");
+                        },
+                      ),
                     ),
                   ),
                   Expanded(
-                    flex: 3,
-                    child: Container(
-                      color: Colors.transparent,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Align(
-                            alignment: Alignment.bottomLeft,
-                            // Place textfield
-                            child: SizedBox(
-                              height: 20,
-                              child: TextFormField(
-                                controller: filename,
-                                textAlign: TextAlign.justify,
-                                style: const TextStyle(
-                                    fontFamily: Constants.fontFamily,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.normal),
-                                // controller: emailController,
-                                  decoration: InputDecoration(
-                                    fillColor: Colors.white,
-                                    focusedBorder:OutlineInputBorder(
-                                      borderSide: const BorderSide(color: Colors.white, width: 2.0),
-                                      borderRadius: BorderRadius.circular(25.0),
-                                    ),
+                    flex: 1,
+                    child: FractionallySizedBox(
+                      widthFactor: 0.9,
+                      child: SizedBox(
+                        height: 50.0,
+                        child: FloatingActionButton.extended(
+                          elevation: 2,
+                          label: const Text(
+                            'Save',
+                            style: TextStyle(
+                                fontFamily: Constants.fontFamily,
+                                color: Colors.white),
+                          ), // <-- Text
+                          backgroundColor: Colors.black,
 
-                                    filled: true,
-                                    hintText: widget
-                                        .appLinks
-                                        .data?[widget.headerIndex]
-                                        .links?[widget.index]
-                                        .name,
-                                    hintStyle: const TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: Constants.fontFamily,
-                                    ),),
-
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5, right: 30.0),
-                            child: Container(
-                              height: 2,
-                              color: Colors.black,
-                            ),
-                          )
-                        ],
+                          onPressed: () async {
+                            String linkid = widget
+                                .appLinks
+                                .data?[widget.headerIndex]
+                                .links?[widget.index]
+                                .linkId
+                                .toString() ??
+                                "";
+                            String linkName = filename.text;
+                            String value = fileValue.text;
+                            var result = uploadImage(linkid, linkName, value,
+                                galleryImage?.path.toString() ?? "");
+                            print(result);
+                          },
+                        ),
                       ),
                     ),
                   )
                 ],
               ),
-            )),
-      ],
-    );
-  }
+            ),
+          ],
+        ),
+      ),
+      Positioned(
+          left: -10,
+          child: Container(
+            height: 74,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.transparent,
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundColor: Colors.transparent,
+                    child: ClipRRect(
+                        borderRadius: const BorderRadius.all(
+                            Radius.circular(Constants.avatarRadius)),
+                        child: galleryImage != null
+                            ? Image.file(
+                          galleryImage!,
+                          fit: BoxFit.fill,
+                        )
+                            : FadeInImage.assetNetwork(
+                            placeholder: 'assets/placeholder.jpeg',
+                            image: widget
+                                .appLinks
+                                .data?[widget.headerIndex]
+                                .links?[widget.index]
+                                .image
+                                .toString() ??
+                                "",
+                            fit: BoxFit.fill,
+                            imageScale: 1.0)),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                    color: Colors.transparent,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Align(
+                          alignment: Alignment.bottomLeft,
+                          // Place textfield
+                          child: SizedBox(
+                            height: 20,
+                            child: TextFormField(
+                              controller: filename,
+                              textAlign: TextAlign.justify,
+                              style: const TextStyle(
+                                  fontFamily: Constants.fontFamily,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.normal),
+                              // controller: emailController,
+                              decoration: InputDecoration(
+                                fillColor: Colors.white,
+                                focusedBorder:OutlineInputBorder(
+                                  borderSide: const BorderSide(color: Colors.white, width: 2.0),
+                                  borderRadius: BorderRadius.circular(25.0),
+                                ),
+
+                                filled: true,
+                                hintText: widget
+                                    .appLinks
+                                    .data?[widget.headerIndex]
+                                    .links?[widget.index]
+                                    .name,
+                                hintStyle: const TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: Constants.fontFamily,
+                                ),),
+
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5, right: 30.0),
+                          child: Container(
+                            height: 2,
+                            color: Colors.black,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )),
+    ],
+  );
+}
 
   Future pickBannerImage(ImageSource source, bool isBannerImage) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -376,10 +379,11 @@ class CustomDialogBoxForContentState extends State<CustomDialogBoxForContent> {
     request.fields['linkId'] = linkId;
     request.fields['value'] = value;
     request.fields['name'] = name;
-
+    utilityOBJ.onLoading(context);
     request.headers.addAll(headers);
     request.files.add(await http.MultipartFile.fromPath('image', filename));
     var res = await request.send();
+    utilityOBJ.onLoadingDismiss(context);
     return res.reasonPhrase.toString();
   }
 
@@ -565,12 +569,13 @@ class CustomDialogBoxForContentState extends State<CustomDialogBoxForContent> {
     var bodyData = {'userId': userID, 'linkId': linkId, 'value': value};
 
     print(bodyData);
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       _url,
       headers: _headerData,
       body: bodyData,
     );
+    utilityOBJ.onLoadingDismiss(context);
   }
 
   //------------------------------------Get User Social Links-------------------------------------
@@ -598,11 +603,12 @@ class CustomDialogBoxForContentState extends State<CustomDialogBoxForContent> {
     var bodyData = {'userId': userID, 'linkId': linkId, 'value': value};
 
     print(bodyData);
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       _url,
       headers: _headerData,
       body: bodyData,
     );
+    utilityOBJ.onLoadingDismiss(context);
   }
 }

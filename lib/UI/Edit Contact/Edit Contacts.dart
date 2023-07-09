@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testtting/DataModels/GetUserModel.dart';
 
 import '../../Constants/Constants.dart';
+import '../../Constants/Utilities.dart';
 import '../../DataModels/SignUpModel.dart';
 
 class EditContacts extends StatefulWidget {
@@ -26,6 +27,8 @@ class EditContactState extends State<EditContacts> {
   //------------------------------------Varibles and Controllers-------------------------------------
   // ignore: prefer_typing_uninitialized_variables
   var headerData;
+
+  Utltity utilityOBJ = new Utltity();
 
   late SignUpModel profileUserData;
 
@@ -191,7 +194,7 @@ class EditContactState extends State<EditContacts> {
                                           style: TextStyle(
                                               fontFamily: Constants.fontFamily,
                                               color: Colors.grey,
-                                              fontSize: 17),
+                                              fontSize: 12),
                                         ),
                                       )),
                                 ),
@@ -274,7 +277,7 @@ class EditContactState extends State<EditContacts> {
                                           style: TextStyle(
                                               fontFamily: Constants.fontFamily,
                                               color: Colors.grey,
-                                              fontSize: 17),
+                                              fontSize: 12),
                                         ),
                                       )),
                                 ),
@@ -356,7 +359,7 @@ class EditContactState extends State<EditContacts> {
                                           style: TextStyle(
                                               fontFamily: Constants.fontFamily,
                                               color: Colors.grey,
-                                              fontSize: 17),
+                                              fontSize: 12),
                                         ),
                                       )),
                                 ),
@@ -436,7 +439,7 @@ class EditContactState extends State<EditContacts> {
                                           style: TextStyle(
                                               fontFamily: Constants.fontFamily,
                                               color: Colors.grey,
-                                              fontSize: 17),
+                                              fontSize: 12),
                                         ),
                                       )),
                                 ),
@@ -512,16 +515,16 @@ class EditContactState extends State<EditContacts> {
                                   alignment: Alignment.topCenter,
                                   child: Container(
                                       width: MediaQuery.of(context).size.width *
-                                          0.5,
+                                          0.55,
                                       height: 20,
                                       color: Colors.white,
                                       child: const Center(
                                         child: Text(
-                                          'Organization/Company',
+                                          'Organization / Company',
                                           style: TextStyle(
                                               fontFamily: Constants.fontFamily,
                                               color: Colors.grey,
-                                              fontSize: 17),
+                                              fontSize: 12),
                                         ),
                                       )),
                                 ),
@@ -595,7 +598,7 @@ class EditContactState extends State<EditContacts> {
                                   alignment: Alignment.topCenter,
                                   child: Container(
                                       width: MediaQuery.of(context).size.width *
-                                          0.3,
+                                          0.25,
                                       height: 20,
                                       color: Colors.white,
                                       child: const Center(
@@ -604,7 +607,7 @@ class EditContactState extends State<EditContacts> {
                                           style: TextStyle(
                                               fontFamily: Constants.fontFamily,
                                               color: Colors.grey,
-                                              fontSize: 17),
+                                              fontSize: 12),
                                         ),
                                       )),
                                 ),
@@ -759,7 +762,7 @@ class EditContactState extends State<EditContacts> {
                                                                       color: Colors
                                                                           .grey,
                                                                       fontSize:
-                                                                          17),
+                                                                          12),
                                                                 ),
                                                               )),
                                                         ),
@@ -866,7 +869,7 @@ class EditContactState extends State<EditContacts> {
                                                                       color: Colors
                                                                           .grey,
                                                                       fontSize:
-                                                                          17),
+                                                                          12),
                                                                 ),
                                                               )),
                                                         ),
@@ -973,7 +976,7 @@ class EditContactState extends State<EditContacts> {
                                                                       color: Colors
                                                                           .grey,
                                                                       fontSize:
-                                                                          17),
+                                                                          12),
                                                                 ),
                                                               )),
                                                         ),
@@ -1237,13 +1240,13 @@ class EditContactState extends State<EditContacts> {
       'contactLink': linkPopField.text,
       'customText': customLinkField.text,
     };
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       url,
       body: bodyData,
       headers: headerData,
     );
-
+    utilityOBJ.onLoadingDismiss(context);
     print(response.body);
 
     if (response.body.isEmpty != true) {

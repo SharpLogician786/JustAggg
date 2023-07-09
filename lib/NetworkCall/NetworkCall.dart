@@ -12,16 +12,16 @@ import '../DataModels/SignUpModel.dart';
 
 class RestAPI {
   //late ProgressDialog pd;
-
+  Utltity utilityOBJ = new Utltity();
   var header = {'Content-Type': 'application/x-www-form-urlencoded'};
 
   //--------------------This method gets data from API requests-------------------------
   Future<dynamic> getReq(context, url, [bool? show]) async {
     var data;
-
+    utilityOBJ.onLoading(context);
     await http.get(url, headers: header).then((response) {
       data = json.decode(response.body);
-
+      utilityOBJ.onLoadingDismiss(context);
       if (data['status'] == 200) {
         return data;
       } else {
@@ -44,6 +44,7 @@ class RestAPI {
     if (show == true) {
       //pd.show();
     }
+    utilityOBJ.onLoading(context);
     await http
         .post(
       url,
@@ -53,7 +54,7 @@ class RestAPI {
     )
         .then((response) async {
       data = json.decode(response.body);
-
+      utilityOBJ.onLoadingDismiss(context);
       if (data['status'] == true) {
         return data;
       } else {
@@ -95,7 +96,7 @@ class RestAPI {
     if (show == true) {
       //pd.show();
     }
-
+    utilityOBJ.onLoading(context);
     await http
         .post(
       url,
@@ -104,7 +105,7 @@ class RestAPI {
     )
         .then((response) async {
       data = json.decode(response.body);
-
+      utilityOBJ.onLoadingDismiss(context);
       if (data['status'] == true) {
         return data;
       } else {
@@ -169,7 +170,6 @@ class RestAPI {
         "body": mssg,
       }
     };
-
     await http
         .post(_notification as Uri,
             body: json.encode(data),

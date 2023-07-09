@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-  
+
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:loading_indicator/loading_indicator.dart';
@@ -26,10 +26,10 @@ class SignIn extends StatefulWidget {
 
 class SignInWidget extends State<SignIn> {
 
-
   final shape = RoundedRectangleBorder(borderRadius: BorderRadius.circular(40));
   final textFieldFocusNode = FocusNode();
   bool _obscured = false;
+
   Utltity utilityOBJ = new Utltity();
   var _data;
   var data;
@@ -43,14 +43,13 @@ class SignInWidget extends State<SignIn> {
       if (textFieldFocusNode.hasPrimaryFocus)
         return; // If focus is on text field, dont unfocus
       textFieldFocusNode.canRequestFocus =
-          false; // Prevents focus if tap on eye
+      false; // Prevents focus if tap on eye
     });
   }
 
   void _showButtonPressDialog(BuildContext context, String provider) {}
 
   void signIn(BuildContext context) async {
-
     if (emailController.text == "") {
       return utilityOBJ.showAlert(context, "Error", "Please enter email.");
     }
@@ -59,7 +58,7 @@ class SignInWidget extends State<SignIn> {
     }
 
     final _url =
-        Uri.parse(Constants.baseUrl.toString() + Constants.login.toString());
+    Uri.parse(Constants.baseUrl.toString() + Constants.login.toString());
     _data = {
       'email': emailController.text,
       'fcmToken': 'asda',
@@ -68,11 +67,11 @@ class SignInWidget extends State<SignIn> {
       'loginWith': 'signup',
       'platform': 'web',
       'socialId':
-          'eyJraWQiOiJmaDZCczhDIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLkp1c3RhZ2cuYXBwIiwiZXhwIjoxNjgxODgyOTUyLCJpYXQiOjE2ODE3OTY1NTIsInN1YiI6IjAwMDY0My45ODQ2YmVmMmI4NGQ0NDA4YmIzMWYxMzI3MDBjYTI0Ni4xMTQxIiwibm9uY2UiOiI4YWQ3Y2VhOGZhMGJlYjhjMjMzNDlkYjhhZTU1Y2JkM2E0YzE5N2Y5MmUwNDliNjI1ZTE0NjkwODc5MDExMTk2IiwiY19oYXNoIjoiNVJNTWc4TEJuRHFTQmw3MHVYZldPUSIsImVtYWlsIjoiYWJkdWxsYWhzYWRhcWF0QGhvdG1haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOiJ0cnVlIiwiYXV0aF90aW1lIjoxNjgxNzk2NTUyLCJub25jZV9zdXBwb3J0ZWQiOnRydWUsInJlYWxfdXNlcl9zdGF0dXMiOjJ9.aun8Zj7xn8zXeQNkrVs5LvuHWANpe-X1ZP9tm5z8WGgbYriix0Iglf0ft28xVY041GFxEVZqMaamIEmMua0aYokj3GVBJVjFD1L80Zg7KWZswOvVeuj7lwPXtCKXvRFRA4EEeFumDwjfpWv0g2JpZqAqrP5QpEm2LqJodRHCGQRqerzj7LOc6e-CO2agCP2JRL3Z8DUgoe_JmfXIbuUzBGhFrc_UbJdPPR4QAkmTKuLOVPhOqg21uGYGTzMfzA9p83cN8oNaS6qGOTu9T9ZXCpfKJcHSnfrGSvtV888w1Ey9hEZPZunun1yhg2pzhWnoKx1jV7jwXCxmibCbxLnrug'
+      'eyJraWQiOiJmaDZCczhDIiwiYWxnIjoiUlMyNTYifQ.eyJpc3MiOiJodHRwczovL2FwcGxlaWQuYXBwbGUuY29tIiwiYXVkIjoiY29tLkp1c3RhZ2cuYXBwIiwiZXhwIjoxNjgxODgyOTUyLCJpYXQiOjE2ODE3OTY1NTIsInN1YiI6IjAwMDY0My45ODQ2YmVmMmI4NGQ0NDA4YmIzMWYxMzI3MDBjYTI0Ni4xMTQxIiwibm9uY2UiOiI4YWQ3Y2VhOGZhMGJlYjhjMjMzNDlkYjhhZTU1Y2JkM2E0YzE5N2Y5MmUwNDliNjI1ZTE0NjkwODc5MDExMTk2IiwiY19oYXNoIjoiNVJNTWc4TEJuRHFTQmw3MHVYZldPUSIsImVtYWlsIjoiYWJkdWxsYWhzYWRhcWF0QGhvdG1haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOiJ0cnVlIiwiYXV0aF90aW1lIjoxNjgxNzk2NTUyLCJub25jZV9zdXBwb3J0ZWQiOnRydWUsInJlYWxfdXNlcl9zdGF0dXMiOjJ9.aun8Zj7xn8zXeQNkrVs5LvuHWANpe-X1ZP9tm5z8WGgbYriix0Iglf0ft28xVY041GFxEVZqMaamIEmMua0aYokj3GVBJVjFD1L80Zg7KWZswOvVeuj7lwPXtCKXvRFRA4EEeFumDwjfpWv0g2JpZqAqrP5QpEm2LqJodRHCGQRqerzj7LOc6e-CO2agCP2JRL3Z8DUgoe_JmfXIbuUzBGhFrc_UbJdPPR4QAkmTKuLOVPhOqg21uGYGTzMfzA9p83cN8oNaS6qGOTu9T9ZXCpfKJcHSnfrGSvtV888w1Ey9hEZPZunun1yhg2pzhWnoKx1jV7jwXCxmibCbxLnrug'
     };
     var header = {'Content-Type': 'application/x-www-form-urlencoded'};
 
-
+    utilityOBJ.onLoading(context);
     await http
         .post(
       _url,
@@ -81,7 +80,7 @@ class SignInWidget extends State<SignIn> {
     )
         .then((response) async {
       data = json.decode(response.body);
-
+      utilityOBJ.onLoadingDismiss(context);
 
       if (data['status'] == true) {
         SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -105,7 +104,7 @@ class SignInWidget extends State<SignIn> {
             PageTransition(
                 type: PageTransitionType.bottomToTop,
                 child: BottomNavigationBarExample()),
-            (e) => false);
+                (e) => false);
       } else {
         Utltity().showAlert(context, 'Info', data['message'].toString());
         data = null;
@@ -123,7 +122,6 @@ class SignInWidget extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-
     // TODO: implement build
     return Scaffold(
       body: SafeArea(
@@ -255,7 +253,6 @@ class SignInWidget extends State<SignIn> {
                       height: 50.0,
                       child: OutlinedButton(
                         onPressed: () {
-
                           this.signIn(context);
                         },
                         child: Text(

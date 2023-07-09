@@ -27,6 +27,7 @@ class BottomNavigationBarExample extends StatefulWidget {
 class _BottomNavigationBarExampleState
     extends State<BottomNavigationBarExample> {
   int _selectedIndex = 0;
+
   static const List<Widget> _widgetOptions = <Widget>[
     Profile(),
     Contacts(),
@@ -49,8 +50,9 @@ class _BottomNavigationBarExampleState
       ),
       bottomNavigationBar: ConvexAppBar(
         curveSize: 1,
+        cornerRadius: 20,
         style: TabStyle.fixedCircle,
-        activeColor: Colors.black,
+        activeColor: Colors.grey,
         shadowColor: const Color.fromARGB(255, 231, 228, 228),
         backgroundColor: Colors.white,
         color: Colors.black,
@@ -69,7 +71,7 @@ class _BottomNavigationBarExampleState
           ),
           TabItem(
             icon: Icon(Icons.share, color: Colors.white),
-            //backgroundColor: Colors.purple,
+            title: 'Share',
           ),
           TabItem(
             fontFamily: Constants.fontFamily,

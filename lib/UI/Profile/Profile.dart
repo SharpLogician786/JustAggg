@@ -11,6 +11,7 @@ import 'package:testtting/UI/App%20Links%20&%20Link%20Store/AppLinks.dart';
 import 'package:testtting/UI/Edit Contact/Edit Contacts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../Constants/Utilities.dart';
 import '../../DataModels/SignUpModel.dart';
 
 import 'package:testtting/DataModels/GetUserModel.dart';
@@ -40,6 +41,8 @@ class ProfileState extends State<Profile> {
   var data;
   // ignore: prefer_typing_uninitialized_variables
   var _headerData;
+
+  Utltity utilityOBJ = new Utltity();
 
   late SignUpModel profileUserData;
 
@@ -132,6 +135,8 @@ class ProfileState extends State<Profile> {
     request.fields['id'] = userId;
     request.headers.addAll(headers);
     print(fileUrl);
+    utilityOBJ.onLoading(context);
+
     if (fileUrl == 'coverUrl') {
       request.files
           .add(await http.MultipartFile.fromPath('coverUrl', filename));
@@ -140,7 +145,9 @@ class ProfileState extends State<Profile> {
           .add(await http.MultipartFile.fromPath('profileUrl', filename));
     }
     var res = await request.send();
+    utilityOBJ.onLoadingDismiss(context);
     return res.reasonPhrase.toString();
+
   }
 
   Future<void> _launchUrl(Uri url) async {
@@ -597,7 +604,7 @@ class ProfileState extends State<Profile> {
                             fontSize: 15,
                             fontWeight: FontWeight.normal),
                         controller: nameField,
-                        textAlignVertical: TextAlignVertical.bottom,
+                        textAlignVertical: TextAlignVertical.center,
                         decoration: InputDecoration(
                             enabledBorder: OutlineInputBorder(
                               borderSide: const BorderSide(
@@ -617,8 +624,7 @@ class ProfileState extends State<Profile> {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        top: 10.0, left: 20.0, right: 20.0),
+                    padding: const EdgeInsets.only(left: 20.0, right: 20.0,top: 10.0),
                     child: SizedBox(
                       height: 54,
                       child: TextField(
@@ -627,15 +633,18 @@ class ProfileState extends State<Profile> {
                             fontSize: 15,
                             fontWeight: FontWeight.normal),
                         controller: mobileField,
-                        textAlignVertical: TextAlignVertical.bottom,
+                        textAlignVertical: TextAlignVertical.center,
                         decoration: InputDecoration(
+                            isDense: true,
                             enabledBorder: OutlineInputBorder(
                               borderSide: const BorderSide(
                                   width: 0, color: Colors.grey),
                               borderRadius: BorderRadius.circular(30.0),
                             ),
                             filled: true,
-                            hintText: '',
+                            hintText:
+                            userDataModelOBJ.data?.username.toString() ??
+                                "",
                             hintStyle: TextStyle(
                               color: Colors.grey[300],
                               fontFamily: Constants.fontFamily,
@@ -813,22 +822,7 @@ class ProfileState extends State<Profile> {
                 ],
               );
             } else {
-              return  Container(
-                height: MediaQuery.of(context).size.height * 0.8,
-                width: MediaQuery.of(context).size.width,
-                child: Center(
-                  child: Container(
-                    width: 100,
-                    height: 100,
-                    child: const LoadingIndicator(
-                        indicatorType: Indicator.ballPulse, /// Required, The loading type of the widget
-                        colors: const [Colors.black],       /// Optional, The color collections
-                        strokeWidth: 2,            /// Optional, Background of the widget
-                        pathBackgroundColor: Colors.black
-                    ),
-                  ),
-                ),
-              );
+              return Container();
             }
           },
         ),
@@ -1013,6 +1007,8 @@ class ProfileState extends State<Profile> {
 
     var bearerToken = user.data?.token.toString();
 
+    utilityOBJ.onLoading(context);
+
     // var bearerToken = '1181|MddbugrToEVjBVhZ9SF9k9BGcCXw8uwbp05WG8bI';
 
     Uri url =
@@ -1027,7 +1023,6 @@ class ProfileState extends State<Profile> {
     prefs.setString("userRole", userRole);
 
     var body = {'role': userRole};
-
     final response = await http.post(
       url,
       body: body,
@@ -1075,7 +1070,7 @@ class ProfileState extends State<Profile> {
     } else {
       isPersonalMode = false;
     }
-
+    utilityOBJ.onLoadingDismiss(context);
     return userDataModelOBJ;
   }
 
@@ -1105,12 +1100,13 @@ class ProfileState extends State<Profile> {
     var headerData = {
       'Authorization': 'Bearer $bearerToken',
     };
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       url,
       body: {'userId': userID},
       headers: headerData,
     );
+    utilityOBJ.onLoadingDismiss(context);
     print(response.body);
     if (response.body.isEmpty != true) {
       data = json.decode(response.body);
@@ -1150,7 +1146,7 @@ class ProfileState extends State<Profile> {
     var headerData = {
       'Authorization': 'Bearer $bearerToken',
     };
-
+    utilityOBJ.onLoading(context);
     final response = await http.post(
       _url,
       body: {'userId': userID},
@@ -1165,6 +1161,7 @@ class ProfileState extends State<Profile> {
         leadModeSwitch = false;
       }
     }
+    utilityOBJ.onLoadingDismiss(context);
     return leadModeSwitch;
   }
 }
