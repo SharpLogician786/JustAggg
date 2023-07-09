@@ -2,6 +2,7 @@ import 'dart:convert';
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
@@ -46,6 +47,7 @@ class SignInWidget extends State<SignIn> {
       false; // Prevents focus if tap on eye
     });
   }
+
 
   void _showButtonPressDialog(BuildContext context, String provider) {}
 
@@ -308,7 +310,7 @@ class SignInWidget extends State<SignIn> {
                       Buttons.FacebookNew,
                       shape: shape,
                       onPressed: () {
-                        _showButtonPressDialog(context, 'Google');
+                        _showButtonPressDialog(context, 'Facebook');
                       },
                     ),
                   ),
@@ -339,4 +341,5 @@ class SignInWidget extends State<SignIn> {
       ),
     );
   }
+
 }

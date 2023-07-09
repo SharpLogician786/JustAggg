@@ -711,7 +711,7 @@ class ProfileState extends State<Profile> {
                                   builder: (context) => EditContacts(
                                         userDataModel: userDataModelOBJ,
                                         coverImage: galleryImage,
-                                        dpImage: dpImage,
+                                        dpImage: dpImage, socialMode: socialOrNot,
                                       )));
                               // EditContacts
                             },

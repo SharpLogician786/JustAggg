@@ -51,6 +51,8 @@ dependencies:
   intl: ^0.18.1
   flutter_colorpicker: ^1.0.3
   loading_indicator: ^3.1.1
+  flutter_facebook_auth: ^6.0.0
+  google_sign_in: ^6.1.4
 
 dev_dependencies:
   flutter_test:

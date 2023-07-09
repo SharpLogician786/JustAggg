@@ -11,10 +11,11 @@ import '../../DataModels/SignUpModel.dart';
 
 class EditContacts extends StatefulWidget {
   const EditContacts(
-      {Key? key, required this.userDataModel, this.coverImage, this.dpImage})
+      {Key? key, required this.userDataModel, this.coverImage, this.dpImage, required this.socialMode})
       : super(key: key);
 
   final GetUserModel userDataModel;
+  final bool socialMode;
 
   final File? coverImage;
   final File? dpImage;
@@ -64,7 +65,14 @@ class EditContactState extends State<EditContacts> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    assignValues();
+    if(widget.socialMode == false)
+      {
+        print('');
+      }
+    else{
+      assignValues();
+    }
+
   }
 
   void assignValues() {
@@ -101,11 +109,11 @@ class EditContactState extends State<EditContacts> {
     // TODO: implement build
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Edit Contacts',
+        title: const Text('Edit Contact',
             style: TextStyle(
                 fontFamily: Constants.fontFamily,
                 fontWeight: FontWeight.bold,
-                fontSize: 20.0,
+                fontSize: 15.0,
                 color: Colors.black)),
         elevation: 0,
         backgroundColor: Colors.white,
@@ -1188,7 +1196,7 @@ class EditContactState extends State<EditContacts> {
                               shape: const StadiumBorder(),
                             ),
                             child: const Text(
-                              'Save',
+                              'Save Changes',
                               style: TextStyle(
                                   fontFamily: Constants.fontFamily,
                                   color: Colors.white),
