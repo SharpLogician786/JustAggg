@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -78,213 +79,250 @@ class ShareState extends State<ShareTab> {
           child: FutureBuilder(
             future: fetchDataFromUserApi(),
             builder: (context, snapshot) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    height: 44,
-                    // color: Colors.white,
-                    child: Center(
-                      child: Text(
-                        'Share',
-                        style: TextStyle(
-                            fontFamily: Constants.fontFamily,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+              if (snapshot.hasData) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 44,
+                      // color: Colors.white,
+                      child: Center(
+                        child: Text(
+                          'Share',
+                          style: TextStyle(
+                              fontFamily: Constants.fontFamily,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 150,
+                            height: 150,
+                            child: QrImageView(
+                              data: snapshot.data?.data?.baseUrl.toString() ??
+                                  "",
+                              version: QrVersions.auto,
+                              size: 200.0,
+                            ),
+                          ),
+                          // IconButton(
+                          //     onPressed: () {},
+                          //     icon: const Icon(
+                          //       Icons.download_for_offline,
+                          //       size: 34,
+                          //     ))
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                              child: Text(
+                                snapshot.data?.data?.baseUrl.toString() ?? "",
+                                style: const TextStyle(
+                                    fontFamily: Constants.fontFamily,
+                                    fontWeight: FontWeight.w600),
+                              )),
+                          IconButton(
+                              onPressed: () {
+                                Clipboard.setData(ClipboardData(
+                                    text:
+                                    snapshot.data?.data?.baseUrl.toString() ??
+                                        ""));
+                              },
+                              icon: const Icon(
+                                Icons.copy_sharp,
+                              ))
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                Icons.info_outline,
+                              )),
+                          const SizedBox(
+                              child: Text(
+                                'Offline Mode',
+                                style: TextStyle(
+                                    fontFamily: Constants.fontFamily,
+                                    fontWeight: FontWeight.w600),
+                              )),
+                          Switch.adaptive(
+                            // This bool value toggles the switch.
+                            value: light,
+                            activeColor: Colors.black,
+                            onChanged: (bool value) {
+                              // This is called when the user toggles the switch.
+                              setState(() {
+                                light = value;
+                              });
+                            },
+                          )
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20.0, left: 20.0),
+                      child: SizedBox(
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height * 0.35,
+                        child: ListView.builder(
+                            itemExtent: 70.0,
+                            padding: EdgeInsets.zero,
+                            shrinkWrap: true,
+                            itemCount: users.length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) {
+                              return InkWell(
+                                onTap: () {
+                                  if (index == 0) {
+                                    Share.share(
+                                        'Hey, \n You can find my profile: \n ${snapshot
+                                            .data?.data?.baseUrl.toString() ??
+                                            ""} ');
+                                  }
+                                  if (index == 1) {
+                                    Share.share(
+                                        'Hey, \n You can find my profile: \n ${snapshot
+                                            .data?.data?.baseUrl.toString() ??
+                                            ""} ');
+                                  }
+                                  if (index == 2) {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Signature(
+                                                  userDataModel: userDataModelOBJ,
+                                                )));
+                                    // EditContacts
+                                  }
+                                  if (index == 3) {
+                                    colorPickerDialog();
+                                  }
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(top: 10.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                      color: Colors.white,
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Colors.grey,
+                                          offset: Offset(0.0, 1.0), //(x,y)
+                                          blurRadius: 6.0,
+                                        ),
+                                      ],
+                                    ),
+                                    height: 30,
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                            flex: 1,
+                                            child: Container(
+                                              child: users[index].icon,
+                                            )),
+                                        Expanded(
+                                            flex: 5,
+                                            child: SizedBox(
+                                              child: Text(
+                                                users[index].name,
+                                                textAlign: TextAlign.center,
+                                                style: const TextStyle(
+                                                    fontFamily:
+                                                    Constants.fontFamily,
+                                                    fontSize: 17,
+                                                    fontWeight: FontWeight
+                                                        .w500),
+                                              ),
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            }),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: FractionallySizedBox(
+                        widthFactor: 0.9,
+                        child: SizedBox(
+                            height: 50.0,
+                            child: OutlinedButton(
+                              onPressed: () {
+                                Share.share(
+                                    'Hey, \n You can find my profile: \n ${snapshot
+                                        .data?.data?.baseUrl.toString() ??
+                                        ""} ');
+                              },
+                              child: Text(
+                                'Share Another Way',
+                                style: TextStyle(
+                                    fontFamily: Constants.fontFamily,
+                                    color: Colors.white),
+                              ),
+                              style: OutlinedButton.styleFrom(
+                                backgroundColor: Colors.black,
+                                shape: const StadiumBorder(),
+                              ),
+                            )),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                  ],
+                );
+              }
+              else {
+                return Container(
+                  height: MediaQuery
+                      .of(context)
+                      .size
+                      .height * 0.8,
+                  width: MediaQuery
+                      .of(context)
+                      .size
+                      .width,
+                  child: Center(
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      child: const LoadingIndicator(
+                        indicatorType: Indicator.ballPulseSync,
+                        strokeWidth: 10.0,
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                          width: 150,
-                          height: 150,
-                          child: QrImageView(
-                            data: snapshot.data?.data?.baseUrl.toString() ?? "",
-                            version: QrVersions.auto,
-                            size: 200.0,
-                          ),
-                        ),
-                        // IconButton(
-                        //     onPressed: () {},
-                        //     icon: const Icon(
-                        //       Icons.download_for_offline,
-                        //       size: 34,
-                        //     ))
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                            child: Text(
-                          snapshot.data?.data?.baseUrl.toString() ?? "",
-                          style: const TextStyle(
-                              fontFamily: Constants.fontFamily,
-                              fontWeight: FontWeight.w600),
-                        )),
-                        IconButton(
-                            onPressed: () {
-                              Clipboard.setData(ClipboardData(
-                                  text:
-                                      snapshot.data?.data?.baseUrl.toString() ??
-                                          ""));
-                            },
-                            icon: const Icon(
-                              Icons.copy_sharp,
-                            ))
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              Icons.info_outline,
-                            )),
-                        const SizedBox(
-                            child: Text(
-                          'Offline Mode',
-                          style: TextStyle(
-                              fontFamily: Constants.fontFamily,
-                              fontWeight: FontWeight.w600),
-                        )),
-                        Switch.adaptive(
-                          // This bool value toggles the switch.
-                          value: light,
-                          activeColor: Colors.black,
-                          onChanged: (bool value) {
-                            // This is called when the user toggles the switch.
-                            setState(() {
-                              light = value;
-                            });
-                          },
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 20.0, left: 20.0),
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.35,
-                      child: ListView.builder(
-                          itemExtent: 70.0,
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          itemCount: users.length,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) {
-                            return InkWell(
-                              onTap: () {
-                                if (index == 0) {
-                                  Share.share(
-                                      'Hey, \n You can find my profile: \n ${snapshot.data?.data?.baseUrl.toString() ?? ""} ');
-                                }
-                                if (index == 1) {
-                                  Share.share(
-                                      'Hey, \n You can find my profile: \n ${snapshot.data?.data?.baseUrl.toString() ?? ""} ');
-                                }
-                                if (index == 2) {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => Signature(
-                                            userDataModel: userDataModelOBJ,
-                                          )));
-                                  // EditContacts
-                                }
-                                if (index == 3) {
-                                  colorPickerDialog();
-                                }
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 10.0),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20.0),
-                                    color: Colors.white,
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Colors.grey,
-                                        offset: Offset(0.0, 1.0), //(x,y)
-                                        blurRadius: 6.0,
-                                      ),
-                                    ],
-                                  ),
-                                  height: 30,
-                                  child: Row(
-                                    children: [
-                                      Expanded(
-                                          flex: 1,
-                                          child: Container(
-                                            child: users[index].icon,
-                                          )),
-                                      Expanded(
-                                          flex: 5,
-                                          child: SizedBox(
-                                            child: Text(
-                                              users[index].name,
-                                              textAlign: TextAlign.center,
-                                              style: const TextStyle(
-                                                  fontFamily:
-                                                      Constants.fontFamily,
-                                                  fontSize: 17,
-                                                  fontWeight: FontWeight.w500),
-                                            ),
-                                          )),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          }),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: FractionallySizedBox(
-                      widthFactor: 0.9,
-                      child: SizedBox(
-                          height: 50.0,
-                          child: OutlinedButton(
-                            onPressed: () {
-                              Share.share(
-                                  'Hey, \n You can find my profile: \n ${snapshot.data?.data?.baseUrl.toString() ?? ""} ');
-                            },
-                            child: Text(
-                              'Share Another Way',
-                              style: TextStyle(
-                                  fontFamily: Constants.fontFamily,
-                                  color: Colors.white),
-                            ),
-                            style: OutlinedButton.styleFrom(
-                              backgroundColor: Colors.black,
-                              shape: const StadiumBorder(),
-                            ),
-                          )),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                ],
-              );
-            },
+                );
+              }
+            }
           ),
         ),
       ),

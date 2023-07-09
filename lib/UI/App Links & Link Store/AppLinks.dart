@@ -2,11 +2,10 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:loading_indicator/loading_indicator.dart';
 import '../../Constants/Constants.dart';
 import '../../DataModels/AppLinks.dart';
 import '../../DataModels/SignUpModel.dart';
@@ -161,9 +160,20 @@ class ApplinkState extends State<Applink> {
                       ),
                     );
                   } else {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
+                   return Container(
+                     height: MediaQuery.of(context).size.height * 0.8,
+                     width: MediaQuery.of(context).size.width,
+                     child: Center(
+                       child: Container(
+                         width: 100,
+                         height: 100,
+                         child: const LoadingIndicator(
+                           indicatorType: Indicator.ballPulseSync,
+                           strokeWidth: 10.0,
+                         ),
+                       ),
+                     ),
+                   );
                   }
                 },
               ),
@@ -304,12 +314,13 @@ class ApplinkState extends State<Applink> {
     _headerData = {
       'Authorization': 'Bearer $bearerToken',
     };
-    EasyLoading.show(status: 'Loading Data');
+
+
     final response = await http.get(
       _url,
       headers: _headerData,
     );
-    EasyLoading.dismiss();
+
     if (response.body.isEmpty != true) {
       AppLinksModel notifyObj =
           AppLinksModel.fromJson(json.decode(response.body));

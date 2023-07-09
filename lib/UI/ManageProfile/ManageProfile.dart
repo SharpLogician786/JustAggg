@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testtting/DataModels/GetUserModel.dart';
 import 'package:http/http.dart' as http;
@@ -364,8 +365,25 @@ class ManageProfileState extends State<ManageProfile> {
               ],
             );
           } else {
-            return const Center(
-              child: CircularProgressIndicator.adaptive(),
+            return Container(
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height * 0.8,
+              width: MediaQuery
+                  .of(context)
+                  .size
+                  .width,
+              child: Center(
+                child: Container(
+                  width: 100,
+                  height: 100,
+                  child: const LoadingIndicator(
+                    indicatorType: Indicator.ballPulseSync,
+                    strokeWidth: 10.0,
+                  ),
+                ),
+              ),
             );
           }
         },

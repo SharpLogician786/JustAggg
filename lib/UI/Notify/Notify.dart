@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import '../../Constants/Constants.dart';
@@ -65,6 +66,7 @@ class NotifyState extends State<Notify> {
                 child: FutureBuilder(
                   future: fetchNotificationData(),
                   builder: (context, snapshot) {
+
                     if (snapshot.hasData == true) {
                       return ListView.builder(
                           itemCount: notificationDataModelOBJ.data?.length,
@@ -132,8 +134,25 @@ class NotifyState extends State<Notify> {
                             );
                           });
                     } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
+                      return Container(
+                        height: MediaQuery
+                            .of(context)
+                            .size
+                            .height * 0.8,
+                        width: MediaQuery
+                            .of(context)
+                            .size
+                            .width,
+                        child: Center(
+                          child: Container(
+                            width: 100,
+                            height: 100,
+                            child: const LoadingIndicator(
+                              indicatorType: Indicator.ballPulseSync,
+                              strokeWidth: 10.0,
+                            ),
+                          ),
+                        ),
                       );
                     }
                   },

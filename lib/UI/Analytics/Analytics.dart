@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testtting/Constants/Utilities.dart';
 
@@ -516,8 +517,21 @@ class AnalyticsState extends State<Analytics> {
                 ],
               );
             } else {
-              return const Center(
-                child: CircularProgressIndicator(),
+              return Container(
+                height: MediaQuery.of(context).size.height * 0.8,
+                width: MediaQuery.of(context).size.width,
+                child: Center(
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    child: const LoadingIndicator(
+                        indicatorType: Indicator.ballPulse, /// Required, The loading type of the widget
+                        colors: const [Colors.black],       /// Optional, The color collections
+                        strokeWidth: 2,            /// Optional, Background of the widget
+                        pathBackgroundColor: Colors.black
+                    ),
+                  ),
+                ),
               );
             }
           },
