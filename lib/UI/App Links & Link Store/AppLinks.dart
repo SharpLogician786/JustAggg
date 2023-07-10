@@ -391,7 +391,7 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
   File? galleryImaage;
   File? dpImage;
   TextEditingController fileValue = TextEditingController();
-
+  Utltity utilityOBJ = new Utltity();
   Widget build(BuildContext context) {
     return Dialog(
       shape: RoundedRectangleBorder(
@@ -522,15 +522,18 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
                             size: 24.0,
                           ),
                           onPressed: () {
-                            deleteAppsLinksData(
-                                widget.appLinks.data?[widget.headerIndex]
-                                        .links?[widget.index].id
-                                        .toString() ??
-                                    "",
-                                widget.appLinks.data?[widget.headerIndex]
-                                        .links?[widget.index].value
-                                        .toString() ??
-                                    "");
+                            setState(() {
+                              deleteAppsLinksData(
+                                  widget.appLinks.data?[widget.headerIndex]
+                                      .links?[widget.index].id
+                                      .toString() ??
+                                      "",
+                                  widget.appLinks.data?[widget.headerIndex]
+                                      .links?[widget.index].value
+                                      .toString() ??
+                                      "");
+                            });
+
                           },
                         ),
                       ),
@@ -550,7 +553,6 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
                                   color: Colors.white),
                             ), // <-- Text
                             backgroundColor: Colors.black,
-
                             onPressed: () {
                               String linkid = widget
                                   .appLinks
@@ -567,10 +569,30 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
                                   .toString() ??
                                   "";
                               String value = fileValue.text;
-                              var result = uploadImage(linkid, linkName, value,
-                                  galleryImaage?.path.toString() ?? "");
-                              print(result);
-                              Navigator.pop(context);
+                              String fileName = "";
+                              print((galleryImaage?.path));
+                              print('path');
+                               if (value == "")
+                              {
+                                utilityOBJ.showAlert(context, 'Error', 'Please enter ${widget
+                                    .appLinks
+                                    .data?[widget.headerIndex]
+                                    .links?[widget.index]
+                                    .placeholder
+                                    .toString() ??
+                                    ""}.');
+                              }else{
+                                 if (galleryImaage?.path == null)
+                                 {
+                                   print('Roger');
+                                   addUpdateAppsLinksData(linkid, value);
+                                 }else{
+                                   fileName = galleryImaage?.path.toString() ?? "";
+                                   var result = uploadImage(linkid, linkName, value,fileName
+                                   );
+                                   print(result);
+                               }
+                              }
                             },
                           ),
                         ),
@@ -679,9 +701,9 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
       body: bodyData,
     );
     utilityOBJ.onLoadingDismiss(context);
-    if (response.body.isEmpty == true)
+    if (response.body.isEmpty != true)
       {
-
+        Navigator.pop(context);
       }
   }
   //------------------------------------Get User Social Links-------------------------------------
@@ -719,6 +741,7 @@ class CustomDialogBoxState extends State<CustomDialogBox> {
       body: bodyData,
     );
     utilityOBJ.onLoadingDismiss(context);
+    Navigator.pop(context);
   }
 
 

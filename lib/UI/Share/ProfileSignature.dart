@@ -26,11 +26,12 @@ class SignatreState extends State<Signature> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        title: const Text(
-          'Signature Preview',
-          style:
-              TextStyle(fontFamily: Constants.fontFamily, color: Colors.black),
-        ),
+       title: Text('Signature Preview',
+          style: TextStyle(
+              fontFamily: Constants.fontFamily,
+              fontWeight: FontWeight.bold,
+              fontSize: 15.0,
+              color: Colors.black)),
         leading: IconButton(
           color: Colors.black,
           icon: const Icon(Icons.arrow_back),
@@ -40,7 +41,7 @@ class SignatreState extends State<Signature> {
         ),
       ),
       body: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             height: 54,
@@ -63,108 +64,203 @@ class SignatreState extends State<Signature> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 40.0),
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.4,
-              child: Row(
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: Align(
-                      alignment: Alignment.center,
-                      child: Container(
-                        color: Colors.transparent,
-                        child: Column(
-                          children: [
-                            FadeInImage.assetNetwork(
-                              placeholder: 'assets/placeholder.jpeg',
-                              image: widget.userDataModel.data?.profileUrl
-                                      .toString() ??
-                                  "",
-                              fit: BoxFit.fill,
-                              imageScale: 1.0,
+          Stack(
+            children:[
+              Visibility(
+                visible: isIncludeQr ==  true ? true : false,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 40.0),
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    child: Row(
+                        children: [
+                          Expanded(
+                            flex: 1,
+                            child: Align(
+                              alignment: Alignment.center,
+                              child: Container(
+                                color: Colors.transparent,
+                                child: Column(
+                                  children: [
+                                    FadeInImage.assetNetwork(
+                                      placeholder: 'assets/placeholder.jpeg',
+                                      image: widget.userDataModel.data?.profileUrl
+                                          .toString() ??
+                                          "",
+                                      fit: BoxFit.fill,
+                                      imageScale: 1.0,
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      widget.userDataModel.data?.name.toString() ?? "",
+                                      style: const TextStyle(
+                                          fontFamily: Constants.fontFamily,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      widget.userDataModel.data?.designation
+                                          .toString() ??
+                                          "",
+                                      style: const TextStyle(
+                                          fontFamily: Constants.fontFamily,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.normal),
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      widget.userDataModel.data?.company.toString() ??
+                                          "",
+                                      style: const TextStyle(
+                                          fontFamily: Constants.fontFamily,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.normal),
+                                    ),
+                                    const SizedBox(
+                                      height: 8,
+                                    ),
+                                    Text(
+                                      widget.userDataModel.data?.address.toString() ??
+                                          "",
+                                      style: const TextStyle(
+                                          fontFamily: Constants.fontFamily,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.normal),
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                            const SizedBox(
-                              height: 8,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: Container(
+                              width: 2.0,
+                              height: MediaQuery.of(context).size.height,
+                              color: const Color.fromARGB(69, 158, 158, 158),
                             ),
-                            Text(
-                              widget.userDataModel.data?.name.toString() ?? "",
-                              style: const TextStyle(
-                                  fontFamily: Constants.fontFamily,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              color: Colors.transparent,
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Container(
+                                  color: Colors.transparent,
+                                  child: Column(
+                                    children: [
+                                      QrImageView(
+                                        data: widget.userDataModel.data?.baseUrl
+                                            .toString() ??
+                                            "",
+                                        version: QrVersions.auto,
+                                        size: 200.0,
+                                      ),
+                                      const Text(
+                                        'Connect with me ',
+                                        style: TextStyle(
+                                            fontFamily: Constants.fontFamily,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              widget.userDataModel.data?.designation
-                                      .toString() ??
-                                  "",
-                              style: const TextStyle(
-                                  fontFamily: Constants.fontFamily,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.normal),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              widget.userDataModel.data?.company.toString() ??
-                                  "",
-                              style: const TextStyle(
-                                  fontFamily: Constants.fontFamily,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.normal),
-                            ),
-                            const SizedBox(
-                              height: 8,
-                            ),
-                            Text(
-                              widget.userDataModel.data?.address.toString() ??
-                                  "",
-                              style: const TextStyle(
-                                  fontFamily: Constants.fontFamily,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.normal),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(2.0),
-                    child: Container(
-                      width: 2.0,
-                      height: MediaQuery.of(context).size.height,
-                      color: const Color.fromARGB(69, 158, 158, 158),
+                ),
+              ),
+              Visibility(
+                visible: isIncludeQr ==  true ? false : true,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.35,
+                    width: MediaQuery.of(context).size.width * 0.65,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(
+                        color: Colors.grey,
+                      ),
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      color: Colors.transparent,
+                    child: Expanded(
+                      flex: 1,
                       child: Align(
                         alignment: Alignment.center,
                         child: Container(
                           color: Colors.transparent,
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              QrImageView(
-                                data: widget.userDataModel.data?.baseUrl
+                              CircleAvatar(
+                                backgroundColor: Colors.transparent,
+                                  radius: 60,
+                                  child: FadeInImage.assetNetwork(
+                                    placeholder: 'assets/placeholder.jpeg',
+                                    image: widget.userDataModel.data?.profileUrl
                                         .toString() ??
-                                    "",
-                                version: QrVersions.auto,
-                                size: 200.0,
+                                        "",
+                                    fit: BoxFit.fill,
+                                    imageScale: 1.0,
+                                  ),
+                                ),
+                              const SizedBox(
+                                height: 8,
                               ),
-                              const Text(
-                                'Connect with me ',
-                                style: TextStyle(
+                              Text(
+                                widget.userDataModel.data?.name.toString() ?? "",
+                                style: const TextStyle(
+                                    fontFamily: Constants.fontFamily,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                widget.userDataModel.data?.designation
+                                    .toString() ??
+                                    "",
+                                style: const TextStyle(
                                     fontFamily: Constants.fontFamily,
                                     fontSize: 15,
-                                    fontWeight: FontWeight.bold),
+                                    fontWeight: FontWeight.normal),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                widget.userDataModel.data?.company.toString() ??
+                                    "",
+                                style: const TextStyle(
+                                    fontFamily: Constants.fontFamily,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal),
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                widget.userDataModel.data?.address.toString() ??
+                                    "",
+                                style: const TextStyle(
+                                    fontFamily: Constants.fontFamily,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal),
                               ),
                             ],
                           ),
@@ -172,9 +268,10 @@ class SignatreState extends State<Signature> {
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
+                ),
+              )
+            ]
+
           ),
           Padding(
             padding: const EdgeInsets.only(top: 50.0),

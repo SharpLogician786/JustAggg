@@ -22,6 +22,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'package:image_picker/image_picker.dart';
 
+import '../../NetworkCall/utils/dialogs.dart';
+
 
 
 class Profile extends StatefulWidget {
@@ -48,7 +50,11 @@ class ProfileState extends State<Profile> {
 
   Utltity utilityOBJ = new Utltity();
 
+  String copyEmail = "";
+
   late SignUpModel profileUserData;
+
+  var headerData;
 
   TextEditingController nameField = TextEditingController();
 
@@ -56,9 +62,9 @@ class ProfileState extends State<Profile> {
 
   TextEditingController emailField = TextEditingController();
 
-  bool leadModeSwitch = false;
+  bool leadModeSwitch = true;
 
-  bool isPersonalMode = false;
+  bool isPersonalMode = true;
 
   bool elseMode = false;
 
@@ -335,514 +341,530 @@ class ProfileState extends State<Profile> {
       ),
       backgroundColor: Colors.white,
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
-      body: SingleChildScrollView(
-        physics: const ClampingScrollPhysics(),
-        // physics: const AlwaysScrollableScrollPhysics(),
-        child: FutureBuilder(
-          future: fetchDataFromUserApi(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData == true) {
-              return Column(
-                children: [
-                  Stack(
-                    children: <Widget>[
-                      // The containers in the background
-                      Column(
-                        children: <Widget>[
-                          GestureDetector(
-                            onTap: () {
-                              imageSelectionDialogue(context, true);
-                            },
-                            child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * .35,
-                                color: Colors.blue,
-                                child: galleryImage != null
-                                    ? Image.file(
-                                        galleryImage!,
-                                        fit: BoxFit.fill,
-                                      )
-                                    : FadeInImage.assetNetwork(
-                                        placeholder: 'assets/placeholder.jpeg',
-                                        image: snapshot.data?.data?.coverUrl
-                                                .toString() ??
-                                            "",
-                                        fit: BoxFit.fill,
-                                        imageScale: 1.0)),
-                          )
-                        ],
-                      ),
-
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-                        child: Container(
-                          alignment: Alignment.topCenter,
-                          padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height * .3,
-                              right: 0.0,
-                              left: 0.0),
-                          child: GestureDetector(
-                            onTap: () {},
-                            child: SizedBox(
-                              height: 95.0,
-                              width: MediaQuery.of(context).size.width,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: InkWell(
-                                      onTap: () {
-                                        imageSelectionDialogue(context, false);
-                                      },
-                                      child: SizedBox(
-                                        height: double.infinity,
-                                        child: Stack(
-                                          clipBehavior: Clip.none,
-                                          fit: StackFit.expand,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(500.0),
-                                              child: dpImage != null
-                                                  ? Image.file(dpImage!,
-                                                      fit: BoxFit.fill)
-                                                  : FadeInImage.assetNetwork(
-                                                      placeholder:
-                                                          'assets/placeholder.jpeg',
-                                                      image: snapshot.data?.data
-                                                              ?.profileUrl
-                                                              .toString() ??
-                                                          "",
-                                                      fit: BoxFit.fill,
-                                                      imageScale: 1.0,
-                                                    ),
-                                            ),
-                                            Positioned(
-                                                bottom: -10,
-                                                right: -30,
-                                                child: RawMaterialButton(
-                                                  onPressed: () {},
-                                                  elevation: 0.0,
-                                                  fillColor: Colors.black,
-                                                  child: Icon(Icons.edit,
-                                                      size: 20,
-                                                      color: Colors.white),
-                                                  padding:
-                                                      const EdgeInsets.all(0.0),
-                                                  shape: const CircleBorder(),
-                                                )),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    flex: 3,
-                                    child: Align(
-                                      alignment: Alignment.bottomCenter,
-                                      child: Container(
-                                          color: Colors.transparent,
-                                          child: Row(
-                                            children: [
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              const Text(
-                                                'Lead',
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        Constants.fontFamily,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 17.0),
-                                              ),
-                                              Switch.adaptive(
-                                                value: leadModeSwitch,
-                                                onChanged: (isOn) {
-                                                  setState(() {
-                                                    changeMode();
-                                                  });
-                                                },
-                                              ),
-                                              const Text(
-                                                'Personal',
-                                                style: TextStyle(
-                                                    fontFamily:
-                                                        Constants.fontFamily,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 17.0),
-                                              ),
-                                              Switch.adaptive(
-                                                value: isPersonalMode,
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    isPersonalMode = value;
-                                                    changeProfileMode();
-                                                  });
-                                                },
-                                              ),
-                                            ],
-                                          )),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-
-                      SafeArea(
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      color: Colors.transparent,
-                                      child: IconButton(
-                                        onPressed: () async {
-                                          Uri url = Uri.parse(snapshot
-                                                  .data?.data?.baseUrl
+      body: GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+          if(emailField.text == copyEmail){
+            print('Noting change');
+          }
+          else{
+            saveUserProfile(context);
+          }
+        },
+        child: SingleChildScrollView(
+          physics: const ClampingScrollPhysics(),
+          // physics: const AlwaysScrollableScrollPhysics(),
+          child: FutureBuilder(
+            future: fetchDataFromUserApi(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData == true) {
+                return Column(
+                  children: [
+                    Stack(
+                      children: <Widget>[
+                        // The containers in the background
+                        Column(
+                          children: <Widget>[
+                            GestureDetector(
+                              onTap: () {
+                                imageSelectionDialogue(context, true);
+                              },
+                              child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * .35,
+                                  color: Colors.blue,
+                                  child: galleryImage != null
+                                      ? Image.file(
+                                          galleryImage!,
+                                          fit: BoxFit.fill,
+                                        )
+                                      : FadeInImage.assetNetwork(
+                                          placeholder: 'assets/placeholder.jpeg',
+                                          image: snapshot.data?.data?.coverUrl
                                                   .toString() ??
-                                              "");
-
-                                          _launchUrl(url);
-                                        },
-                                        icon: const Icon(
-                                          Icons.remove_red_eye,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    )),
-
-                                socialOrNot == true
-                                    ? socialButton(context)
-                                    : businessButton(context),
-                                // Expanded(
-                                //     flex: 4,
-                                //     child: Container(
-                                //       color: Colors.transparent,
-                                //       height: 40.0,
-                                //       child: Align(
-                                //         alignment: Alignment.center,
-                                //         child: FloatingActionButton.extended(
-                                //           heroTag: null,
-                                //           label: Text(
-                                //             socialOrNot == true
-                                //                 ? 'Social'
-                                //                 : 'Business',
-                                //             style: TextStyle(
-                                //                 fontFamily:
-                                //                     Constants.fontFamily,
-                                //                 color: socialOrNot == true
-                                //                     ? Colors.black
-                                //                     : Colors.white,
-                                //                 fontSize: 15),
-                                //           ), // <-- Text
-                                //           backgroundColor: socialOrNot == true
-                                //               ? Colors.white
-                                //               : Colors.black,
-                                //           elevation: 0.0,
-                                //           icon: Icon(
-                                //             // <-- Icon
-                                //             Icons.person,
-                                //             size: 24.0,
-                                //             color: socialOrNot == true
-                                //                 ? Colors.black
-                                //                 : Colors.white,
-                                //           ),
-                                //           onPressed: () {
-                                //             setState(() {
-                                //               if (userRole == 'personal') {
-                                //                 socialOrNot = false;
-                                //                 userRole = 'business';
-                                //               } else {
-                                //                 socialOrNot = true;
-                                //                 userRole = 'personal';
-                                //               }
-                                //             });
-                                //           },
-                                //         ),
-                                //       ),
-                                //     )),
-                                Expanded(
-                                    flex: 1,
-                                    child: Container(
-                                      height: 50,
-                                      color: Colors.transparent,
-                                      child: IconButton(
-                                        onPressed: () {
-                                          Share.share(
-                                              'Hey, \n You can find my profile: \n ${snapshot.data?.data?.baseUrl.toString() ?? ""} ');
-                                        },
-                                        icon: const Icon(
-                                          Icons.share,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ))
-                              ],
-                            ),
-                            Align(
-                              alignment: Alignment.topRight,
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    top: 0.0, right: 15.0),
-                                child: Container(
-                                  height: 30,
-                                  width: 30,
-                                  child: RawMaterialButton(
-                                    onPressed: () {},
-                                    elevation: 0.0,
-                                    fillColor: Colors.black,
-                                    child: const Icon(Icons.edit,
-                                        size: 20, color: Colors.white),
-                                    padding: const EdgeInsets.all(0.0),
-                                    shape: const CircleBorder(),
-                                  ),
-                                ),
-                              ),
+                                              "",
+                                          fit: BoxFit.fill,
+                                          imageScale: 1.0)),
                             )
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.02,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                    child: SizedBox(
-                      height: 54,
-                      child: TextField(
-                        style: const TextStyle(
-                            fontFamily: Constants.fontFamily,
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal),
-                        controller: nameField,
-                        textAlignVertical: TextAlignVertical.center,
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  width: 0, color: Colors.grey),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            filled: true,
-                            hintText:
-                                userDataModelOBJ.data?.username.toString() ??
-                                    "",
-                            hintStyle: TextStyle(
-                              color: Colors.grey[300],
-                              fontFamily: Constants.fontFamily,
-                            ),
-                            fillColor: Colors.grey[200]),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 20.0,top: 10.0),
-                    child: SizedBox(
-                      height: 54,
-                      child: TextField(
-                        style: const TextStyle(
-                            fontFamily: Constants.fontFamily,
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal),
-                        controller: mobileField,
-                        textAlignVertical: TextAlignVertical.center,
-                        decoration: InputDecoration(
-                            isDense: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: const BorderSide(
-                                  width: 0, color: Colors.grey),
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            filled: true,
-                            hintText:
-                            userDataModelOBJ.data?.username.toString() ??
-                                "",
-                            hintStyle: TextStyle(
-                              color: Colors.grey[300],
-                              fontFamily: Constants.fontFamily,
-                            ),
-                            fillColor: Colors.grey[200]),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 10.0, left: 20.0, right: 20.0),
-                    child: TextField(
-                      style: const TextStyle(
-                          fontFamily: Constants.fontFamily,
-                          fontSize: 15,
-                          fontWeight: FontWeight.normal),
-                      controller: emailField,
-                      decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                            borderSide:
-                                const BorderSide(width: 0, color: Colors.grey),
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                          filled: true,
-                          suffixIcon: IconButton(
-                            icon: const Icon(
-                              Icons.info_outline,
-                              color: Colors.black,
-                            ),
-                            onPressed: () {},
-                          ),
-                          hintText: '',
-                          hintStyle: TextStyle(
-                            color: Colors.grey[300],
-                            fontFamily: Constants.fontFamily,
-                          ),
-                          fillColor: Colors.grey[200]),
-                      maxLines: 5, // <-- SEE HERE
-                      minLines: 1, // <-- SEE HERE
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: FractionallySizedBox(
-                        widthFactor: 0.5,
-                        child: SizedBox(
-                          height: 50.0,
-                          child: FloatingActionButton.extended(
-                            heroTag: null,
-                            label: const Text(
-                              'Edit Details',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontFamily: Constants.fontFamily,
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+                          child: Container(
+                            alignment: Alignment.topCenter,
+                            padding: EdgeInsets.only(
+                                top: MediaQuery.of(context).size.height * .3,
+                                right: 0.0,
+                                left: 0.0),
+                            child: GestureDetector(
+                              onTap: () {},
+                              child: SizedBox(
+                                height: 95.0,
+                                width: MediaQuery.of(context).size.width,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: InkWell(
+                                        onTap: () {
+                                          imageSelectionDialogue(context, false);
+                                        },
+                                        child: SizedBox(
+                                          height: double.infinity,
+                                          child: Stack(
+                                            clipBehavior: Clip.none,
+                                            fit: StackFit.expand,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(500.0),
+                                                child: dpImage != null
+                                                    ? Image.file(dpImage!,
+                                                        fit: BoxFit.fill)
+                                                    : FadeInImage.assetNetwork(
+                                                        placeholder:
+                                                            'assets/placeholder.jpeg',
+                                                        image: snapshot.data?.data
+                                                                ?.profileUrl
+                                                                .toString() ??
+                                                            "",
+                                                        fit: BoxFit.fill,
+                                                        imageScale: 1.0,
+                                                      ),
+                                              ),
+                                              Positioned(
+                                                  bottom: -10,
+                                                  right: -30,
+                                                  child: RawMaterialButton(
+                                                    onPressed: () {},
+                                                    elevation: 0.0,
+                                                    fillColor: Colors.black,
+                                                    child: Icon(Icons.edit,
+                                                        size: 20,
+                                                        color: Colors.white),
+                                                    padding:
+                                                        const EdgeInsets.all(0.0),
+                                                    shape: const CircleBorder(),
+                                                  )),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      flex: 3,
+                                      child: Align(
+                                        alignment: Alignment.bottomCenter,
+                                        child: Container(
+                                            color: Colors.transparent,
+                                            child: Row(
+                                              children: [
+                                                const SizedBox(
+                                                  width: 10,
+                                                ),
+                                                const Text(
+                                                  'Lead',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          Constants.fontFamily,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 17.0),
+                                                ),
+                                                Switch.adaptive(
+                                                  value: leadModeSwitch,
+                                                  onChanged: (isOn) {
+                                                    setState(() {
+                                                      changeMode();
+                                                    });
+                                                  },
+                                                ),
+                                                const Text(
+                                                  'Personal',
+                                                  style: TextStyle(
+                                                      fontFamily:
+                                                          Constants.fontFamily,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 17.0),
+                                                ),
+                                                Switch.adaptive(
+                                                  value: isPersonalMode,
+                                                  onChanged: (value) {
+                                                    setState(() {
+                                                      changeProfileMode();
+                                                    });
+                                                  },
+                                                ),
+                                              ],
+                                            )),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
-                            ), // <-- Text
-                            backgroundColor: Colors.black,
-                            elevation: 2.0,
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => EditContacts(
-                                        userDataModel: userDataModelOBJ,
-                                        coverImage: galleryImage,
-                                        dpImage: dpImage, socialMode: socialOrNot,
-                                      )));
-                              // EditContacts
-                            },
+                            ),
+                          ),
+                        ),
+
+                        SafeArea(
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        child: IconButton(
+                                          onPressed: () async {
+                                            Uri url = Uri.parse(snapshot
+                                                    .data?.data?.baseUrl
+                                                    .toString() ??
+                                                "");
+
+                                            _launchUrl(url);
+                                          },
+                                          icon: const Icon(
+                                            Icons.remove_red_eye,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      )),
+
+                                  socialOrNot == true
+                                      ? socialButton(context)
+                                      : businessButton(context),
+
+                                  Expanded(
+                                      flex: 1,
+                                      child: Container(
+                                        height: 50,
+                                        color: Colors.transparent,
+                                        child: IconButton(
+                                          onPressed: () {
+                                            Share.share(
+                                                'Hey, \n You can find my profile: \n ${snapshot.data?.data?.baseUrl.toString() ?? ""} ');
+                                          },
+                                          icon: const Icon(
+                                            Icons.share,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ))
+                                ],
+                              ),
+                              Align(
+                                alignment: Alignment.topRight,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 0.0, right: 15.0),
+                                  child: Container(
+                                    height: 30,
+                                    width: 30,
+                                    child: RawMaterialButton(
+                                      onPressed: () {},
+                                      elevation: 0.0,
+                                      fillColor: Colors.black,
+                                      child: const Icon(Icons.edit,
+                                          size: 20, color: Colors.white),
+                                      padding: const EdgeInsets.all(0.0),
+                                      shape: const CircleBorder(),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: SizedBox(
+                        height: 54,
+                        child: Stack(
+                          children:[
+                            TextField(
+                              style: const TextStyle(
+                                  fontFamily: Constants.fontFamily,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.normal),
+                              controller: nameField,
+                              textAlignVertical: TextAlignVertical.center,
+                              decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        width: 0, color: Colors.grey),
+                                    borderRadius: BorderRadius.circular(30.0),
+                                  ),
+                                  filled: true,
+                                  hintText:
+                                  userDataModelOBJ.data?.username.toString() ??
+                                      "",
+                                  hintStyle: TextStyle(
+                                    color: Colors.grey[300],
+                                    fontFamily: Constants.fontFamily,
+                                  ),
+                                  fillColor: Colors.grey[200]),
+                            ),
+                            Container(
+                              height: 54,
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              color: Colors.transparent,
+                            )
+                        ]
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20.0, right: 20.0,top: 10.0),
+                      child: SizedBox(
+                        height: 54,
+                        child: Stack(
+                          children:[
+                            FocusScope(
+                              onFocusChange: (value) {
+                                if (!value) {
+                                  print(value);
+                                }
+                              },
+                              child: TextField(
+                                readOnly: true,
+                                style: const TextStyle(
+                                    fontFamily: Constants.fontFamily,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal),
+                                controller: mobileField,
+                                textAlignVertical: TextAlignVertical.center,
+                                decoration: InputDecoration(
+                                    isDense: true,
+                                    enabledBorder: OutlineInputBorder(
+                                      borderSide: const BorderSide(
+                                          width: 0, color: Colors.grey),
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                    filled: true,
+                                    hintText:
+                                    userDataModelOBJ.data?.username.toString() ??
+                                        "",
+                                    hintStyle: TextStyle(
+                                      color: Colors.grey[300],
+                                      fontFamily: Constants.fontFamily,
+                                    ),
+                                    fillColor: Colors.grey[200]),
+                              ),
+                            ),
+                            Container(
+                              height: 54,
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              color: Colors.transparent,
+                            )
+              ]
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          top: 10.0, left: 20.0, right: 20.0),
+                      child: TextField(
+                        style: const TextStyle(
+                            fontFamily: Constants.fontFamily,
+                            fontSize: 15,
+                            fontWeight: FontWeight.normal),
+                        controller: emailField,
+                        decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderSide:
+                                  const BorderSide(width: 0, color: Colors.grey),
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            filled: true,
+                            suffixIcon: IconButton(
+                              icon: const Icon(
+                                Icons.info_outline,
+                                color: Colors.grey,
+                              ),
+                              onPressed: () {
+
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return CustomDialog(
+                                          topLabel: 'Info',
+                                        meesage: 'You can add your bio here.',
+                                      );
+                                    });
+                              },
+                            ),
+                            hintText: '',
+                            hintStyle: TextStyle(
+                              color: Colors.grey[300],
+                              fontFamily: Constants.fontFamily,
+                            ),
+                            fillColor: Colors.grey[200]),
+                        maxLines: 5, // <-- SEE HERE
+                        minLines: 1, // <-- SEE HERE
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: FractionallySizedBox(
+                          widthFactor: 0.5,
+                          child: SizedBox(
+                            height: 50.0,
+                            child: FloatingActionButton.extended(
+                              heroTag: null,
+                              label: const Text(
+                                'Edit Details',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontFamily: Constants.fontFamily,
+                                ),
+                              ), // <-- Text
+                              backgroundColor: Colors.black,
+                              elevation: 2.0,
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => EditContacts(
+                                          userDataModel: userDataModelOBJ,
+                                          coverImage: galleryImage,
+                                          dpImage: dpImage, socialMode: socialOrNot,
+                                        )));
+                                // EditContacts
+                              },
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, right: 20.0, left: 20.0),
-                    child: SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.3,
-                      child: ListView.builder(
-                          itemExtent: 60.0,
-                          itemCount: userDataModelOBJ.data?.links?.length,
-                          shrinkWrap: true,
-                          padding: EdgeInsets.zero,
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          itemBuilder: (BuildContext context, int index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 10.0, right: 5.0, left: 5.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.0),
-                                  color: Colors.white,
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      color: Colors.grey,
-                                      offset: Offset(0.0, 1.0), //(x,y)
-                                      blurRadius: 6.0,
-                                    ),
-                                  ],
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 20, right: 20.0, left: 20.0),
+                      child: SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.3,
+                        child: ListView.builder(
+                            itemExtent: 60.0,
+                            itemCount: userDataModelOBJ.data?.links?.length,
+                            shrinkWrap: true,
+                            padding: EdgeInsets.zero,
+                            physics: const AlwaysScrollableScrollPhysics(),
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 10.0, right: 5.0, left: 5.0),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                    color: Colors.white,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        color: Colors.grey,
+                                        offset: Offset(0.0, 1.0), //(x,y)
+                                        blurRadius: 6.0,
+                                      ),
+                                    ],
+                                  ),
+                                  height: 30,
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                          flex: 1,
+                                          child: Container(
+                                            height: 24,
+                                            width: 24,
+                                            child: Image.asset('assets/drag.png'),
+                                          )),
+                                      Expanded(
+                                          flex: 4,
+                                          child: Container(
+                                            child: Align(
+                                                alignment: Alignment.center,
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                        padding:
+                                                            const EdgeInsets.only(
+                                                                left: 5.0,
+                                                                right: 5.0),
+                                                        child: SizedBox(
+                                                          height: 24,
+                                                          width: 24,
+                                                          child: Image.network(
+                                                              userDataModelOBJ
+                                                                      .data
+                                                                      ?.links?[
+                                                                          index]
+                                                                      .image ??
+                                                                  "",
+                                                              scale: 1.0),
+                                                        )),
+                                                    Text(
+                                                      userDataModelOBJ.data
+                                                              ?.links?[index].name
+                                                              .toString() ??
+                                                          "",
+                                                      style: const TextStyle(
+                                                          fontFamily: Constants
+                                                              .fontFamily,
+                                                          fontWeight:
+                                                              FontWeight.w400,
+                                                          fontSize: 17.0),
+                                                    ),
+                                                  ],
+                                                )),
+                                          )),
+                                      Expanded(
+                                          flex: 1,
+                                          child: SizedBox(
+                                            child: Switch.adaptive(
+                                              value: checkLinkStatus(userDataModelOBJ.data
+                                                  ?.links?[index].status
+                                                  .toString() ??
+                                                  ""),
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  var linkid = userDataModelOBJ.data
+                                                      ?.links?[index].linkId
+                                                      .toString() ??
+                                                      "";
+                                                  var status = userDataModelOBJ.data
+                                                      ?.links?[index].status
+                                                      .toString() ??
+                                                      "";
+                                                  if (status == "0"){
+                                                    status = "1";
+                                                  }else{
+                                                    status = "0";
+                                                  }
+                                                 changelinkStatus(linkid,status);
+                                                });
+                                              },
+                                            ),
+                                          ))
+                                    ],
+                                  ),
                                 ),
-                                height: 30,
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                        flex: 1,
-                                        child: Container(
-                                          height: 24,
-                                          width: 24,
-                                          child: Image.asset('assets/drag.png'),
-                                        )),
-                                    Expanded(
-                                        flex: 4,
-                                        child: Container(
-                                          child: Align(
-                                              alignment: Alignment.center,
-                                              child: Row(
-                                                children: [
-                                                  Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 5.0,
-                                                              right: 5.0),
-                                                      child: SizedBox(
-                                                        height: 24,
-                                                        width: 24,
-                                                        child: Image.network(
-                                                            userDataModelOBJ
-                                                                    .data
-                                                                    ?.links?[
-                                                                        index]
-                                                                    .image ??
-                                                                "",
-                                                            scale: 1.0),
-                                                      )),
-                                                  Text(
-                                                    userDataModelOBJ.data
-                                                            ?.links?[index].name
-                                                            .toString() ??
-                                                        "",
-                                                    style: const TextStyle(
-                                                        fontFamily: Constants
-                                                            .fontFamily,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        fontSize: 17.0),
-                                                  ),
-                                                ],
-                                              )),
-                                        )),
-                                    Expanded(
-                                        flex: 1,
-                                        child: SizedBox(
-                                          child: Switch.adaptive(
-                                            value: elseMode,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                elseMode = value;
-                                              });
-                                            },
-                                          ),
-                                        ))
-                                  ],
-                                ),
-                              ),
-                            );
-                          }),
+                              );
+                            }),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 60,
-                  )
-                  //--------------------------------Real Code------------------------------//
-                ],
-              );
-            } else {
-              return Container();
-            }
-          },
+                    const SizedBox(
+                      height: 60,
+                    )
+                    //--------------------------------Real Code------------------------------//
+                  ],
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
         ),
       ),
     );
@@ -851,6 +873,69 @@ class ProfileState extends State<Profile> {
   ///////////////////////////////////////////Main Widget  End /////////////////////////////////////////////////////////////////
 
   // --------------------------------------------------Image Selection Widget--------------------------------------------------------
+  bool checkLinkStatus (String currentStatus)
+  {
+    if(currentStatus == "0")
+      {
+        return false;
+      }
+    else{
+      return true;
+    }
+  }
+
+  //------------------------------------Profile Status Api Call-------------------------------------
+
+  Future<bool?> changelinkStatus(String linkId,String status) async {
+    print(
+        '----------------------------------Profile Status Api Call------------------------');
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var data;
+
+    var userData = (prefs.getString('user') ?? '');
+
+    Map<String, dynamic> userMap = jsonDecode(userData);
+
+    SignUpModel user = SignUpModel.fromJson(userMap);
+
+    var bearerToken = user.data?.token.toString();
+
+    var userID = user.data?.id.toString() ?? "";
+
+    Uri url = Uri.parse(Constants.baseUrl.toString() +
+        Constants.CHANGE_LINK_STATUS.toString());
+
+    var headerData = {
+      'Authorization': 'Bearer $bearerToken',
+    };
+
+    var body ={
+      'userId': userID,
+      'linkId':linkId,
+        'status': status
+    };
+    print(body);
+    utilityOBJ.onLoading(context);
+    final response = await http.post(
+      url,
+      body: body,
+      headers: headerData,
+    );
+    utilityOBJ.onLoadingDismiss(context);
+    print(response.body);
+    if (response.body.isEmpty != true) {
+      data = json.decode(response.body);
+      if (data['status'] == 'true') {
+        isPersonalMode = true;
+      } else {
+        isPersonalMode = false;
+      }
+    }
+    return isPersonalMode;
+  }
+
 
   Future imageSelectionDialogue(BuildContext context, bool isBannerImage) {
     // show the dialog
@@ -1073,6 +1158,8 @@ class ProfileState extends State<Profile> {
 
     emailField.text = userDataModelOBJ.data?.bio.toString() ?? "";
 
+    copyEmail = userDataModelOBJ.data?.bio.toString() ?? "";
+
     userRole = userDataModelOBJ.data?.role?.toString() ?? "";
 
     if (userDataModelOBJ.data?.leadMode?.toInt() == 0) {
@@ -1081,7 +1168,7 @@ class ProfileState extends State<Profile> {
       leadModeSwitch = false;
     }
 
-    if (userDataModelOBJ.data?.directMode?.toInt() == 0) {
+    if (userDataModelOBJ.data?.profileOn?.toInt() == 0) {
       isPersonalMode = true;
     } else {
       isPersonalMode = false;
@@ -1126,11 +1213,7 @@ class ProfileState extends State<Profile> {
     print(response.body);
     if (response.body.isEmpty != true) {
       data = json.decode(response.body);
-      if (data['status'] == 'true') {
-        isPersonalMode = true;
-      } else {
-        isPersonalMode = false;
-      }
+      // isPersonalMode = !isPersonalMode;
     }
     return isPersonalMode;
   }
@@ -1170,14 +1253,50 @@ class ProfileState extends State<Profile> {
     );
     if (response.body.isEmpty != true) {
       data = json.decode(response.body);
-
-      if (data['status'] == 'true') {
-        leadModeSwitch = true;
-      } else {
-        leadModeSwitch = false;
-      }
+      leadModeSwitch = !leadModeSwitch;
     }
     utilityOBJ.onLoadingDismiss(context);
     return leadModeSwitch;
+  }
+
+
+  Future<GetUserModel> saveUserProfile(BuildContext context) async {
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var userData = (prefs.getString('user') ?? '');
+
+    Map<String, dynamic> userMap = jsonDecode(userData);
+
+    SignUpModel user = SignUpModel.fromJson(userMap);
+
+    var bearerToken = user.data?.token.toString();
+
+    Uri url = Uri.parse(
+        Constants.baseUrl.toString() + Constants.UPDATE_USER.toString());
+
+    headerData = {
+      'Authorization': 'Bearer $bearerToken',
+    };
+
+    var bodyData = {
+      'id': userDataModelOBJ.data?.id?.toString() ?? "",
+      'bio': emailField.text,
+    };
+    utilityOBJ.onLoading(context);
+    final response = await http.post(
+      url,
+      body: bodyData,
+      headers: headerData,
+    );
+    utilityOBJ.onLoadingDismiss(context);
+    print(response.body);
+
+    if (response.body.isEmpty != true) {
+      GetUserModel contactObj =
+      GetUserModel.fromJson(json.decode(response.body));
+      userDataModelOBJ = contactObj;
+    }
+    return userDataModelOBJ;
   }
 }

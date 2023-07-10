@@ -117,6 +117,12 @@ class Constants {
 
   // ignore: constant_identifier_names
   static const String GET_GROUP_CONTACTS = "get_group_contacts";
+
+  // ignore: constant_identifier_names
+  static const String CHANGE_LINK_STATUS = "change_link_status";
+
+  // ignore: constant_identifier_names
+  static const String SignOut = "signout";
 }
 
 class GetSharedPreferencesData {

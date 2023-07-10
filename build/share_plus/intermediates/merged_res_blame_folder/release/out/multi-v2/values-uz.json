@@ -4,7 +4,7 @@
             "outputFile": "dev.fluttercommunity.plus.share.share_plus-merged_res-12:/values-uz/values-uz.xml",
             "map": [
                 {
-                    "source": "/Users/macbook/.gradle/caches/transforms-3/c4f93f4a1b836067c90408dcb9fce49f/transformed/core-1.9.0/res/values-uz/values-uz.xml",
+                    "source": "C:\\Users\\fandy\\.gradle\\caches\\transforms-3\\37a959375e60d9c0f1858f258eb24e99\\transformed\\core-1.9.0\\res\\values-uz\\values-uz.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -19,7 +19,7 @@
             "outputFile": "dev.fluttercommunity.plus.share.share_plus-mergeReleaseResources-10:/values-uz/values-uz.xml",
             "map": [
                 {
-                    "source": "/Users/macbook/.gradle/caches/transforms-3/c4f93f4a1b836067c90408dcb9fce49f/transformed/core-1.9.0/res/values-uz/values-uz.xml",
+                    "source": "C:\\Users\\fandy\\.gradle\\caches\\transforms-3\\37a959375e60d9c0f1858f258eb24e99\\transformed\\core-1.9.0\\res\\values-uz\\values-uz.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

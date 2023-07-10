@@ -6,6 +6,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testtting/Constants/Utilities.dart';
 import 'package:testtting/UI/Notify/Notify.dart';
+import 'package:testtting/UI/StartingScreen/startup.dart';
 import 'package:testtting/UI/TaskStatus/TaskStatus.dart';
 import 'package:http/http.dart' as http;
 import 'package:testtting/UI/ManageProfile/ManageProfile.dart';
@@ -37,49 +38,6 @@ class MenuState extends State<MenuWidget> {
 
   var percentage = 0;
 
-  //------------------------------------Get User Data Api Data-------------------------------------
-
-  Future<GetUserModel> fetchDataFromUserApi() async {
-    //EasyLoading.show(status: 'loading...');
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    var userData = (prefs.getString('user') ?? '');
-
-    Map<String, dynamic> userMap = jsonDecode(userData);
-
-    SignUpModel user = SignUpModel.fromJson(userMap);
-
-    var bearerToken = user.data?.token.toString();
-
-    // var bearerToken = '1181|MddbugrToEVjBVhZ9SF9k9BGcCXw8uwbp05WG8bI';
-
-    Uri url =
-        Uri.parse(Constants.baseUrl.toString() + Constants.GET_USER.toString());
-
-    _headerData = {
-      'Authorization': 'Bearer $bearerToken',
-    };
-
-    var role = prefs.getString("userRole");
-
-    var body = {'role': role};
-
-    utilityOBJ.onLoading(context);
-
-    final response = await http.post(
-      url,
-      body: body,
-      headers: _headerData,
-    );
-    utilityOBJ.onLoadingDismiss(context);
-    if (response.body.isEmpty != true) {
-      GetUserModel contactObj =
-          GetUserModel.fromJson(json.decode(response.body));
-      userDataModelOBJ = contactObj;
-    }
-    percentage = userDataModelOBJ.data?.profile?.trueCount?.toInt() ?? 0;
-    return userDataModelOBJ;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -259,7 +217,7 @@ class MenuState extends State<MenuWidget> {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (_) => const TaskStatus(),
+                                  builder: (_) => TaskStatus(percentage: percentage),
                                 ),
                               );
                             },
@@ -523,7 +481,7 @@ class MenuState extends State<MenuWidget> {
                               height: 50.0,
                               child: OutlinedButton(
                                 onPressed: () async {
-                                  // Navigator.of(context).push(MaterialPageRoute(builder: (context) => DashBaord()));
+                                  singOutApi();
                                 },
                                 child: const Text(
                                   'Sign Out',
@@ -588,4 +546,93 @@ class MenuState extends State<MenuWidget> {
       ),
     );
   }
+
+
+  //------------------------------------Get User Data Api Data-------------------------------------
+
+  Future<GetUserModel> fetchDataFromUserApi() async {
+    //EasyLoading.show(status: 'loading...');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var userData = (prefs.getString('user') ?? '');
+
+    Map<String, dynamic> userMap = jsonDecode(userData);
+
+    SignUpModel user = SignUpModel.fromJson(userMap);
+
+    var bearerToken = user.data?.token.toString();
+
+    // var bearerToken = '1181|MddbugrToEVjBVhZ9SF9k9BGcCXw8uwbp05WG8bI';
+
+    Uri url =
+    Uri.parse(Constants.baseUrl.toString() + Constants.GET_USER.toString());
+
+    _headerData = {
+      'Authorization': 'Bearer $bearerToken',
+    };
+
+    var role = prefs.getString("userRole");
+
+    var body = {'role': role};
+
+    utilityOBJ.onLoading(context);
+
+    final response = await http.post(
+      url,
+      body: body,
+      headers: _headerData,
+    );
+    utilityOBJ.onLoadingDismiss(context);
+    if (response.body.isEmpty != true) {
+      GetUserModel contactObj =
+      GetUserModel.fromJson(json.decode(response.body));
+      userDataModelOBJ = contactObj;
+    }
+    percentage = userDataModelOBJ.data?.profile?.trueCount?.toInt() ?? 0;
+    return userDataModelOBJ;
+  }
+
+
+  //------------------------------------Get User Data Api Data-------------------------------------
+
+  Future<GetUserModel> singOutApi() async {
+    //EasyLoading.show(status: 'loading...');
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    var userData = (prefs.getString('user') ?? '');
+
+    Map<String, dynamic> userMap = jsonDecode(userData);
+
+    SignUpModel user = SignUpModel.fromJson(userMap);
+
+    var bearerToken = user.data?.token.toString();
+
+    Uri url =
+    Uri.parse(Constants.baseUrl.toString() + Constants.SignOut.toString());
+
+    _headerData = {
+      'Authorization': 'Bearer $bearerToken',
+    };
+
+    utilityOBJ.onLoading(context);
+
+    final response = await http.post(
+      url,
+      headers: _headerData,
+    );
+    utilityOBJ.onLoadingDismiss(context);
+
+    if (response.body.isEmpty != true) {
+      prefs.remove('user');
+      prefs.remove('bearerToken');
+      prefs.remove('userRole');
+      prefs.remove('isLogin');
+
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => IntialView(
+          )));
+    }
+    return userDataModelOBJ;
+  }
+
 }

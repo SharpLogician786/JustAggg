@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import '../../Constants/Constants.dart';
 
 class TaskStatus extends StatefulWidget {
-  const TaskStatus({Key? key}) : super(key: key);
+
+  const TaskStatus({Key? key, required this.percentage}) : super(key: key);
+
+  final int percentage;
   TaskStatusState createState() => TaskStatusState();
 }
 
@@ -77,17 +80,20 @@ class TaskStatusState extends State<TaskStatus> {
                                 ),
                                 // color: Colors.green,
                               )),
-                          Expanded(
-                              flex: 1,
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Image.asset('assets/check.png'),
-                                ),
-                                //color: Colors.orange,
-                              )),
+                          Visibility(
+                            visible: widget.percentage >= 1 ? true : false,
+                            child: Expanded(
+                                flex: 1,
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Image.asset('assets/check.png'),
+                                  ),
+                                  //color: Colors.orange,
+                                )),
+                          ),
                         ],
                       ),
                     )),
@@ -139,17 +145,20 @@ class TaskStatusState extends State<TaskStatus> {
                                 ),
                                 // color: Colors.green,
                               )),
-                          Expanded(
-                              flex: 1,
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Image.asset('assets/check.png'),
-                                ),
-                                //color: Colors.orange,
-                              )),
+                          Visibility(
+                            visible: widget.percentage >= 2 ? true : false,
+                            child: Expanded(
+                                flex: 1,
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Image.asset('assets/check.png'),
+                                  ),
+                                  //color: Colors.orange,
+                                )),
+                          ),
                         ],
                       ),
                     )),
@@ -207,17 +216,20 @@ class TaskStatusState extends State<TaskStatus> {
                                 ),
                                 // color: Colors.green,
                               )),
-                          Expanded(
-                              flex: 1,
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Image.asset('assets/check.png'),
-                                ),
-                                //color: Colors.orange,
-                              )),
+                          Visibility(
+                            visible: widget.percentage >= 3 ? true : false,
+                            child: Expanded(
+                                flex: 1,
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Image.asset('assets/check.png'),
+                                  ),
+                                  //color: Colors.orange,
+                                )),
+                          ),
                         ],
                       ),
                     )),
@@ -268,17 +280,20 @@ class TaskStatusState extends State<TaskStatus> {
                                 ),
                                 // color: Colors.green,
                               )),
-                          Expanded(
-                              flex: 1,
-                              child: Container(
-                                height: 30,
-                                width: 30,
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Image.asset('assets/check.png'),
-                                ),
-                                //color: Colors.orange,
-                              )),
+                          Visibility(
+                            visible: widget.percentage >= 4 ? true : false,
+                            child: Expanded(
+                                flex: 1,
+                                child: Container(
+                                  height: 30,
+                                  width: 30,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Image.asset('assets/check.png'),
+                                  ),
+                                  //color: Colors.orange,
+                                )),
+                          ),
                         ],
                       ),
                     )),
@@ -334,17 +349,20 @@ class TaskStatusState extends State<TaskStatus> {
                                 ),
                                 // color: Colors.green,
                               )),
-                          Expanded(
-                              flex: 1,
-                              child: SizedBox(
-                                height: 30,
-                                width: 30,
-                                child: Align(
-                                  alignment: Alignment.center,
-                                  child: Image.asset('assets/check.png'),
-                                ),
-                                //color: Colors.orange,
-                              )),
+                          Visibility(
+                            visible: widget.percentage >= 5 ? true : false,
+                            child: Expanded(
+                                flex: 1,
+                                child: SizedBox(
+                                  height: 30,
+                                  width: 30,
+                                  child: Align(
+                                    alignment: Alignment.center,
+                                    child: Image.asset('assets/check.png'),
+                                  ),
+                                  //color: Colors.orange,
+                                )),
+                          ),
                         ],
                       ),
                     )),

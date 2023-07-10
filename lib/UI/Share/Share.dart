@@ -107,13 +107,13 @@ class ShareState extends State<ShareTab> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: 150,
-                            height: 150,
+                            width: 100,
+                            height: 100,
                             child: QrImageView(
                               data: snapshot.data?.data?.baseUrl.toString() ??
                                   "",
                               version: QrVersions.auto,
-                              size: 200.0,
+                              size: 150.0,
                             ),
                           ),
                           // IconButton(
@@ -174,7 +174,6 @@ class ShareState extends State<ShareTab> {
                             value: light,
                             activeColor: Colors.black,
                             onChanged: (bool value) {
-                              // This is called when the user toggles the switch.
                               setState(() {
                                 light = value;
                               });
@@ -184,83 +183,86 @@ class ShareState extends State<ShareTab> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(right: 20.0, left: 20.0),
+                      padding: const EdgeInsets.only(right: 0, left: 0),
                       child: SizedBox(
                         height: MediaQuery
                             .of(context)
                             .size
                             .height * 0.35,
                         child: ListView.builder(
-                            itemExtent: 70.0,
+                            itemExtent: 65.0,
                             padding: EdgeInsets.zero,
                             shrinkWrap: true,
                             itemCount: users.length,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) {
-                              return InkWell(
-                                onTap: () {
-                                  if (index == 0) {
-                                    Share.share(
-                                        'Hey, \n You can find my profile: \n ${snapshot
-                                            .data?.data?.baseUrl.toString() ??
-                                            ""} ');
-                                  }
-                                  if (index == 1) {
-                                    Share.share(
-                                        'Hey, \n You can find my profile: \n ${snapshot
-                                            .data?.data?.baseUrl.toString() ??
-                                            ""} ');
-                                  }
-                                  if (index == 2) {
-                                    Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                Signature(
-                                                  userDataModel: userDataModelOBJ,
-                                                )));
-                                    // EditContacts
-                                  }
-                                  if (index == 3) {
-                                    colorPickerDialog();
-                                  }
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 10.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20.0),
-                                      color: Colors.white,
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Colors.grey,
-                                          offset: Offset(0.0, 1.0), //(x,y)
-                                          blurRadius: 6.0,
-                                        ),
-                                      ],
-                                    ),
-                                    height: 30,
-                                    child: Row(
-                                      children: [
-                                        Expanded(
-                                            flex: 1,
-                                            child: Container(
-                                              child: users[index].icon,
-                                            )),
-                                        Expanded(
-                                            flex: 5,
-                                            child: SizedBox(
-                                              child: Text(
-                                                users[index].name,
-                                                textAlign: TextAlign.center,
-                                                style: const TextStyle(
-                                                    fontFamily:
-                                                    Constants.fontFamily,
-                                                    fontSize: 17,
-                                                    fontWeight: FontWeight
-                                                        .w500),
-                                              ),
-                                            )),
-                                      ],
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 20.0, left: 20.0),
+                                child: InkWell(
+                                  onTap: () {
+                                    if (index == 0) {
+                                      Share.share(
+                                          'Hey, \n You can find my profile: \n ${snapshot
+                                              .data?.data?.baseUrl.toString() ??
+                                              ""} ');
+                                    }
+                                    if (index == 1) {
+                                      Share.share(
+                                          'Hey, \n You can find my profile: \n ${snapshot
+                                              .data?.data?.baseUrl.toString() ??
+                                              ""} ');
+                                    }
+                                    if (index == 2) {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  Signature(
+                                                    userDataModel: userDataModelOBJ,
+                                                  )));
+                                      // EditContacts
+                                    }
+                                    if (index == 3) {
+                                      colorPickerDialog();
+                                    }
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 10.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20.0),
+                                        color: Colors.white,
+                                        boxShadow: const [
+                                          BoxShadow(
+                                            color: Colors.grey,
+                                            offset: Offset(0.0, 1.0), //(x,y)
+                                            blurRadius: 6.0,
+                                          ),
+                                        ],
+                                      ),
+                                      height: 30,
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                              flex: 1,
+                                              child: Container(
+                                                child: users[index].icon,
+                                              )),
+                                          Expanded(
+                                              flex: 5,
+                                              child: SizedBox(
+                                                child: Text(
+                                                  users[index].name,
+                                                  textAlign: TextAlign.center,
+                                                  style: const TextStyle(
+                                                      fontFamily:
+                                                      Constants.fontFamily,
+                                                      fontSize: 17,
+                                                      fontWeight: FontWeight
+                                                          .w500),
+                                                ),
+                                              )),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -269,7 +271,7 @@ class ShareState extends State<ShareTab> {
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 20,
                     ),
                     Align(
                       alignment: Alignment.bottomCenter,

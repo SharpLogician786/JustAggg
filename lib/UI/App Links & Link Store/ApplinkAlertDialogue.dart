@@ -10,9 +10,6 @@ import '../../Constants/Constants.dart';
 import '../../Constants/Utilities.dart';
 import '../../DataModels/AppLinks.dart';
 import '../../DataModels/SignUpModel.dart';
-import 'package:testtting/DataModels/UserSocialLinks';
-
-import 'package:sticky_headers/sticky_headers.dart';
 
 class CustomDialogBoxForContent extends StatefulWidget {
   final AppLinksModel appLinks;
@@ -210,9 +207,30 @@ contentBox(
                                 "";
                             String linkName = filename.text;
                             String value = fileValue.text;
-                            var result = uploadImage(linkid, linkName, value,
-                                galleryImage?.path.toString() ?? "");
-                            print(result);
+
+
+                            if (linkName == "")
+                              {
+                                utilityOBJ.showAlert(context, 'Error', 'Please enter link name.');
+                              }
+                            else if (value == "")
+                            {
+                              utilityOBJ.showAlert(context, 'Error', 'Please enter ${widget
+                                  .appLinks
+                                  .data?[widget.headerIndex]
+                                  .links?[widget.index]
+                                  .placeholder
+                                  .toString() ??
+                                  ""}.');
+                            }
+                            else if (galleryImage?.path == null)
+                            {
+                              utilityOBJ.showAlert(context, 'Error', 'Please select image.');
+                            }
+                            else{
+                              var result = uploadImage(linkid, linkName, value,
+                                  galleryImage?.path.toString() ?? "");
+                            }
                           },
                         ),
                       ),
@@ -286,13 +304,9 @@ contentBox(
                                 ),
 
                                 filled: true,
-                                hintText: widget
-                                    .appLinks
-                                    .data?[widget.headerIndex]
-                                    .links?[widget.index]
-                                    .name,
+                                hintText: 'Enter Name',
                                 hintStyle: const TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.grey,
                                   fontFamily: Constants.fontFamily,
                                 ),),
 
@@ -302,7 +316,7 @@ contentBox(
                         Padding(
                           padding: const EdgeInsets.only(top: 5, right: 30.0),
                           child: Container(
-                            height: 2,
+                            height: 0,
                             color: Colors.black,
                           ),
                         )

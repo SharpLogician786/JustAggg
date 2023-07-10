@@ -27,7 +27,7 @@ class RestAPI {
       } else {
         // Dialogs().alert(context,3, 'Error', data['message'],Constants.error_gif);
         if (show != false) {
-          Dialogs().displayToast(context, data['message'], 0);
+          //Dialogs().displayToast(context, data['message'], 0);
         }
         data = null;
       }

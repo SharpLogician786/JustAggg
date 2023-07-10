@@ -6,196 +6,376 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="26"
-8-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml
+8-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml
 9        android:targetSdkVersion="33" />
-9-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml
+9-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-11-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:3:5-80
-11-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:3:22-77
+11-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:3:5-80
+11-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:3:22-77
 12    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-12-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:4:5-81
-12-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:4:22-78
+12-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:4:5-81
+12-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:4:22-78
 13    <uses-permission android:name="android.permission.CAMERA" />
-13-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:5:5-65
-13-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:5:22-62
+13-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:5:5-65
+13-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:5:22-62
 14
 15    <uses-feature android:name="android.hardware.camera" />
-15-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:6:5-60
-15-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:6:19-57
+15-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:6:5-60
+15-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:6:19-57
 16    <uses-feature android:name="android.hardware.camera.autofocus" />
-16-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:7:5-70
-16-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:7:19-67
+16-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:7:5-70
+16-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:7:19-67
 17
 18    <uses-permission android:name="android.permission.RECORD_AUDIO" />
-18-->[:camera_android] /Users/macbook/Desktop/Testtting/build/camera_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:5-71
-18-->[:camera_android] /Users/macbook/Desktop/Testtting/build/camera_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:22-68
-19
-20    <permission
-20-->[androidx.core:core:1.10.1] /Users/macbook/.gradle/caches/transforms-3/f396f1c0e7b4efbe1bdb9e3537f88914/transformed/core-1.10.1/AndroidManifest.xml:22:5-24:47
-21        android:name="com.example.testtting.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
-21-->[androidx.core:core:1.10.1] /Users/macbook/.gradle/caches/transforms-3/f396f1c0e7b4efbe1bdb9e3537f88914/transformed/core-1.10.1/AndroidManifest.xml:23:9-81
-22        android:protectionLevel="signature" />
-22-->[androidx.core:core:1.10.1] /Users/macbook/.gradle/caches/transforms-3/f396f1c0e7b4efbe1bdb9e3537f88914/transformed/core-1.10.1/AndroidManifest.xml:24:9-44
-23
-24    <uses-permission android:name="com.example.testtting.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
-24-->[androidx.core:core:1.10.1] /Users/macbook/.gradle/caches/transforms-3/f396f1c0e7b4efbe1bdb9e3537f88914/transformed/core-1.10.1/AndroidManifest.xml:26:5-97
-24-->[androidx.core:core:1.10.1] /Users/macbook/.gradle/caches/transforms-3/f396f1c0e7b4efbe1bdb9e3537f88914/transformed/core-1.10.1/AndroidManifest.xml:26:22-94
-25
-26    <application
-26-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:9:5-18:19
-27        android:name="com.example.testtting.JustAgg"
-27-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:11:9-33
-28        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
-28-->[androidx.core:core:1.10.1] /Users/macbook/.gradle/caches/transforms-3/f396f1c0e7b4efbe1bdb9e3537f88914/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
-29        android:extractNativeLibs="false"
-30        android:icon="@mipmap/ic_launcher"
-30-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:12:9-43
-31        android:label="JustAgg" >
-31-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:10:9-32
-32
-33        <!--
-34             Don't delete the meta-data below.
-35             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
-36        -->
-37        <meta-data
-37-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:15:9-17:33
-38            android:name="flutterEmbedding"
-38-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:16:13-44
-39            android:value="2" />
-39-->/Users/macbook/Desktop/Testtting/android/app/src/main/AndroidManifest.xml:17:13-30
-40
-41        <provider
-41-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-18:20
-42            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-42-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-82
-43            android:authorities="com.example.testtting.flutter.image_provider"
-43-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-74
-44            android:exported="false"
-44-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-37
-45            android:grantUriPermissions="true" >
-45-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-47
-46            <meta-data
-46-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
-47                android:name="android.support.FILE_PROVIDER_PATHS"
-47-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
-48                android:resource="@xml/flutter_image_picker_file_paths" />
-48-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
-49        </provider>
-50        <!--
-51           Declares a provider which allows us to store files to share in
-52           '.../caches/share_plus' and grant the receiving action access
-53        -->
-54        <provider
-54-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:15:9-23:20
-55            android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
-55-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:16:13-77
-56            android:authorities="com.example.testtting.flutter.share_provider"
-56-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:17:13-74
-57            android:exported="false"
-57-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:18:13-37
-58            android:grantUriPermissions="true" >
-58-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:19:13-47
-59            <meta-data
-59-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
-60                android:name="android.support.FILE_PROVIDER_PATHS"
-60-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
-61                android:resource="@xml/flutter_share_file_paths" />
-61-->[:image_picker_android] /Users/macbook/Desktop/Testtting/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
-62        </provider>
-63        <!--
-64           This manifest declared broadcast receiver allows us to use an explicit
-65           Intent when creating a PendingItent to be informed of the user's choice
-66        -->
-67        <receiver
-67-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:28:9-34:20
-68            android:name="dev.fluttercommunity.plus.share.SharePlusPendingIntent"
-68-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:29:13-82
-69            android:exported="false" >
-69-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:30:13-37
-70            <intent-filter>
-70-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:31:13-33:29
-71                <action android:name="EXTRA_CHOSEN_COMPONENT" />
-71-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:32:17-65
-71-->[:share_plus] /Users/macbook/Desktop/Testtting/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:32:25-62
-72            </intent-filter>
-73        </receiver>
-74
-75        <activity
-75-->[:url_launcher_android] /Users/macbook/Desktop/Testtting/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-13:74
-76            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-76-->[:url_launcher_android] /Users/macbook/Desktop/Testtting/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-74
+18-->[:camera_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\camera_android\intermediates\merged_manifest\release\AndroidManifest.xml:10:5-71
+18-->[:camera_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\camera_android\intermediates\merged_manifest\release\AndroidManifest.xml:10:22-68
+19    <uses-permission android:name="android.permission.INTERNET" />
+19-->[:google_sign_in_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\google_sign_in_android\intermediates\merged_manifest\release\AndroidManifest.xml:9:5-67
+19-->[:google_sign_in_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\google_sign_in_android\intermediates\merged_manifest\release\AndroidManifest.xml:9:22-64
+20
+21    <queries>
+21-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:17:5-19:15
+22        <package android:name="com.facebook.katana" />
+22-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:18:9-55
+22-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:18:18-52
+23    </queries>
+24
+25    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+25-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:16:5-79
+25-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:16:22-76
+26
+27    <permission
+27-->[androidx.core:core:1.10.1] C:\Users\fandy\.gradle\caches\transforms-3\9d8fb97b2a99c1b1d78bd925837bcbf3\transformed\core-1.10.1\AndroidManifest.xml:22:5-24:47
+28        android:name="com.example.testtting.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+28-->[androidx.core:core:1.10.1] C:\Users\fandy\.gradle\caches\transforms-3\9d8fb97b2a99c1b1d78bd925837bcbf3\transformed\core-1.10.1\AndroidManifest.xml:23:9-81
+29        android:protectionLevel="signature" />
+29-->[androidx.core:core:1.10.1] C:\Users\fandy\.gradle\caches\transforms-3\9d8fb97b2a99c1b1d78bd925837bcbf3\transformed\core-1.10.1\AndroidManifest.xml:24:9-44
+30
+31    <uses-permission android:name="com.example.testtting.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+31-->[androidx.core:core:1.10.1] C:\Users\fandy\.gradle\caches\transforms-3\9d8fb97b2a99c1b1d78bd925837bcbf3\transformed\core-1.10.1\AndroidManifest.xml:26:5-97
+31-->[androidx.core:core:1.10.1] C:\Users\fandy\.gradle\caches\transforms-3\9d8fb97b2a99c1b1d78bd925837bcbf3\transformed\core-1.10.1\AndroidManifest.xml:26:22-94
+32    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+32-->[com.android.installreferrer:installreferrer:1.0] C:\Users\fandy\.gradle\caches\transforms-3\e2aaef4b4dffb96a301608f7a437383a\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:9:5-110
+32-->[com.android.installreferrer:installreferrer:1.0] C:\Users\fandy\.gradle\caches\transforms-3\e2aaef4b4dffb96a301608f7a437383a\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:9:22-107
+33
+34    <application
+35        android:name="android.app.Application"
+35-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:11:9-42
+36        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+36-->[androidx.core:core:1.10.1] C:\Users\fandy\.gradle\caches\transforms-3\9d8fb97b2a99c1b1d78bd925837bcbf3\transformed\core-1.10.1\AndroidManifest.xml:28:18-86
+37        android:extractNativeLibs="false"
+38        android:icon="@mipmap/ic_launcher"
+38-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:12:9-43
+39        android:label="JustAgg"
+39-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:10:9-32
+40        android:supportsRtl="true" >
+40-->[com.facebook.android:facebook-login:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\b41b208905490098266b18e4587e232b\transformed\jetified-facebook-login-16.0.1\AndroidManifest.xml:16:18-44
+41        <activity
+41-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:13:9-33:20
+42            android:name="com.example.testtting.MainActivity"
+42-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:14:13-41
+43            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+43-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:18:13-163
+44            android:exported="true"
+44-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:15:13-36
+45            android:hardwareAccelerated="true"
+45-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:19:13-47
+46            android:launchMode="singleTop"
+46-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:16:13-43
+47            android:theme="@style/LaunchTheme"
+47-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:17:13-47
+48            android:windowSoftInputMode="adjustResize" >
+48-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:20:13-55
+49
+50            <!--
+51                 Specifies an Android theme to apply to this Activity as soon as
+52                 the Android process has started. This theme is visible to the user
+53                 while the Flutter UI initializes. After that, this theme continues
+54                 to determine the Window background behind the Flutter UI.
+55            -->
+56            <meta-data
+56-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:25:13-28:19
+57                android:name="io.flutter.embedding.android.NormalTheme"
+57-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:26:17-72
+58                android:resource="@style/NormalTheme" />
+58-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:27:17-54
+59
+60            <intent-filter>
+60-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:29:13-32:29
+61                <action android:name="android.intent.action.MAIN" />
+61-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:30:17-68
+61-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:30:25-66
+62
+63                <category android:name="android.intent.category.LAUNCHER" />
+63-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:31:17-76
+63-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:31:27-74
+64            </intent-filter>
+65        </activity>
+66        <!--
+67             Don't delete the meta-data below.
+68             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+69        -->
+70        <meta-data
+70-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:36:9-38:33
+71            android:name="flutterEmbedding"
+71-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:37:13-44
+72            android:value="2" />
+72-->C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\android\app\src\main\AndroidManifest.xml:38:13-30
+73
+74        <provider
+74-->[:image_picker_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:10:9-18:20
+75            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
+75-->[:image_picker_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:11:13-82
+76            android:authorities="com.example.testtting.flutter.image_provider"
+76-->[:image_picker_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:12:13-74
 77            android:exported="false"
-77-->[:url_launcher_android] /Users/macbook/Desktop/Testtting/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-37
-78            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-78-->[:url_launcher_android] /Users/macbook/Desktop/Testtting/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-71
-79
-80        <uses-library
-80-->[androidx.window:window:1.0.0-beta04] /Users/macbook/.gradle/caches/transforms-3/710d8bb5eafb400ef0b189b82cdde18f/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
-81            android:name="androidx.window.extensions"
-81-->[androidx.window:window:1.0.0-beta04] /Users/macbook/.gradle/caches/transforms-3/710d8bb5eafb400ef0b189b82cdde18f/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
-82            android:required="false" />
-82-->[androidx.window:window:1.0.0-beta04] /Users/macbook/.gradle/caches/transforms-3/710d8bb5eafb400ef0b189b82cdde18f/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
-83        <uses-library
-83-->[androidx.window:window:1.0.0-beta04] /Users/macbook/.gradle/caches/transforms-3/710d8bb5eafb400ef0b189b82cdde18f/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
-84            android:name="androidx.window.sidecar"
-84-->[androidx.window:window:1.0.0-beta04] /Users/macbook/.gradle/caches/transforms-3/710d8bb5eafb400ef0b189b82cdde18f/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
-85            android:required="false" />
-85-->[androidx.window:window:1.0.0-beta04] /Users/macbook/.gradle/caches/transforms-3/710d8bb5eafb400ef0b189b82cdde18f/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
-86
+77-->[:image_picker_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-37
+78            android:grantUriPermissions="true" >
+78-->[:image_picker_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:14:13-47
+79            <meta-data
+79-->[:image_picker_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:15:13-17:75
+80                android:name="android.support.FILE_PROVIDER_PATHS"
+80-->[:image_picker_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:16:17-67
+81                android:resource="@xml/flutter_image_picker_file_paths" />
+81-->[:image_picker_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:17:17-72
+82        </provider>
+83        <!--
+84           Declares a provider which allows us to store files to share in
+85           '.../caches/share_plus' and grant the receiving action access
+86        -->
 87        <provider
-87-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:24:9-32:20
-88            android:name="androidx.startup.InitializationProvider"
-88-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:25:13-67
-89            android:authorities="com.example.testtting.androidx-startup"
-89-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:26:13-68
-90            android:exported="false" >
-90-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:27:13-37
-91            <meta-data
-91-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:29:13-31:52
-92                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
-92-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:30:17-85
-93                android:value="androidx.startup" />
-93-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:31:17-49
-94        </provider>
-95
-96        <receiver
-96-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:34:9-52:20
-97            android:name="androidx.profileinstaller.ProfileInstallReceiver"
-97-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:35:13-76
-98            android:directBootAware="false"
-98-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:36:13-44
-99            android:enabled="true"
-99-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:37:13-35
-100            android:exported="true"
-100-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:38:13-36
-101            android:permission="android.permission.DUMP" >
-101-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:39:13-57
-102            <intent-filter>
-102-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:40:13-42:29
-103                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
-103-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:17-91
-103-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:41:25-88
-104            </intent-filter>
-105            <intent-filter>
-105-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:43:13-45:29
-106                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
-106-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:17-85
-106-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:44:25-82
-107            </intent-filter>
-108            <intent-filter>
-108-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:46:13-48:29
-109                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
-109-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:17-88
-109-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:47:25-85
-110            </intent-filter>
-111            <intent-filter>
-111-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:49:13-51:29
-112                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
-112-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:17-95
-112-->[androidx.profileinstaller:profileinstaller:1.3.0] /Users/macbook/.gradle/caches/transforms-3/b785124e5155667b1114c948e4478a9d/transformed/jetified-profileinstaller-1.3.0/AndroidManifest.xml:50:25-92
-113            </intent-filter>
-114        </receiver>
-115    </application>
-116
-117</manifest>
+87-->[:share_plus] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\share_plus\intermediates\merged_manifest\release\AndroidManifest.xml:15:9-23:20
+88            android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
+88-->[:share_plus] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\share_plus\intermediates\merged_manifest\release\AndroidManifest.xml:16:13-77
+89            android:authorities="com.example.testtting.flutter.share_provider"
+89-->[:share_plus] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\share_plus\intermediates\merged_manifest\release\AndroidManifest.xml:17:13-74
+90            android:exported="false"
+90-->[:share_plus] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\share_plus\intermediates\merged_manifest\release\AndroidManifest.xml:18:13-37
+91            android:grantUriPermissions="true" >
+91-->[:share_plus] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\share_plus\intermediates\merged_manifest\release\AndroidManifest.xml:19:13-47
+92            <meta-data
+92-->[:image_picker_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:15:13-17:75
+93                android:name="android.support.FILE_PROVIDER_PATHS"
+93-->[:image_picker_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:16:17-67
+94                android:resource="@xml/flutter_share_file_paths" />
+94-->[:image_picker_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\image_picker_android\intermediates\merged_manifest\release\AndroidManifest.xml:17:17-72
+95        </provider>
+96        <!--
+97           This manifest declared broadcast receiver allows us to use an explicit
+98           Intent when creating a PendingItent to be informed of the user's choice
+99        -->
+100        <receiver
+100-->[:share_plus] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\share_plus\intermediates\merged_manifest\release\AndroidManifest.xml:28:9-34:20
+101            android:name="dev.fluttercommunity.plus.share.SharePlusPendingIntent"
+101-->[:share_plus] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\share_plus\intermediates\merged_manifest\release\AndroidManifest.xml:29:13-82
+102            android:exported="false" >
+102-->[:share_plus] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\share_plus\intermediates\merged_manifest\release\AndroidManifest.xml:30:13-37
+103            <intent-filter>
+103-->[:share_plus] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\share_plus\intermediates\merged_manifest\release\AndroidManifest.xml:31:13-33:29
+104                <action android:name="EXTRA_CHOSEN_COMPONENT" />
+104-->[:share_plus] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\share_plus\intermediates\merged_manifest\release\AndroidManifest.xml:32:17-65
+104-->[:share_plus] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\share_plus\intermediates\merged_manifest\release\AndroidManifest.xml:32:25-62
+105            </intent-filter>
+106        </receiver>
+107
+108        <activity
+108-->[:url_launcher_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\url_launcher_android\intermediates\merged_manifest\release\AndroidManifest.xml:10:9-13:74
+109            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+109-->[:url_launcher_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\url_launcher_android\intermediates\merged_manifest\release\AndroidManifest.xml:11:13-74
+110            android:exported="false"
+110-->[:url_launcher_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\url_launcher_android\intermediates\merged_manifest\release\AndroidManifest.xml:12:13-37
+111            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+111-->[:url_launcher_android] C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\url_launcher_android\intermediates\merged_manifest\release\AndroidManifest.xml:13:13-71
+112        <activity
+112-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:22:9-25:66
+113            android:name="com.facebook.FacebookActivity"
+113-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:23:13-57
+114            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+114-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:24:13-96
+115            android:theme="@style/com_facebook_activity_theme" />
+115-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:25:13-63
+116        <activity android:name="com.facebook.CustomTabMainActivity" />
+116-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:26:9-71
+116-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:26:19-68
+117        <activity
+117-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:27:9-41:20
+118            android:name="com.facebook.CustomTabActivity"
+118-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:28:13-58
+119            android:exported="true" >
+119-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:29:13-36
+120            <intent-filter>
+120-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:31:13-40:29
+121                <action android:name="android.intent.action.VIEW" />
+121-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:32:17-69
+121-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:32:25-66
+122
+123                <category android:name="android.intent.category.DEFAULT" />
+123-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:34:17-76
+123-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:34:27-73
+124                <category android:name="android.intent.category.BROWSABLE" />
+124-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:35:17-78
+124-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:35:27-75
+125
+126                <data
+126-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:37:17-39:50
+127                    android:host="cct.com.example.testtting"
+127-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:38:21-56
+128                    android:scheme="fbconnect" />
+128-->[com.facebook.android:facebook-common:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\d42f705030b761c9b25580cea191bc6e\transformed\jetified-facebook-common-16.0.1\AndroidManifest.xml:39:21-47
+129            </intent-filter>
+130        </activity>
+131        <activity
+131-->[com.google.android.gms:play-services-auth:20.6.0] C:\Users\fandy\.gradle\caches\transforms-3\f9fdca6c7726ef79bec74309fc1ca122\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:23:9-27:75
+132            android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity"
+132-->[com.google.android.gms:play-services-auth:20.6.0] C:\Users\fandy\.gradle\caches\transforms-3\f9fdca6c7726ef79bec74309fc1ca122\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:24:13-93
+133            android:excludeFromRecents="true"
+133-->[com.google.android.gms:play-services-auth:20.6.0] C:\Users\fandy\.gradle\caches\transforms-3\f9fdca6c7726ef79bec74309fc1ca122\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:25:13-46
+134            android:exported="false"
+134-->[com.google.android.gms:play-services-auth:20.6.0] C:\Users\fandy\.gradle\caches\transforms-3\f9fdca6c7726ef79bec74309fc1ca122\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:26:13-37
+135            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+135-->[com.google.android.gms:play-services-auth:20.6.0] C:\Users\fandy\.gradle\caches\transforms-3\f9fdca6c7726ef79bec74309fc1ca122\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:27:13-72
+136        <!--
+137            Service handling Google Sign-In user revocation. For apps that do not integrate with
+138            Google Sign-In, this service will never be started.
+139        -->
+140        <service
+140-->[com.google.android.gms:play-services-auth:20.6.0] C:\Users\fandy\.gradle\caches\transforms-3\f9fdca6c7726ef79bec74309fc1ca122\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:33:9-37:51
+141            android:name="com.google.android.gms.auth.api.signin.RevocationBoundService"
+141-->[com.google.android.gms:play-services-auth:20.6.0] C:\Users\fandy\.gradle\caches\transforms-3\f9fdca6c7726ef79bec74309fc1ca122\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:34:13-89
+142            android:exported="true"
+142-->[com.google.android.gms:play-services-auth:20.6.0] C:\Users\fandy\.gradle\caches\transforms-3\f9fdca6c7726ef79bec74309fc1ca122\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:35:13-36
+143            android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION"
+143-->[com.google.android.gms:play-services-auth:20.6.0] C:\Users\fandy\.gradle\caches\transforms-3\f9fdca6c7726ef79bec74309fc1ca122\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:36:13-107
+144            android:visibleToInstantApps="true" />
+144-->[com.google.android.gms:play-services-auth:20.6.0] C:\Users\fandy\.gradle\caches\transforms-3\f9fdca6c7726ef79bec74309fc1ca122\transformed\jetified-play-services-auth-20.6.0\AndroidManifest.xml:37:13-48
+145
+146        <activity
+146-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f4fd805fe140efeeb9198f0589b317aa\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:9-22:45
+147            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+147-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f4fd805fe140efeeb9198f0589b317aa\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:20:19-85
+148            android:exported="false"
+148-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f4fd805fe140efeeb9198f0589b317aa\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:22:19-43
+149            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+149-->[com.google.android.gms:play-services-base:18.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f4fd805fe140efeeb9198f0589b317aa\transformed\jetified-play-services-base-18.0.1\AndroidManifest.xml:21:19-78
+150
+151        <meta-data
+151-->[com.google.android.gms:play-services-basement:18.2.0] C:\Users\fandy\.gradle\caches\transforms-3\181773274af758c67573d5d386dedb3a\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:21:9-23:69
+152            android:name="com.google.android.gms.version"
+152-->[com.google.android.gms:play-services-basement:18.2.0] C:\Users\fandy\.gradle\caches\transforms-3\181773274af758c67573d5d386dedb3a\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:22:13-58
+153            android:value="@integer/google_play_services_version" />
+153-->[com.google.android.gms:play-services-basement:18.2.0] C:\Users\fandy\.gradle\caches\transforms-3\181773274af758c67573d5d386dedb3a\transformed\jetified-play-services-basement-18.2.0\AndroidManifest.xml:23:13-66
+154        <!--
+155         The initialization ContentProvider will call FacebookSdk.sdkInitialize automatically
+156         with the application context. This config is merged in with the host app's manifest,
+157         but there can only be one provider with the same authority activated at any given
+158         point; so if the end user has two or more different apps that use Facebook SDK, only the
+159         first one will be able to use the provider. To work around this problem, we use the
+160         following placeholder in the authority to identify each host application as if it was
+161         a completely different provider.
+162        -->
+163        <provider
+163-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:29:9-32:40
+164            android:name="com.facebook.internal.FacebookInitProvider"
+164-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:30:13-70
+165            android:authorities="com.example.testtting.FacebookInitProvider"
+165-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:31:13-72
+166            android:exported="false" />
+166-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:32:13-37
+167
+168        <receiver
+168-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:34:9-40:20
+169            android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver"
+169-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:35:13-86
+170            android:exported="false" >
+170-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:36:13-37
+171            <intent-filter>
+171-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:37:13-39:29
+172                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED" />
+172-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:38:17-95
+172-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:38:25-92
+173            </intent-filter>
+174        </receiver>
+175        <receiver
+175-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:41:9-47:20
+176            android:name="com.facebook.AuthenticationTokenManager$CurrentAuthenticationTokenChangedBroadcastReceiver"
+176-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:42:13-118
+177            android:exported="false" >
+177-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:43:13-37
+178            <intent-filter>
+178-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:44:13-46:29
+179                <action android:name="com.facebook.sdk.ACTION_CURRENT_AUTHENTICATION_TOKEN_CHANGED" />
+179-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:45:17-103
+179-->[com.facebook.android:facebook-core:16.0.1] C:\Users\fandy\.gradle\caches\transforms-3\f0adbf6b7f38e75f466d496aa9614431\transformed\jetified-facebook-core-16.0.1\AndroidManifest.xml:45:25-100
+180            </intent-filter>
+181        </receiver>
+182
+183        <uses-library
+183-->[androidx.window:window:1.0.0-beta04] C:\Users\fandy\.gradle\caches\transforms-3\880a66cf4ae8ae026fee2686f16a9f93\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:25:9-27:40
+184            android:name="androidx.window.extensions"
+184-->[androidx.window:window:1.0.0-beta04] C:\Users\fandy\.gradle\caches\transforms-3\880a66cf4ae8ae026fee2686f16a9f93\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:26:13-54
+185            android:required="false" />
+185-->[androidx.window:window:1.0.0-beta04] C:\Users\fandy\.gradle\caches\transforms-3\880a66cf4ae8ae026fee2686f16a9f93\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:27:13-37
+186        <uses-library
+186-->[androidx.window:window:1.0.0-beta04] C:\Users\fandy\.gradle\caches\transforms-3\880a66cf4ae8ae026fee2686f16a9f93\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:28:9-30:40
+187            android:name="androidx.window.sidecar"
+187-->[androidx.window:window:1.0.0-beta04] C:\Users\fandy\.gradle\caches\transforms-3\880a66cf4ae8ae026fee2686f16a9f93\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:29:13-51
+188            android:required="false" />
+188-->[androidx.window:window:1.0.0-beta04] C:\Users\fandy\.gradle\caches\transforms-3\880a66cf4ae8ae026fee2686f16a9f93\transformed\jetified-window-1.0.0-beta04\AndroidManifest.xml:30:13-37
+189
+190        <provider
+190-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:24:9-32:20
+191            android:name="androidx.startup.InitializationProvider"
+191-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:25:13-67
+192            android:authorities="com.example.testtting.androidx-startup"
+192-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:26:13-68
+193            android:exported="false" >
+193-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:27:13-37
+194            <meta-data
+194-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+195                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+195-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+196                android:value="androidx.startup" />
+196-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+197        </provider>
+198
+199        <receiver
+199-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+200            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+200-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+201            android:directBootAware="false"
+201-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+202            android:enabled="true"
+202-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+203            android:exported="true"
+203-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+204            android:permission="android.permission.DUMP" >
+204-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+205            <intent-filter>
+205-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+206                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+206-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+206-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+207            </intent-filter>
+208            <intent-filter>
+208-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+209                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+209-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+209-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+210            </intent-filter>
+211            <intent-filter>
+211-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+212                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+212-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+212-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+213            </intent-filter>
+214            <intent-filter>
+214-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+215                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+215-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+215-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\fandy\.gradle\caches\transforms-3\0f91426ca9281b789cef78cb754dd104\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+216            </intent-filter>
+217        </receiver>
+218    </application>
+219
+220</manifest>

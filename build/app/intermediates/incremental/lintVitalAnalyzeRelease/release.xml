@@ -4,23 +4,23 @@
     minSdkVersion="26"
     targetSdkVersion="33"
     shrinking="true"
-    mergedManifest="/Users/macbook/Desktop/Testtting/build/app/intermediates/merged_manifest/release/AndroidManifest.xml"
-    proguardFiles="/Users/macbook/Desktop/Testtting/build/app/intermediates/default_proguard_files/global/proguard-android.txt-7.3.0:/Users/macbook/Developer/flutter/packages/flutter_tools/gradle/flutter_proguard_rules.pro:proguard-rules.pro"
-    partialResultsDir="/Users/macbook/Desktop/Testtting/build/app/intermediates/lint_vital_partial_results/release/out"
-    desugaredMethodsFiles="/Users/macbook/.gradle/caches/transforms-3/bc48f04dece968d0d93fecb90a135f47/transformed/D8BackportedDesugaredMethods.txt">
+    mergedManifest="C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\app\intermediates\merged_manifest\release\AndroidManifest.xml"
+    proguardFiles="C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\app\intermediates\default_proguard_files\global\proguard-android.txt-7.3.0;C:\Users\flutter\packages\flutter_tools\gradle\flutter_proguard_rules.pro;proguard-rules.pro"
+    partialResultsDir="C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\app\intermediates\lint_vital_partial_results\release\out"
+    desugaredMethodsFiles="C:\Users\fandy\.gradle\caches\transforms-3\c63e0e728bb4f25a1393cec7ac5665c2\transformed\D8BackportedDesugaredMethods.txt">
   <buildFeatures
       namespacing="REQUIRED"/>
   <sourceProviders>
     <sourceProvider
-        manifest="src/main/AndroidManifest.xml"
-        javaDirectories="src/main/java:src/main/kotlin"
-        resDirectories="src/main/res"
-        assetsDirectories="src/main/assets"/>
+        manifest="src\main\AndroidManifest.xml"
+        javaDirectories="src\main\java;src\main\kotlin"
+        resDirectories="src\main\res"
+        assetsDirectories="src\main\assets"/>
     <sourceProvider
-        manifest="src/release/AndroidManifest.xml"
-        javaDirectories="src/release/java:src/release/kotlin"
-        resDirectories="src/release/res"
-        assetsDirectories="src/release/assets"/>
+        manifest="src\release\AndroidManifest.xml"
+        javaDirectories="src\release\java;src\release\kotlin"
+        resDirectories="src\release\res"
+        assetsDirectories="src\release\assets"/>
   </sourceProviders>
   <testSourceProviders>
   </testSourceProviders>
@@ -32,9 +32,9 @@
         value="android.app.Application" />
   </manifestPlaceholders>
   <mainArtifact
-      classOutputs="/Users/macbook/Desktop/Testtting/build/app/intermediates/javac/release/classes:/Users/macbook/Desktop/Testtting/build/app/tmp/kotlin-classes/release:/Users/macbook/Desktop/Testtting/build/app/kotlinToolingMetadata:/Users/macbook/Desktop/Testtting/build/app/intermediates/compile_and_runtime_not_namespaced_r_class_jar/release/R.jar"
+      classOutputs="C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\app\intermediates\javac\release\classes;C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\app\tmp\kotlin-classes\release;C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\app\kotlinToolingMetadata;C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\app\intermediates\compile_and_runtime_not_namespaced_r_class_jar\release\R.jar"
       applicationId="com.example.testtting"
-      generatedSourceFolders="/Users/macbook/Desktop/Testtting/build/app/generated/ap_generated_sources/release/out:/Users/macbook/Desktop/Testtting/build/app/generated/aidl_source_output_dir/release/out:/Users/macbook/Desktop/Testtting/build/app/generated/source/buildConfig/release:/Users/macbook/Desktop/Testtting/build/app/generated/renderscript_source_output_dir/release/out"
-      generatedResourceFolders="/Users/macbook/Desktop/Testtting/build/app/generated/res/rs/release:/Users/macbook/Desktop/Testtting/build/app/generated/res/resValues/release">
+      generatedSourceFolders="C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\app\generated\ap_generated_sources\release\out;C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\app\generated\aidl_source_output_dir\release\out;C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\app\generated\source\buildConfig\release;C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\app\generated\renderscript_source_output_dir\release\out"
+      generatedResourceFolders="C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\app\generated\res\rs\release;C:\Users\fandy\OneDrive\Desktop\GitHubProject\JustAggg\build\app\generated\res\resValues\release">
   </mainArtifact>
 </variant>

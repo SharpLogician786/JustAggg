@@ -8,6 +8,7 @@ import 'package:testtting/Constants/Utilities.dart';
 import '../../Constants/Constants.dart';
 import '../../DataModels/Analytics.dart';
 import '../../DataModels/SignUpModel.dart';
+import '../../NetworkCall/utils/dialogs.dart';
 
 class Analytics extends StatefulWidget {
   const Analytics({Key? key}) : super(key: key);
@@ -274,10 +275,21 @@ class AnalyticsState extends State<Analytics> {
                                           ),
                                         ),
                                       )),
-                                  const Expanded(
+                                   Expanded(
                                       flex: 1,
                                       child: SizedBox(
-                                        child: Icon(Icons.info_outline),
+                                        child: IconButton(icon:Icon(Icons.info_outline),
+                                          onPressed: (){
+                                            showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return CustomDialog(
+                                                    topLabel: 'Information',
+                                                    meesage: 'Total views of your profile.',
+                                                  );
+                                                });
+                                          },
+                                        ),
                                       ))
                                 ],
                               ),
@@ -320,10 +332,21 @@ class AnalyticsState extends State<Analytics> {
                                           ),
                                         ),
                                       )),
-                                  const Expanded(
+                                   Expanded(
                                       flex: 1,
                                       child: SizedBox(
-                                        child: Icon(Icons.info_outline),
+                                        child:  IconButton(icon:Icon(Icons.info_outline),
+                                          onPressed: (){
+                                            showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return CustomDialog(
+                                                    topLabel: 'Information',
+                                                    meesage: 'Total clicks of your profile.',
+                                                  );
+                                                });
+                                          },
+                                        ),
                                       ))
                                 ],
                               ),
@@ -366,10 +389,21 @@ class AnalyticsState extends State<Analytics> {
                                           ),
                                         ),
                                       )),
-                                  const Expanded(
+                                   Expanded(
                                       flex: 1,
                                       child: SizedBox(
-                                        child: Icon(Icons.info_outline),
+                                        child:  IconButton(icon:Icon(Icons.info_outline),
+                                          onPressed: (){
+                                            showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return CustomDialog(
+                                                    topLabel: 'Information',
+                                                    meesage: 'Total contacts of your profile.',
+                                                  );
+                                                });
+                                          },
+                                        ),
                                       ))
                                 ],
                               ),
@@ -412,10 +446,21 @@ class AnalyticsState extends State<Analytics> {
                                           ),
                                         ),
                                       )),
-                                  const Expanded(
+                                   Expanded(
                                       flex: 1,
                                       child: SizedBox(
-                                        child: Icon(Icons.info_outline),
+                                        child:  IconButton(icon:Icon(Icons.info_outline),
+                                          onPressed: (){
+                                            showDialog(
+                                                context: context,
+                                                builder: (BuildContext context) {
+                                                  return CustomDialog(
+                                                    topLabel: 'Information',
+                                                    meesage: 'Total click rates of your profile.',
+                                                  );
+                                                });
+                                          },
+                                        ),
                                       ))
                                 ],
                               ),
