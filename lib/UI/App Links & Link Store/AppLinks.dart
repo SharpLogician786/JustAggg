@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
-import 'package:loading_indicator/loading_indicator.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:testtting/Constants/Utilities.dart';
 import '../../Constants/Constants.dart';
 import '../../DataModels/AppLinks.dart';
@@ -132,7 +132,7 @@ class ApplinkState extends State<Applink> {
                               ),
                             ),
                             content: SizedBox(
-                              height: 150,
+                              height: 130,
                               width: MediaQuery.of(context).size.width * 0.9,
                               child: GridView.builder(
                                 scrollDirection: Axis.horizontal,
@@ -143,7 +143,7 @@ class ApplinkState extends State<Applink> {
                                   crossAxisCount: 1,
                                   crossAxisSpacing: 10,
                                   mainAxisSpacing: 10,
-                                  mainAxisExtent: 110,
+                                  mainAxisExtent: 80,
                                 ),
                                 itemBuilder: (contxt, indx) {
                                   if (appLinkIds.contains(appLinkDataModelOBJ
@@ -238,10 +238,17 @@ class ApplinkState extends State<Applink> {
                 children: [
                   Expanded(
                       flex: 3,
-                      child: Image.network(appLinkDataModelOBJ
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child:
+                        Image.network(
+                          appLinkDataModelOBJ
                               .data?[headerIndex].links?[index].image
                               .toString() ??
-                          "")),
+                              "",
+
+                        ),
+                      )),
                   Expanded(
                     flex: 1,
                     child: FractionallySizedBox(
@@ -252,10 +259,11 @@ class ApplinkState extends State<Applink> {
                                     .data?[headerIndex].links?[index].name
                                     .toString() ??
                                 "",
+                            textAlign: TextAlign.center,
                             style: const TextStyle(
                                 fontFamily: Constants.fontFamily,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15.0),
+                                fontWeight: FontWeight.normal,
+                                fontSize: 13.0),
                           ),
                         )),
                   )
@@ -264,11 +272,11 @@ class ApplinkState extends State<Applink> {
               Visibility(
                 visible: ContentShow,
                 child: Positioned(
-                    top: -5,
+                    top: 0,
                     right: 0,
                     child: SizedBox(
-                      height: 24,
-                      width: 24,
+                      height: 20,
+                      width: 20,
                       child: RawMaterialButton(
                         onPressed: () {},
                         elevation: 0.0,

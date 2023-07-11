@@ -2,6 +2,7 @@ import 'dart:convert';
 
 
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:loading_indicator/loading_indicator.dart';
@@ -256,6 +257,7 @@ class SignInWidget extends State<SignIn> {
                       height: 50.0,
                       child: OutlinedButton(
                         onPressed: () {
+
                           this.signIn(context);
                         },
                         child: Text(

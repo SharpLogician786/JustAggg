@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:intl/intl.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 
@@ -47,34 +48,13 @@ class Utltity {
   }
 
   void onLoading(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return Dialog(
-            backgroundColor: Colors.transparent,
-            child: contentBox(context)
-        );
-      },
-    );
-  }
-
-  contentBox(context) {
-    return Center(
-      child: Container(
-        height: 100,width: 100,
-        child: LoadingIndicator(
-            indicatorType: Indicator.ballScaleRippleMultiple, /// Required, The loading type of the widget
-            colors: const [Colors.white],       /// Optional, The color collections
-            strokeWidth: 2,                     /// Optional, The stroke of the line, only applicable to widget which contains line
-            backgroundColor: Colors.transparent,      /// Optional, Background of the widget
-            pathBackgroundColor: Colors.black
-        ),
-      ),
-    );
+    EasyLoading.show(status: '');
   }
   void onLoadingDismiss(BuildContext context) {
-    Navigator.pop(context);
+    EasyLoading.dismiss();
   }
+
+
   String parseDate(String currentDate)
   {
     DateTime parseDate =

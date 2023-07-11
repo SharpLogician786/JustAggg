@@ -647,9 +647,7 @@ class ProfileState extends State<Profile> {
                                       borderRadius: BorderRadius.circular(30.0),
                                     ),
                                     filled: true,
-                                    hintText:
-                                    userDataModelOBJ.data?.username.toString() ??
-                                        "",
+                                    hintText: '',
                                     hintStyle: TextStyle(
                                       color: Colors.grey[300],
                                       fontFamily: Constants.fontFamily,
@@ -661,6 +659,18 @@ class ProfileState extends State<Profile> {
                               height: 54,
                               width: MediaQuery.of(context).size.width * 0.9,
                               color: Colors.transparent,
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 10.0,right: 8.0,bottom: 10),
+                                  child: Text('${userDataModelOBJ.data?.designation.toString() ?? ""}'
+                                  " "
+                                  '${userDataModelOBJ.data?.company.toString() ?? ""}',maxLines: 1,
+                                  style: const TextStyle(
+                                      fontFamily: Constants.fontFamily,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.normal),),
+                                ),
+                              ),
                             )
               ]
                         ),
@@ -676,6 +686,7 @@ class ProfileState extends State<Profile> {
                             fontWeight: FontWeight.normal),
                         controller: emailField,
                         decoration: InputDecoration(
+
                             enabledBorder: OutlineInputBorder(
                               borderSide:
                                   const BorderSide(width: 0, color: Colors.grey),
@@ -699,7 +710,7 @@ class ProfileState extends State<Profile> {
                                     });
                               },
                             ),
-                            hintText: '',
+                            hintText: 'About me',
                             hintStyle: TextStyle(
                               color: Colors.grey[300],
                               fontFamily: Constants.fontFamily,
@@ -747,13 +758,13 @@ class ProfileState extends State<Profile> {
                       padding:
                           const EdgeInsets.only(top: 20, right: 20.0, left: 20.0),
                       child: SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.3,
+                       // height: MediaQuery.of(context).size.height * 0.3,
                         child: ListView.builder(
                             itemExtent: 60.0,
                             itemCount: userDataModelOBJ.data?.links?.length,
                             shrinkWrap: true,
                             padding: EdgeInsets.zero,
-                            physics: const AlwaysScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) {
                               return Padding(
                                 padding: const EdgeInsets.only(
@@ -1152,9 +1163,9 @@ class ProfileState extends State<Profile> {
 
     nameField.text = userDataModelOBJ.data?.name.toString() ?? "";
 
-    mobileField.text = '${userDataModelOBJ.data?.designation.toString() ?? ""}'
-        " "
-        '${userDataModelOBJ.data?.company.toString() ?? ""}';
+    // mobileField.text = '${userDataModelOBJ.data?.designation.toString() ?? ""}'
+    //     " "
+    //     '${userDataModelOBJ.data?.company.toString() ?? ""}';
 
     emailField.text = userDataModelOBJ.data?.bio.toString() ?? "";
 

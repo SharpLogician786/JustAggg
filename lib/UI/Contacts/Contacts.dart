@@ -144,7 +144,7 @@ class ContactsState extends State<Contacts> {
                       scrollDirection: Axis.horizontal,
                       itemCount: groupNames.length,
                       gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
+                      const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 1,
                         crossAxisSpacing: 10,
                         mainAxisSpacing: 10,
@@ -211,6 +211,7 @@ class ContactsState extends State<Contacts> {
                                 borderRadius: BorderRadius.circular(100)),
                             label: Text(
                               groupNames[index].groupName.toString(),
+                              maxLines: 2,
                               style: TextStyle(
                                 color: index == groupIndexSelected
                                     ? Colors.white
@@ -427,7 +428,7 @@ class ContactsState extends State<Contacts> {
             .toString() ??
             ""))
           {
-            return Colors.blue;
+            return Colors.grey[400];
           }
         else {
           return Colors.grey[50];
@@ -443,6 +444,7 @@ class ContactsState extends State<Contacts> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.transparent,
           content: dialogueBox(),
           actions: const <Widget>[],
         );
@@ -451,64 +453,72 @@ class ContactsState extends State<Contacts> {
   }
 
   Widget dialogueBox() {
-    return SizedBox(
-      height: 174,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Expanded(
-            flex: 1,
-            child: SizedBox(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Text(
-                  'Please Enter a group name',
-                  style: TextStyle(
-                      fontFamily: Constants.fontFamily,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            ),
+    return Container(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(
+            color: Colors.white,
           ),
-          Expanded(
-            flex: 2,
-            child: SizedBox(
-              child: Center(
-                child: SizedBox(
-                  height: 44,
-                  child: TextField(
-                    style: const TextStyle(
+          borderRadius: BorderRadius.circular(20.0),
+        ),
+        height: MediaQuery.of(context).size.height * 0.25,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Expanded(
+              flex: 1,
+              child: SizedBox(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    'Please enter group name',
+                    style: TextStyle(
+                      fontSize: 15,
                         fontFamily: Constants.fontFamily,
-                        fontSize: 15,
-                        fontWeight: FontWeight.normal),
-                    controller: groupName,
-                    textAlignVertical: TextAlignVertical.bottom,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        filled: true,
-                        hintText: 'Enter group name.',
-                        hintStyle: TextStyle(
-                          color: Colors.grey[300],
-                          fontFamily: Constants.fontFamily,
-                        ),
-                        fillColor: Colors.white70),
+                        fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: SizedBox(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: FractionallySizedBox(
-                  widthFactor: 0.9,
+            Expanded(
+              flex: 2,
+              child: SizedBox(
+                child: Center(
                   child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    height: 44,
+                    child: TextField(
+                      style: const TextStyle(
+                          fontFamily: Constants.fontFamily,
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal),
+                      controller: groupName,
+                      textAlignVertical: TextAlignVertical.bottom,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(30.0),
+                          ),
+                          filled: true,
+                          hintText: 'Enter group name.',
+                          hintStyle: TextStyle(
+                            color: Colors.grey[300],
+                            fontFamily: Constants.fontFamily,
+                          ),
+                          fillColor: Colors.white70),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width  * 0.6,
+              child: Row(
+                children: [
+                  SizedBox(
                       height: 50.0,
+                      width: 100,
                       child: OutlinedButton(
                         onPressed: () {
                           setState(() {
@@ -527,11 +537,35 @@ class ContactsState extends State<Contacts> {
                           shape: const StadiumBorder(),
                         ),
                       )),
-                ),
+                  Spacer(),
+                  SizedBox(
+                      height: 50.0,
+                      width: 100,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          setState(() {
+                            Navigator.pop(context);
+                          });
+                        },
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: Constants.fontFamily,
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          shape: const StadiumBorder(),
+                        ),
+                      )),
+
+                ],
               ),
             ),
-          )
-        ],
+            SizedBox(height: 10,)
+          ],
+        ),
       ),
     );
   }
@@ -611,6 +645,7 @@ class ContactsState extends State<Contacts> {
       CreateGroupModel contactObj =
           CreateGroupModel.fromJson(json.decode(response.body));
       userDataModelOBJ = contactObj;
+      getUserGroupApi();
     }
     Navigator.pop(context);
     return userDataModelOBJ;
@@ -815,3 +850,68 @@ class Groups {
     this.groupName,
   });
 }
+
+
+
+
+
+// if (index > 0) {
+//
+// } else {
+// print('');
+// }
+// buttonTitle = "";
+// if (index == 0) {
+// setState(() {
+// buttonTitle = '';
+// selectedContactIDS.clear();
+// isGroupSelection = false;
+// groupSelection = false;
+// addGroup(context);
+// });
+// } else if (index == 1) {
+// setState(() {
+// buttonTitle = '';
+// groupIndexSelected = index;
+// selectedContactIDS.clear();
+// isGroupSelection = false;
+// groupSelection = false;
+// });
+// } else {
+// setState(() {
+// buttonTitle = 'Select';
+// groupSelection = true;
+// groupIndexSelected = index;
+// deleteGroupId =
+// groupNames[index].id?.toString() ?? "";
+// updateGroupId =
+// groupNames[index].id?.toString() ?? "";
+// isGroupSelection = true;
+// getGroupContactsApi(updateGroupId);
+// });
+// }
+
+//
+// Text(
+// groupNames[index].groupName.toString(),
+// style: TextStyle(
+// color: index == groupIndexSelected
+// ? Colors.white
+//     : Colors.black,
+// fontFamily: Constants.fontFamily,
+// ),
+// ),
+// backgroundColor: index == groupIndexSelected
+// ? Colors.black
+//     : Colors.white,
+
+
+
+// icon: Visibility(
+// visible: plusSignVisible,
+// child: const Icon(
+// Icons.add,
+// size: 24.0,
+// color: Colors.black,
+// ),
+// ),
