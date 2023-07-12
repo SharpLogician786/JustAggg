@@ -34,7 +34,6 @@ class ContactsState extends State<Contacts> {
   var updateGroupId = "";
   bool groupSelection = false;
 
-
   // ignore: prefer_typing_uninitialized_variables
   var headerData;
 
@@ -46,7 +45,7 @@ class ContactsState extends State<Contacts> {
 
   var buttonTitle = 'Select';
 
-  int groupIndexSelected = 1;
+  int groupIndexSelected = 0;
 
   Utltity utilityOBJ = new Utltity();
 
@@ -56,7 +55,7 @@ class ContactsState extends State<Contacts> {
 
   late ContactsModel groupContacts = ContactsModel();
 
-  TextEditingController groupName = TextEditingController();
+  TextEditingController enteredGroupName = TextEditingController();
 
   late CreateGroupModel userDataModelOBJ = CreateGroupModel();
 
@@ -133,102 +132,116 @@ class ContactsState extends State<Contacts> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 20.0),
-              child: SizedBox(
-                height: 44,
-                width: MediaQuery.of(context).size.width * 0.9,
-                child: FutureBuilder(
-                  future: getUserGroupApi(),
-                  builder: (context, snapshot) {
-                    return GridView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: groupNames.length,
-                      gridDelegate:
-                      const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 1,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 10,
-                        mainAxisExtent: 110,
-                      ),
-                      itemBuilder: (contxt, index) {
-                        if (index == 0) {
-                          plusSignVisible = true;
-                        } else {
-                          plusSignVisible = false;
-                        }
-                        return SizedBox(
-                          height: 44,
-                          child: FloatingActionButton.extended(
-                            icon: Visibility(
-                              visible: plusSignVisible,
-                              child: const Icon(
-                                Icons.add,
-                                size: 24.0,
-                                color: Colors.black,
-                              ),
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 3.0, right: 3.0),
+                      child: SizedBox(
+                        height: 44,
+                        child: FloatingActionButton.extended(
+                          icon:Icon(
+                              Icons.add,
+                              size: 24.0,
+                              color: Colors.black,
                             ),
-                            onPressed: () {
-                              if (index > 0) {
-
-                              } else {
-                                print('');
-                              }
-                              buttonTitle = "";
-                              if (index == 0) {
-                                setState(() {
-                                  buttonTitle = '';
-                                  selectedContactIDS.clear();
-                                  isGroupSelection = false;
-                                  groupSelection = false;
-                                  addGroup(context);
-                                });
-                              } else if (index == 1) {
-                                setState(() {
-                                  buttonTitle = '';
-                                  groupIndexSelected = index;
-                                  selectedContactIDS.clear();
-                                  isGroupSelection = false;
-                                  groupSelection = false;
-                                });
-                              } else {
-                                setState(() {
-                                  buttonTitle = 'Select';
-                                  groupSelection = true;
-                                  groupIndexSelected = index;
-                                  deleteGroupId =
-                                      groupNames[index].id?.toString() ?? "";
-                                  updateGroupId =
-                                      groupNames[index].id?.toString() ?? "";
-                                  isGroupSelection = true;
-                                  getGroupContactsApi(updateGroupId);
-                                });
-                              }
-                            },
-                            shape: RoundedRectangleBorder(
-                                side:  BorderSide(
-                                    width: 1,
-                                    color: Colors.black),
-                                borderRadius: BorderRadius.circular(100)),
-                            label: Text(
-                              groupNames[index].groupName.toString(),
-                              maxLines: 2,
-                              style: TextStyle(
-                                color: index == groupIndexSelected
-                                    ? Colors.white
-                                    : Colors.black,
-                                fontFamily: Constants.fontFamily,
-                              ),
+                          onPressed: () {
+                            addGroup(context);
+                          },
+                          shape: RoundedRectangleBorder(
+                              side: BorderSide(width: 1, color: Colors.black),
+                              borderRadius: BorderRadius.circular(100)),
+                          label: Text(
+                            'New',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: Constants.fontFamily,
                             ),
-                            backgroundColor: index == groupIndexSelected
-                                ? Colors.black
-                                : Colors.white,
-                            elevation: 0,
                           ),
-                        );
-                      },
-                    );
-                  },
-                ),
+                          backgroundColor: Colors.white,
+                          elevation: 0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 0.0),
+                      child: SizedBox(
+                        height: 44,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        child: FutureBuilder(
+                          future: getUserGroupApi(),
+                          builder: (context, snapshot) {
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: groupNames.length,
+                              itemBuilder: (contxt, index) {
+                                return Padding(
+                                    padding:
+                                        const EdgeInsets.only(left: 3.0, right: 3.0),
+                                    child: SizedBox(
+                                      height: 44,
+                                      child: FloatingActionButton.extended(
+                                        onPressed: () {
+                                          setState(() {
+                                            groupIndexSelected = index;
+                                          });
+                                          if (index == 0) {
+                                            buttonTitle = '';
+                                            selectedContactIDS.clear();
+                                            groupSelection = false;
+                                            setState(() {
+                                              isGroupSelection = false;
+                                            });
+                                          } else {
+                                            setState(() {
+                                              isGroupSelection = true;
+                                            });
+                                            buttonTitle = 'Select';
+                                            groupSelection = true;
+                                            deleteGroupId =
+                                                groupNames[index].id?.toString() ??
+                                                    "";
+                                            updateGroupId =
+                                                groupNames[index].id?.toString() ??
+                                                    "";
+                                            getGroupContactsApi(updateGroupId);
+                                          }
+                                        },
+                                        shape: RoundedRectangleBorder(
+                                            side: BorderSide(
+                                                width: 1, color: Colors.black),
+                                            borderRadius: BorderRadius.circular(100)),
+                                        label: Text(
+                                          groupNames[index].groupName.toString(),
+                                          maxLines: 1,
+                                          style: TextStyle(
+                                            color: index == groupIndexSelected
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontFamily: Constants.fontFamily,
+                                          ),
+                                        ),
+                                        backgroundColor: index == groupIndexSelected
+                                            ? Colors.black
+                                            : Colors.white,
+                                        elevation: 0,
+                                      ),
+                                    ),
+                                  );
+                              },
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             Visibility(
@@ -243,10 +256,8 @@ class ContactsState extends State<Contacts> {
                       SizedBox(
                         child: FloatingActionButton.extended(
                           onPressed: () {
-                            setState(() {
-                              groupNames.clear();
-                              deleteUserGroupApi(deleteGroupId);
-                            });
+                            isGroupSelection = false;
+                            deleteUserGroupApi(deleteGroupId);
                           },
                           shape: RoundedRectangleBorder(
                               side: const BorderSide(
@@ -319,30 +330,32 @@ class ContactsState extends State<Contacts> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (_) => ContactDetails(contactDataModelOBJ: contactDataModelOBJ,index: index,),
+                                          builder: (_) => ContactDetails(
+                                            contactDataModelOBJ:
+                                                contactDataModelOBJ,
+                                            index: index,
+                                          ),
                                         ),
                                       );
                                     } else {
                                       setState(() {
-                                        if (selectedContactIDS.contains(contactDataModelOBJ
-                                            .data?[index].id
-                                            .toString() ??
-                                            ""))
-                                        {
-                                          selectedContactIDS.remove(contactDataModelOBJ
-                                              .data?[index].id
-                                              .toString() ??
-                                              "");
+                                        if (selectedContactIDS.contains(
+                                            contactDataModelOBJ.data?[index].id
+                                                    .toString() ??
+                                                "")) {
+                                          selectedContactIDS.remove(
+                                              contactDataModelOBJ
+                                                      .data?[index].id
+                                                      .toString() ??
+                                                  "");
+                                        } else {
+                                          selectedContactIDS.add(
+                                              contactDataModelOBJ
+                                                      .data?[index].id
+                                                      .toString() ??
+                                                  "");
                                         }
-                                        else {
-                                          selectedContactIDS.add(contactDataModelOBJ
-                                              .data?[index].id
-                                              .toString() ??
-                                              "");
-                                        }
-
                                       });
-
                                     }
                                   },
                                   child: SizedBox(
@@ -362,38 +375,38 @@ class ContactsState extends State<Contacts> {
                                                         color: Colors.black)),
                                                 child: CircleAvatar(
                                                   backgroundColor:
-                                                  Colors.transparent,
+                                                      Colors.transparent,
                                                   radius: 20.0,
                                                   backgroundImage: NetworkImage(
                                                       contactDataModelOBJ
-                                                          .data?[index]
-                                                          .image
-                                                          .toString() ??
+                                                              .data?[index]
+                                                              .image
+                                                              .toString() ??
                                                           ""),
                                                 )),
                                             title: Text(
                                               contactDataModelOBJ
-                                                  .data?[index].name
-                                                  .toString() ??
+                                                      .data?[index].name
+                                                      .toString() ??
                                                   "",
-
                                               style: TextStyle(
-                                                color:  Colors.black,
+                                                  color: Colors.black,
                                                   fontFamily:
-                                                  Constants.fontFamily,
+                                                      Constants.fontFamily,
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w600),
                                             ),
                                             trailing: Text(
-                                              utilityOBJ.parseDate(contactDataModelOBJ
-                                                  .data?[index].createdAt
-                                                  .toString() ??
-                                                  "")
-                                              ,
-                                              style:  TextStyle(
+                                              utilityOBJ.parseDate(
+                                                  contactDataModelOBJ
+                                                          .data?[index]
+                                                          .createdAt
+                                                          .toString() ??
+                                                      ""),
+                                              style: TextStyle(
                                                   color: Colors.black,
                                                   fontFamily:
-                                                  Constants.fontFamily,
+                                                      Constants.fontFamily,
                                                   fontSize: 10,
                                                   fontWeight: FontWeight.w300),
                                             ),
@@ -405,9 +418,7 @@ class ContactsState extends State<Contacts> {
                                 );
                               });
                         } else {
-                          return Container(
-
-                          );
+                          return Container();
                         }
                       })),
             ),
@@ -417,22 +428,16 @@ class ContactsState extends State<Contacts> {
     );
   }
 
-  Color? getColor(int index)
-  {
-    if(selectedContactIDS.isEmpty == true)
-      {
+  Color? getColor(int index) {
+    if (selectedContactIDS.isEmpty == true) {
+      return Colors.grey[50];
+    } else {
+      if (selectedContactIDS
+          .contains(contactDataModelOBJ.data?[index].id.toString() ?? "")) {
+        return Colors.grey[400];
+      } else {
         return Colors.grey[50];
-      }else{
-        if (selectedContactIDS.contains(contactDataModelOBJ
-            .data?[index].id
-            .toString() ??
-            ""))
-          {
-            return Colors.grey[400];
-          }
-        else {
-          return Colors.grey[50];
-        }
+      }
     }
   }
 
@@ -444,8 +449,11 @@ class ContactsState extends State<Contacts> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.white,
           content: dialogueBox(),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32.0))),
+          contentPadding: EdgeInsets.only(top: 10.0),
           actions: const <Widget>[],
         );
       },
@@ -475,7 +483,7 @@ class ContactsState extends State<Contacts> {
                   child: Text(
                     'Please enter group name',
                     style: TextStyle(
-                      fontSize: 15,
+                        fontSize: 15,
                         fontFamily: Constants.fontFamily,
                         fontWeight: FontWeight.w600),
                   ),
@@ -488,17 +496,17 @@ class ContactsState extends State<Contacts> {
                 child: Center(
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.6,
-                    height: 44,
+                    height: 60,
                     child: TextField(
                       style: const TextStyle(
                           fontFamily: Constants.fontFamily,
                           fontSize: 15,
                           fontWeight: FontWeight.normal),
-                      controller: groupName,
+                      controller: enteredGroupName,
                       textAlignVertical: TextAlignVertical.bottom,
                       decoration: InputDecoration(
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.0),
+                            borderRadius: BorderRadius.circular(24.0),
                           ),
                           filled: true,
                           hintText: 'Enter group name.',
@@ -513,39 +521,15 @@ class ContactsState extends State<Contacts> {
               ),
             ),
             Container(
-              width: MediaQuery.of(context).size.width  * 0.6,
+              width: MediaQuery.of(context).size.width * 0.6,
               child: Row(
                 children: [
                   SizedBox(
-                      height: 50.0,
-                      width: 100,
+                      height: 44.0,
+                      width: MediaQuery.of(context).size.width * 0.28,
                       child: OutlinedButton(
                         onPressed: () {
-                          setState(() {
-                            createGroupApi(groupName.text.toString());
-                          });
-                        },
-                        child: Text(
-                          'Create',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: Constants.fontFamily,
-                          ),
-                        ),
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          shape: const StadiumBorder(),
-                        ),
-                      )),
-                  Spacer(),
-                  SizedBox(
-                      height: 50.0,
-                      width: 100,
-                      child: OutlinedButton(
-                        onPressed: () {
-                          setState(() {
-                            Navigator.pop(context);
-                          });
+                          Navigator.pop(context);
                         },
                         child: Text(
                           'Cancel',
@@ -559,11 +543,32 @@ class ContactsState extends State<Contacts> {
                           shape: const StadiumBorder(),
                         ),
                       )),
-
+                  Spacer(),
+                  SizedBox(
+                      height: 44.0,
+                      width: MediaQuery.of(context).size.width * 0.28,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          createGroupApi(enteredGroupName.text.toString());
+                        },
+                        child: Text(
+                          'Create',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: Constants.fontFamily,
+                          ),
+                        ),
+                        style: OutlinedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          shape: const StadiumBorder(),
+                        ),
+                      )),
                 ],
               ),
             ),
-            SizedBox(height: 10,)
+            SizedBox(
+              height: 10,
+            )
           ],
         ),
       ),
@@ -614,7 +619,6 @@ class ContactsState extends State<Contacts> {
   //---------------------------------------------Create Group Api Call-----------------------------------------------------
 
   Future<CreateGroupModel> createGroupApi(String groupName) async {
-    //EasyLoading.show(status: 'loading...');
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var userData = (prefs.getString('user') ?? '');
@@ -635,6 +639,7 @@ class ContactsState extends State<Contacts> {
     };
     var body = {'userId': userId, 'name': groupName};
     utilityOBJ.onLoading(context);
+    groupNames.clear();
     final response = await http.post(
       url,
       body: body,
@@ -645,8 +650,18 @@ class ContactsState extends State<Contacts> {
       CreateGroupModel contactObj =
           CreateGroupModel.fromJson(json.decode(response.body));
       userDataModelOBJ = contactObj;
+
+
+      setState(() {
+        enteredGroupName.text = "";
+        groupNames.clear();
+        buttonTitle = '';
+        selectedContactIDS.clear();
+
+      });
       getUserGroupApi();
     }
+
     Navigator.pop(context);
     return userDataModelOBJ;
   }
@@ -654,9 +669,8 @@ class ContactsState extends State<Contacts> {
   //---------------------------------------------Group Group Api Call-----------------------------------------------------
 
   Future<CreateGroupModel> getUserGroupApi() async {
-
     //EasyLoading.show(status: 'loading...');
-
+    print('call');
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var userData = (prefs.getString('user') ?? '');
@@ -671,19 +685,6 @@ class ContactsState extends State<Contacts> {
 
     Uri url = Uri.parse(
         Constants.baseUrl.toString() + Constants.GET_USER_GROUP.toString());
-    groupNames.clear();
-    Groups? group1 = Groups();
-    group1.id = 1;
-    group1.groupName = 'New';
-
-    groupNames.add(group1);
-
-    Groups? group2 = Groups();
-    group2.id = 2;
-    group2.groupName = 'All';
-
-    groupNames.add(group2);
-
     headerData = {
       'Authorization': 'Bearer $bearerToken',
     };
@@ -694,6 +695,13 @@ class ContactsState extends State<Contacts> {
       body: body,
       headers: headerData,
     );
+    groupNames.clear();
+    Groups? group2 = Groups();
+    group2.id = 2;
+    group2.groupName = '   All    ';
+
+    groupNames.add(group2);
+
     utilityOBJ.onLoadingDismiss(context);
     if (response.body.isEmpty != true) {
       CreateGroupModel contactObj =
@@ -716,7 +724,6 @@ class ContactsState extends State<Contacts> {
   //-----------------------------------------Delete Group Api-------------------------------------
 
   Future<CreateGroupModel> deleteUserGroupApi(String groupId) async {
-
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
     var userData = (prefs.getString('user') ?? '');
@@ -743,18 +750,17 @@ class ContactsState extends State<Contacts> {
       body: body,
       headers: headerData,
     );
-    utilityOBJ.onLoadingDismiss(context);
+   // utilityOBJ.onLoadingDismiss(context);
     if (response.body.isEmpty != true) {
       CreateGroupModel contactObj =
           CreateGroupModel.fromJson(json.decode(response.body));
       userGroupDataModelOBJ = contactObj;
     }
     setState(() {
-     groupIndexSelected = 1;
-      isGroupSelection = false;
-      groupSelection = false;
-     selectedContactIDS.clear();
+      selectedContactIDS.clear();
+      groupIndexSelected = 0;
     });
+    getUserGroupApi();
     return userDataModelOBJ;
   }
 
@@ -827,14 +833,13 @@ class ContactsState extends State<Contacts> {
       headers: headerData,
     );
     utilityOBJ.onLoadingDismiss(context);
-    // setState(() {
+
     if (response.body.isEmpty != true) {
       ContactsModel contactObj =
           ContactsModel.fromJson(json.decode(response.body));
       contactDataModelOBJ = contactObj;
     }
-  if (contactDataModelOBJ.data?.isEmpty == true)
-    {
+    if (contactDataModelOBJ.data?.isEmpty == true) {
       contactDataModelOBJ = copyContactDataModelOBJ;
     }
     return contactDataModelOBJ;
@@ -850,68 +855,3 @@ class Groups {
     this.groupName,
   });
 }
-
-
-
-
-
-// if (index > 0) {
-//
-// } else {
-// print('');
-// }
-// buttonTitle = "";
-// if (index == 0) {
-// setState(() {
-// buttonTitle = '';
-// selectedContactIDS.clear();
-// isGroupSelection = false;
-// groupSelection = false;
-// addGroup(context);
-// });
-// } else if (index == 1) {
-// setState(() {
-// buttonTitle = '';
-// groupIndexSelected = index;
-// selectedContactIDS.clear();
-// isGroupSelection = false;
-// groupSelection = false;
-// });
-// } else {
-// setState(() {
-// buttonTitle = 'Select';
-// groupSelection = true;
-// groupIndexSelected = index;
-// deleteGroupId =
-// groupNames[index].id?.toString() ?? "";
-// updateGroupId =
-// groupNames[index].id?.toString() ?? "";
-// isGroupSelection = true;
-// getGroupContactsApi(updateGroupId);
-// });
-// }
-
-//
-// Text(
-// groupNames[index].groupName.toString(),
-// style: TextStyle(
-// color: index == groupIndexSelected
-// ? Colors.white
-//     : Colors.black,
-// fontFamily: Constants.fontFamily,
-// ),
-// ),
-// backgroundColor: index == groupIndexSelected
-// ? Colors.black
-//     : Colors.white,
-
-
-
-// icon: Visibility(
-// visible: plusSignVisible,
-// child: const Icon(
-// Icons.add,
-// size: 24.0,
-// color: Colors.black,
-// ),
-// ),
